@@ -39,6 +39,13 @@
   --accent-soft: #dfe8e6;
   --accent-line: rgba(11, 86, 97, 0.24);
 
+  /* Warm counterpoint to the teal. Used deliberately and sparingly: one tile,
+     one aurora blob, and the hover state on interactive surfaces.
+     Darkened from the first pass so body text at 88% white still clears AA. */
+  --warm: #a34a24;
+  --warm-soft: #f2e2d6;
+  --warm-line: rgba(163, 74, 36, 0.3);
+
   --r-control: 999px;
   --r-surface: 20px;
   --r-block: 28px;
@@ -72,10 +79,13 @@
 
     --accent: #6cc0cb;
     --accent-hover: #8ad2db;
-    --accent-ink: #06222705;
     --accent-ink: #072429;
     --accent-soft: #14343a;
     --accent-line: rgba(108, 192, 203, 0.3);
+
+    --warm: #e08a5c;
+    --warm-soft: #33211a;
+    --warm-line: rgba(224, 138, 92, 0.32);
   }
 }
 
@@ -101,18 +111,39 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Display type: large, light, tight. The single strongest signal on the page. */
+/* Display type: large, light, tight. The single strongest signal on the page.
+   text-wrap: balance evens out the line lengths and kills orphaned words. */
 h1, h2, h3 {
   font-family: var(--font-serif), Georgia, "Times New Roman", serif;
   font-weight: 300;
   letter-spacing: -0.021em;
   line-height: 1.04;
   margin: 0;
+  text-wrap: balance;
 }
 
 h3 { font-weight: 400; letter-spacing: -0.012em; line-height: 1.2; }
 
-p { margin: 0; }
+p { margin: 0; text-wrap: pretty; }
+
+/* Anchor targets must clear the sticky header, or the nav covers the heading
+   the visitor just clicked through to. */
+[id] { scroll-margin-top: calc(70px + 28px); }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 0 0 var(--r-surface) 0;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.skip-link:focus-visible { left: 0; }
 a { color: inherit; }
 img, svg { display: block; max-width: 100%; }
 
@@ -185,7 +216,59 @@ img, svg { display: block; max-width: 100%; }
 
 .nav__links a:hover { color: var(--ink); }
 
-@media (max-width: 799px) { .nav__links { display: none; } }
+/* Mobile navigation: a native disclosure, so it works with zero JavaScript
+   and stays keyboard and screen-reader operable. */
+.nav__menu { display: none; position: relative; }
+
+.nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 40px;
+  padding-inline: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-control);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.nav__toggle::-webkit-details-marker { display: none; }
+
+.nav__bars { display: grid; gap: 3.5px; }
+.nav__bars span { display: block; width: 15px; height: 1.5px; background: currentColor; }
+
+.nav__panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 12px);
+  min-width: 210px;
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-surface);
+  box-shadow: 0 24px 50px -28px rgba(20, 20, 19, 0.4);
+}
+
+.nav__panel a {
+  padding: 11px 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.nav__panel a:hover { background: var(--panel); }
+
+@media (max-width: 799px) {
+  .nav__links { display: none; }
+  .nav__menu { display: block; }
+  .nav__cta { display: none; }
+}
 
 /* -------------------------------------------------------------- buttons -- */
 
@@ -226,7 +309,12 @@ img, svg { display: block; max-width: 100%; }
 
 /* ----------------------------------------------------------------- hero -- */
 
+/* Full-bleed section: the aurora and grid span the viewport, the grid of
+   content inside is constrained by .shell. */
 .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding-top: clamp(48px, 7vw, 96px);
   padding-bottom: clamp(56px, 7vw, 96px);
 }
@@ -273,10 +361,29 @@ img, svg { display: block; max-width: 100%; }
    ------------------------------------------------------------------------ */
 
 .block {
+  position: relative;
+  isolation: isolate;
   background: var(--block);
   color: var(--block-ink);
   border-radius: var(--r-block);
   padding: clamp(36px, 6vw, 92px);
+  overflow: hidden;
+}
+
+/* A single soft light source in the top-left, so the block reads as a surface
+   rather than a flat rectangle. Deliberately far below a glow. */
+.block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    120% 90% at 8% 0%,
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    transparent 58%
+  );
+  opacity: 0.55;
+  pointer-events: none;
 }
 
 .block__grid {
@@ -405,6 +512,14 @@ img, svg { display: block; max-width: 100%; }
 
 .tile--soft { background: var(--accent-soft); }
 
+.tile--warm { background: var(--warm); color: #fff; }
+.tile--warm p { color: rgba(255, 255, 255, 0.88); }
+
+@media (prefers-color-scheme: dark) {
+  .tile--warm { background: var(--warm); color: #1c0f08; }
+  .tile--warm p { color: rgba(28, 15, 8, 0.78); }
+}
+
 .tile--outline { background: transparent; border: 1px solid var(--line-strong); }
 
 .tile--pattern {
@@ -454,6 +569,24 @@ img, svg { display: block; max-width: 100%; }
   color: color-mix(in srgb, var(--accent-ink) 82%, transparent);
 }
 
+/* ------------------------------------------------------------- not found -- */
+
+.notFound {
+  min-height: calc(100dvh - 70px);
+  display: grid;
+  align-content: center;
+  gap: 22px;
+  padding-block: clamp(64px, 12vw, 140px);
+}
+
+.notFound h1 {
+  font-size: clamp(38px, 6vw, 76px);
+  max-width: 16ch;
+}
+
+.notFound p { max-width: 44ch; color: var(--ink-soft); font-size: 18px; }
+.notFound .btn { justify-self: start; margin-top: 6px; }
+
 /* --------------------------------------------------------------- footer -- */
 
 .footer { padding-block: 48px 56px; border-top: 1px solid var(--line); }
@@ -478,10 +611,123 @@ img, svg { display: block; max-width: 100%; }
 
 .footer__links a:hover { color: var(--ink); }
 
-/* --------------------------------------------------------------- motion --
-   MOTION_INTENSITY 3: entry reveal only, to establish reading order.
-   Native scroll-driven animation, no JS, no scroll listeners.
-   ------------------------------------------------------------------------ */
+/* ================================================================ motion ==
+   MOTION_INTENSITY 7.
+
+   Every animation here is transform/opacity only, so it stays on the
+   compositor. Everything collapses to a static page under
+   prefers-reduced-motion. No scroll listeners anywhere: scroll work uses
+   native scroll-driven animations.
+   ========================================================================= */
+
+/* ---- Aurora: slow drifting colour fields behind the hero ---------------- */
+
+.aurora {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  /* Fade the field out gradually so there is never a visible edge where the
+     colour stops. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 22%, rgba(0, 0, 0, 0.55) 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 22%, rgba(0, 0, 0, 0.55) 62%, transparent 100%);
+}
+
+.aurora i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform;
+}
+
+.aurora i:nth-child(1) {
+  width: min(48vw, 660px);
+  aspect-ratio: 1;
+  left: -10%;
+  top: -26%;
+  background: color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+.aurora i:nth-child(2) {
+  width: min(44vw, 600px);
+  aspect-ratio: 1;
+  right: -10%;
+  top: -20%;
+  background: color-mix(in srgb, var(--warm) 30%, transparent);
+}
+
+.aurora i:nth-child(3) {
+  width: min(34vw, 460px);
+  aspect-ratio: 1;
+  left: 42%;
+  top: 34%;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aurora i:nth-child(1) { animation: drift-a 30s ease-in-out infinite alternate; }
+  .aurora i:nth-child(2) { animation: drift-b 38s ease-in-out infinite alternate; }
+  .aurora i:nth-child(3) { animation: drift-c 34s ease-in-out infinite alternate; }
+}
+
+@keyframes drift-a {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(9%, 12%, 0) scale(1.16); }
+}
+
+@keyframes drift-b {
+  from { transform: translate3d(0, 0, 0) scale(1.08); }
+  to   { transform: translate3d(-12%, 16%, 0) scale(0.9); }
+}
+
+@keyframes drift-c {
+  from { transform: translate3d(0, 0, 0) scale(0.94); }
+  to   { transform: translate3d(-8%, -14%, 0) scale(1.2); }
+}
+
+/* ---- Hairline grid, borrowed from technical drawing ---------------------- */
+
+.gridlines {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(90% 70% at 50% 0%, #000, transparent 78%);
+  mask-image: radial-gradient(90% 70% at 50% 0%, #000, transparent 78%);
+}
+
+.hero { --grid-line: color-mix(in srgb, var(--ink) 7%, transparent); }
+.block { --grid-line: color-mix(in srgb, var(--block-ink) 8%, transparent); }
+
+/* ---- Cursor spotlight on the dark block --------------------------------- */
+
+.block__spot {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 30%, transparent),
+    transparent 68%
+  );
+}
+
+.block:hover .block__spot { opacity: 1; }
+
+@media (hover: none) {
+  .block__spot { display: none; }
+}
+
+/* ---- Entry reveals ------------------------------------------------------ */
 
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
@@ -491,9 +737,96 @@ img, svg { display: block; max-width: 100%; }
       animation-range: entry 5% cover 22%;
     }
   }
+
+  /* Hero lines lift in on load, staggered. Establishes reading order and is
+     the one deliberately theatrical moment on the page. */
+  .lift {
+    animation: lift-in 0.9s var(--ease) both;
+    animation-delay: calc(var(--i, 0) * 110ms);
+  }
 }
 
 @keyframes reveal-in {
   from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: none; }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes lift-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---- Micro-interactions ------------------------------------------------- */
+
+/* Buttons carry a trailing arrow that slides on hover. */
+.btn__arrow {
+  display: inline-block;
+  margin-left: 9px;
+  transition: transform 0.28s var(--ease);
+}
+
+.btn:hover .btn__arrow { transform: translateX(4px); }
+
+/* Nav links draw an underline from the left. */
+.nav__links a {
+  position: relative;
+  padding-block: 4px;
+}
+
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s var(--ease);
+}
+
+.nav__links a:hover::after { transform: scaleX(1); }
+
+/* Tiles lift and warm up under the cursor. */
+.tile {
+  transition: transform 0.34s var(--ease), box-shadow 0.34s var(--ease),
+    border-color 0.34s var(--ease);
+}
+
+@media (hover: hover) {
+  .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 46px -30px color-mix(in srgb, var(--ink) 55%, transparent);
+  }
+
+  .tile--outline:hover { border-color: var(--warm-line); }
+}
+
+/* Principles get a colour marker that grows in on hover. */
+.principle { position: relative; }
+
+.principle::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 2px;
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease);
+}
+
+@media (hover: hover) {
+  .principle:hover::before { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn__arrow,
+  .nav__links a::after,
+  .tile,
+  .principle::before,
+  .block__spot { transition: none; }
 }

@@ -1,8 +1,14 @@
+import { Spotlight } from "./_components/Spotlight"
+
 const NAV = [
   { href: "#creator", label: "Creator" },
   { href: "#principles", label: "Principles" },
   { href: "#company", label: "Company" },
 ]
+
+function Arrow() {
+  return <span className="btn__arrow" aria-hidden="true">&rarr;</span>
+}
 
 export default function HomePage() {
   return (
@@ -10,29 +16,54 @@ export default function HomePage() {
       <header className="nav">
         <div className="shell nav__inner">
           <a className="wordmark" href="#top">Radovar</a>
+
           <nav className="nav__links" aria-label="Primary">
             {NAV.map((item) => (
               <a key={item.href} href={item.href}>{item.label}</a>
             ))}
           </nav>
-          <a className="btn btn--ghost btn--sm" href="mailto:info@radovar.com">Contact us</a>
+
+          <a className="btn btn--ghost btn--sm nav__cta" href="mailto:info@radovar.com">
+            Contact us
+          </a>
+
+          {/* Narrow viewports: native disclosure, no JavaScript. */}
+          <details className="nav__menu">
+            <summary className="nav__toggle" aria-label="Open menu">
+              <span className="nav__bars" aria-hidden="true">
+                <span /><span /><span />
+              </span>
+              Menu
+            </summary>
+            <nav className="nav__panel" aria-label="Primary">
+              {NAV.map((item) => (
+                <a key={item.href} href={item.href}>{item.label}</a>
+              ))}
+              <a href="mailto:info@radovar.com">Contact us</a>
+            </nav>
+          </details>
         </div>
       </header>
 
       <main id="top">
-        {/* Hero: large display type, supporting column on the right. */}
-        <section className="shell hero">
-          <div className="hero__grid">
-            <h1>
+        {/* Hero: drifting colour field and a hairline grid behind large type. */}
+        <section className="hero">
+          {/* Full-bleed: the colour field and grid run edge to edge, while the
+              content stays inside the shell. */}
+          <div className="aurora" aria-hidden="true"><i /><i /><i /></div>
+          <div className="gridlines" aria-hidden="true" />
+
+          <div className="hero__grid shell">
+            <h1 className="lift" style={{ "--i": 0 } as React.CSSProperties}>
               AI that runs on <em>your</em> machine.
             </h1>
-            <div className="hero__side">
+            <div className="hero__side lift" style={{ "--i": 1 } as React.CSSProperties}>
               <p className="hero__lede">
                 Radovar builds local-first AI. Creator, our desktop application, runs agents
                 on your computer and keeps your code there.
               </p>
               <div className="hero__actions">
-                <a className="btn btn--primary" href="#creator">Explore Creator</a>
+                <a className="btn btn--primary" href="#creator">Explore Creator<Arrow /></a>
                 <a className="btn btn--ghost" href="#company">About Radovar</a>
               </div>
             </div>
@@ -42,6 +73,9 @@ export default function HomePage() {
         {/* Creator: the dark block carries the visual weight of the page. */}
         <section className="shell" id="creator">
           <div className="block reveal">
+            <div className="gridlines" aria-hidden="true" />
+            <Spotlight />
+
             <div className="block__grid">
               <div>
                 <p className="eyebrow">Our product</p>
@@ -111,7 +145,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* How it works: four ideas, four cells, varied surfaces. */}
+        {/* How it works: four ideas, four cells, four different surfaces. */}
         <section className="shell section">
           <h2 className="bento__head reveal">How Creator actually works.</h2>
           <div className="bento">
@@ -122,7 +156,7 @@ export default function HomePage() {
                 folder where the work already lives.
               </p>
             </div>
-            <div className="tile tile--soft reveal">
+            <div className="tile tile--warm reveal">
               <h3>Agents work in place</h3>
               <p>They read, edit, and run against the real files on disk.</p>
             </div>
@@ -171,7 +205,9 @@ export default function HomePage() {
                 Questions about the product, a team rollout, or how the local setup works.
               </p>
             </div>
-            <a className="btn btn--onAccent" href="mailto:info@radovar.com">Contact us</a>
+            <a className="btn btn--onAccent" href="mailto:info@radovar.com">
+              Contact us<Arrow />
+            </a>
           </div>
         </section>
       </main>
