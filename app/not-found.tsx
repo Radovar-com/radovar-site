@@ -1,4 +1,7 @@
+import Link from "next/link"
 import type { Metadata } from "next"
+import { SiteHeader } from "./_components/SiteHeader"
+import { SiteFooter } from "./_components/SiteFooter"
 
 export const metadata: Metadata = {
   title: "Page not found",
@@ -8,20 +11,18 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <header className="nav">
-        <div className="shell nav__inner">
-          <a className="wordmark" href="/">Radovar</a>
-        </div>
-      </header>
-
-      <main className="shell notFound">
+      <SiteHeader />
+      <main className="shell notFound" id="top">
         <h1>That page is not here.</h1>
         <p>
-          The link may be out of date, or the address slightly off. Everything Radovar
-          publishes lives on the home page.
+          The link may be out of date, or the address slightly off. The footer below has
+          everything Radovar publishes.
         </p>
-        <a className="btn btn--primary" href="/">Back to the home page</a>
+        <Link className="btn btn--primary" href="/">
+          Back to the home page<span className="btn__arrow" aria-hidden="true">&rarr;</span>
+        </Link>
       </main>
+      <SiteFooter />
     </>
   )
 }

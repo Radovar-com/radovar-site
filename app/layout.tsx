@@ -21,13 +21,13 @@ const sans = Source_Sans_3({
 })
 
 const SITE = "https://radovar.com"
-const title = "Radovar — local-first AI, built in Bucharest"
+const title = "Radovar: AI that runs on your machine"
 const description =
   "Radovar is a technology company building local-first AI. Creator, our desktop application, runs AI agents on your machine and keeps your code there."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
-  title: { default: title, template: "%s — Radovar" },
+  title: { default: title, template: "%s | Radovar" },
   description,
   applicationName: "Radovar",
   keywords: ["Radovar", "Creator", "local-first AI", "AI agents", "privacy", "desktop AI"],
@@ -68,11 +68,6 @@ const jsonLd = {
   url: SITE,
   description,
   email: "info@radovar.com",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Bucharest",
-    addressCountry: "RO",
-  },
   makesOffer: {
     "@type": "Offer",
     itemOffered: {

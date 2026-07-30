@@ -1,10 +1,7 @@
+import Link from "next/link"
 import { Spotlight } from "./_components/Spotlight"
-
-const NAV = [
-  { href: "#creator", label: "Creator" },
-  { href: "#principles", label: "Principles" },
-  { href: "#company", label: "Company" },
-]
+import { SiteHeader } from "./_components/SiteHeader"
+import { SiteFooter } from "./_components/SiteFooter"
 
 function Arrow() {
   return <span className="btn__arrow" aria-hidden="true">&rarr;</span>
@@ -13,37 +10,7 @@ function Arrow() {
 export default function HomePage() {
   return (
     <>
-      <header className="nav">
-        <div className="shell nav__inner">
-          <a className="wordmark" href="#top">Radovar</a>
-
-          <nav className="nav__links" aria-label="Primary">
-            {NAV.map((item) => (
-              <a key={item.href} href={item.href}>{item.label}</a>
-            ))}
-          </nav>
-
-          <a className="btn btn--ghost btn--sm nav__cta" href="mailto:info@radovar.com">
-            Contact us
-          </a>
-
-          {/* Narrow viewports: native disclosure, no JavaScript. */}
-          <details className="nav__menu">
-            <summary className="nav__toggle" aria-label="Open menu">
-              <span className="nav__bars" aria-hidden="true">
-                <span /><span /><span />
-              </span>
-              Menu
-            </summary>
-            <nav className="nav__panel" aria-label="Primary">
-              {NAV.map((item) => (
-                <a key={item.href} href={item.href}>{item.label}</a>
-              ))}
-              <a href="mailto:info@radovar.com">Contact us</a>
-            </nav>
-          </details>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main id="top">
         {/* Hero: drifting colour field and a hairline grid behind large type. */}
@@ -54,9 +21,16 @@ export default function HomePage() {
           <div className="gridlines" aria-hidden="true" />
 
           <div className="hero__grid shell">
-            <h1 className="lift" style={{ "--i": 0 } as React.CSSProperties}>
-              AI that runs on <em>your</em> machine.
-            </h1>
+            <div className="lift" style={{ "--i": 0 } as React.CSSProperties}>
+              <Link className="pill" href="/releases/">
+                <span className="pill__dot" aria-hidden="true" />
+                Creator 0.1.31 is out
+                <span className="pill__arrow" aria-hidden="true">&rarr;</span>
+              </Link>
+              <h1>
+                AI that runs on <em>your</em> machine.
+              </h1>
+            </div>
             <div className="hero__side lift" style={{ "--i": 1 } as React.CSSProperties}>
               <p className="hero__lede">
                 Radovar builds local-first AI. Creator, our desktop application, runs agents
@@ -212,17 +186,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="footer">
-        <div className="shell footer__inner">
-          <span className="wordmark">Radovar</span>
-          <div className="footer__links">
-            <a href="#creator">Creator</a>
-            <a href="#company">Company</a>
-            <a href="mailto:info@radovar.com">info@radovar.com</a>
-          </div>
-          <span>Bucharest, Romania</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   )
 }
