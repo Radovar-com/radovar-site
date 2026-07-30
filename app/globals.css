@@ -2,7 +2,7 @@
 /* Design system: mobile-first */
 :root {
   color-scheme: light;
-  font-family: UniCredit;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   /* Selected design-system token layer. Literal values are confined to this managed DS boundary. */
   --MF-T2: #007A91;
   --MF-BrandWhite: #FFFFFF;

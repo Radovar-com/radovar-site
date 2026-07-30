@@ -3,3 +3,5 @@ node_modules
 .creator
 npm-debug.log*
 .env*
+
+out
