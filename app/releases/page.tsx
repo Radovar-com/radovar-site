@@ -5,13 +5,14 @@ import { DocPage } from "../_components/DocPage"
 export const metadata: Metadata = {
   title: "Releases",
   description:
-    "The current Creator build, how early-access releases are published, and how updates reach an installed copy.",
+    "Selected early-access Codevalanche releases from June and July 2026, with a link to current product and download information.",
+  alternates: { canonical: "/releases/" },
 }
 
-/* Real published builds, most recent first. Kept short on purpose: the full
+/* Real published early-access builds, most recent first. Kept short on purpose: the full
    pre-release history is internal iteration and is not useful to a reader. */
-const RECENT = [
-  { v: "0.1.31", d: "2 July 2026", tag: "Current" },
+const ARCHIVE = [
+  { v: "0.1.31", d: "2 July 2026" },
   { v: "0.1.30", d: "2 July 2026" },
   { v: "0.1.29", d: "2 July 2026" },
   { v: "0.1.21", d: "27 June 2026" },
@@ -23,62 +24,56 @@ export default function ReleasesPage() {
   return (
     <DocPage
       kicker="Releases"
-      title="Creator 0.1.31, and how it got here."
-      intro="Creator is published as pre-release builds while it is in early access. This page says what the current build is and how updates reach a machine that already has it."
-      updated="30 July 2026"
+      title="Early release archive."
+      intro="Selected early-access release history for Codevalanche, covering June and July 2026. This archive records an early period in the product’s development."
+      updated="9 October 2026"
     >
-      <h2>Current build</h2>
       <div className="note">
         <p>
-          <strong>Creator 0.1.31</strong>, published 2 July 2026, for Windows desktop.
-          Marked pre-release, like every build so far.
+          For current product and download information, visit{" "}
+          <a href="https://codevalanche.com">codevalanche.com</a>.
         </p>
       </div>
 
-      <h2>How releases work</h2>
+      <h2>How these releases worked</h2>
       <p>
-        Every build is published as a signed Windows installer with an update feed
-        alongside it. An installed copy of Creator checks that feed and can update itself,
-        so you are not expected to come back here to find out that something shipped.
+        These builds were published as signed Windows installers with an update feed
+        alongside them. Installed copies could check that feed for updates.
       </p>
       <p>
-        Builds are frequent. Between 17 June and 2 July 2026 we published twenty of them.
-        That cadence is what early access looks like from the inside: small changes, shipped
-        as they are ready, rather than held for a milestone.
+        This archive records twenty retained builds between 17 June and 2 July 2026. Several were published
+        on the same day as part of that early-access development period.
       </p>
 
       <h2>Version numbers</h2>
       <p>
-        Creator is on <strong>0.x</strong> and every build is a pre-release. That is not
-        modesty, it is a status: interfaces move, behaviour changes, and a version number
-        starting with zero is the honest way to say so.
+        The builds in this archive use <strong>0.x</strong> version numbers and were marked
+        pre-release. They document an early stage when interfaces and behaviour were changing.
       </p>
       <p>
-        Occasionally a number is skipped. If a build is published and then found to be
-        broken, it is pulled rather than quietly replaced, and the next good build takes the
-        next number. Version 0.1.24 is missing for exactly that reason.
+        Version 0.1.24 was published and then pulled after a problem was found. It was not
+        replaced under the same number, which accounts for the gap in the release history.
       </p>
 
-      <h2>Selected builds</h2>
+      <h2>Selected early-access builds</h2>
       <div className="vtable">
-        {RECENT.map((r) => (
+        {ARCHIVE.map((r) => (
           <div className="vrow" key={r.v}>
             <span className="vrow__v">{r.v}</span>
             <span className="vrow__d">{r.d}</span>
-            {r.tag ? <span className="tag">{r.tag}</span> : <span />}
+            <span />
           </div>
         ))}
       </div>
       <p>
         This is a selection, not the complete list. See{" "}
-        <Link href="/changelog/">the changelog</Link> for what has been changing.
+        <Link href="/changelog/">the changelog archive</Link> for publication dates and build counts.
       </p>
 
-      <h2>Getting a build</h2>
+      <h2>Product information</h2>
       <p>
-        Creator is not on a public download page yet. If you want to try it, write to{" "}
-        <a href="mailto:info@radovar.com">info@radovar.com</a> and tell us a little about
-        what you would use it for.
+        Visit <a href="https://codevalanche.com">codevalanche.com</a> for current
+        Codevalanche product and download information.
       </p>
     </DocPage>
   )

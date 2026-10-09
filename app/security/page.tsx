@@ -1,102 +1,62 @@
-import type { Metadata } from "next"
-import { DocPage } from "../_components/DocPage"
-
+import type { Metadata } from "next";
+import { DocPage } from "../_components/DocPage";
 export const metadata: Metadata = {
   title: "Security",
+  alternates: { canonical: "/security/" },
   description:
-    "How Creator is built: what stays on your machine, what leaves it when you choose a hosted model, and how to report a vulnerability to Radovar.",
-}
-
+    "The boundaries between your local Codevalanche workspace, connected AI runtimes, and model providers.",
+};
 export default function SecurityPage() {
   return (
     <DocPage
       kicker="Security"
-      title="What leaves your machine, and what does not."
-      intro="Most AI coding tools answer the security question with a policy. We would rather answer it with an architecture, and then be precise about where that architecture stops."
-      updated="30 July 2026"
+      title="Know where the boundaries are."
+      intro="Local-first is a starting point for understanding Codevalanche. Your connected runtime, provider, and permissions matter too."
     >
-      <h2>The design premise</h2>
+      <h2>The local workspace</h2>
       <p>
-        Creator is a desktop application. It opens a project that already exists on your
-        disk, and the agents inside it read and write those files directly. There is no
-        step where your repository is copied to a Radovar server in order for the product
-        to work, because there is no Radovar server in the path.
+        Codevalanche is a desktop application that works with projects on your
+        machine. You can open an existing repository without moving your
+        development workflow into a hosted editor.
+      </p>
+      <h2>Connected AI providers</h2>
+      <p>
+        When you use a hosted model, your prompts and relevant file context can
+        be sent to the provider. That provider’s terms and data practices apply.
+        Keeping a repository on disk does not make hosted inference private or
+        offline.
       </p>
       <p>
-        That single decision removes a large part of the usual threat model. There is no
-        shared bucket of customer source code to breach. There is no retention window to
-        argue about. There is no internal team with a plausible reason to read your
-        project. We cannot lose data we never receive.
+        Review the configuration and documentation of the runtime you connect,
+        including its authentication, telemetry, network access, and tool
+        permissions.
       </p>
-
-      <h2>Where the architecture stops</h2>
+      <h2>Review and permissions</h2>
       <p>
-        Being precise matters more than sounding safe, so: <strong>if you point Creator at
-        a hosted model, the content of your prompts and the file context the agent needs
-        are sent to that model provider.</strong> That is how hosted models work. Creator
-        does not change it, and no amount of local-first design can.
-      </p>
-      <p>What Creator does give you is the choice, made explicitly and visibly:</p>
-      <ul>
-        <li>
-          <strong>Hosted model.</strong> Your prompt and the relevant file context go to
-          the provider you selected, under that provider terms. Radovar is not in the
-          middle of that exchange.
-        </li>
-        <li>
-          <strong>Local model.</strong> The model runs on your own hardware. Nothing
-          leaves the machine at all. This is the mode for work that genuinely cannot go
-          anywhere.
-        </li>
-      </ul>
-      <div className="note">
-        <p>
-          If you are evaluating Creator for a codebase that cannot be disclosed to a third
-          party, the local model path is the one to test. It is the only configuration
-          where the guarantee is architectural rather than contractual.
-        </p>
-      </div>
-
-      <h2>Changes are proposed, not applied</h2>
-      <p>
-        An agent that can silently rewrite your working tree is a security problem
-        regardless of where it runs. Creator treats every edit an agent wants to make as a
-        proposal: it arrives as a diff, scoped to named files, and it does not land until
-        you approve it.
+        Review AI-generated changes and check the work before you keep or commit
+        it. Approval behavior and file access depend on the runtime and
+        configuration. A review interface is not a guarantee that every
+        operation waits for individual approval.
       </p>
       <p>
-        This is the control that matters in practice. It means a mistaken instruction, a
-        confused model, or text injected into a file the agent happened to read cannot
-        turn into a committed change without a person seeing the diff first.
+        Keep important work in version control. Choose permissions deliberately,
+        and use a separate working copy when a task needs isolation.
       </p>
-
-      <h2>Credentials</h2>
-      <p>
-        Provider keys and sign-in sessions are stored on the machine that uses them, and
-        are read only by the process that needs them to make a request. Radovar does not
-        proxy provider traffic, so we never hold your provider credentials.
-      </p>
-
       <h2>Reporting a vulnerability</h2>
       <p>
-        If you believe you have found a security issue in Creator, write to{" "}
-        <a href="mailto:security@radovar.com">security@radovar.com</a> with enough detail
-        to reproduce it. Please give us a reasonable window to investigate and ship a fix
-        before disclosing publicly.
+        If you believe you have found a security issue in Codevalanche, write to{" "}
+        <a href="mailto:security@radovar.com">security@radovar.com</a> with the
+        affected version and enough detail to reproduce it. Please avoid
+        including credentials or sensitive project data.
       </p>
+      <h2>Early access</h2>
       <p>
-        We will confirm receipt, tell you what we found, and tell you when a fix ships. If
-        we disagree that something is a vulnerability, we will explain why rather than go
-        quiet.
-      </p>
-
-      <h2>What we do not claim</h2>
-      <p>
-        Radovar is a small company and Creator is in early access. We hold no third-party
-        security certification today, and we would rather say so plainly than imply
-        otherwise. If a certification becomes relevant to how you would use Creator, tell
-        us and we will tell you honestly where we stand.
+        Codevalanche is in early access. Radovar does not claim third-party
+        security certification. For a deployment with specific security
+        requirements, contact{" "}
+        <a href="mailto:info@radovar.com">info@radovar.com</a> to discuss the
+        configuration you plan to use.
       </p>
     </DocPage>
-  )
+  );
 }

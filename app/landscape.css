@@ -1,0 +1,75 @@
+/* Pine-green ink and ivory paper give Radovar its own landscape identity. */
+:root { --accent:#36584c; --accent-hover:#294639; --accent-soft:#e3ebe4; --line-strong:rgba(24,39,30,.2); }
+:root[data-theme="dark"] { --paper:#121b17; --paper-raised:#1a2620; --panel:#23332a; --ink:#f1f0e9; --ink-soft:#cedad1; --ink-muted:#a7b8ac; --line:rgba(222,234,225,.15); --line-strong:rgba(222,234,225,.23); --accent:#a2c7b0; --accent-hover:#bdd9c6; --accent-soft:#294338; }
+@media(prefers-color-scheme:dark) { :root:not([data-theme]) { --paper:#121b17; --paper-raised:#1a2620; --panel:#23332a; --ink:#f1f0e9; --ink-soft:#cedad1; --ink-muted:#a7b8ac; --line:rgba(222,234,225,.15); --line-strong:rgba(222,234,225,.23); --accent:#a2c7b0; --accent-hover:#bdd9c6; --accent-soft:#294338; } }
+.nav__inner { max-width:1440px; }
+.nav { height:78px; }
+.nav .radovar-logo { width:145px; }
+.nav__links { gap:28px; margin-right:10px; }
+.nav__cta { border-radius:6px; padding:12px 16px; background:var(--accent); color:var(--paper); }
+.nav__cta:hover { background:var(--accent-hover); color:var(--paper); }
+.nav__toggle { min-height:44px; }
+.theme-switch button { min-height:30px; }
+.landscape-scene { position:absolute; inset:0; z-index:0; overflow:hidden; }
+.landscape-scene__art { position:absolute; inset:-1%; animation:landscape-drift 48s ease-in-out infinite; animation-play-state:paused; transform-origin:70% 70%; }
+.landscape-scene[data-playing="true"] .landscape-scene__art { animation-play-state:running; }
+.landscape-scene__art img { object-fit:cover; object-position:center center; }
+.landscape-scene__walkers, .landscape-scene__birds { position:absolute; inset:0; width:100%; height:100%; overflow:hidden; pointer-events:none; color:#243e35; }
+.landscape-scene__birds { color:var(--accent); }
+.landscape-scene__mist { position:absolute; inset:51% -12% -6%; opacity:.68; animation:landscape-mist 37s ease-in-out infinite; animation-play-state:paused; pointer-events:none; }
+.landscape-scene__mist img { object-fit:fill; }
+.landscape-scene__mist--distant { inset:44% -16% 17%; opacity:.3; animation-duration:57s; animation-delay:-18s; }
+.landscape-scene[data-playing="true"] .landscape-scene__mist { animation-play-state:running; }
+.landscape-scene__veil { position:absolute; inset:0; pointer-events:none; }
+.landscape-scene--hero .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,color-mix(in srgb,var(--paper) 96%,transparent) 27%,color-mix(in srgb,var(--paper) 40%,transparent) 51%,transparent 64%,rgba(17,41,32,.18) 83%,rgba(17,41,32,.68) 100%); }
+.scenic-footer.footer { position:relative; isolation:isolate; overflow:hidden; padding:0; border:0; background:var(--paper); }
+.scenic-footer__content { position:relative; z-index:1; max-width:1440px; min-height:810px; padding-top:65px; padding-bottom:23px; display:flex; flex-direction:column; pointer-events:none; }
+.scenic-footer__content a { pointer-events:auto; }
+.scenic-footer__top { display:grid; grid-template-columns:1fr 1.6fr; gap:9%; }
+.scenic-footer .footer__brand .radovar-logo { width:152px; }
+.scenic-footer .footer__brand p { font-size:20px; line-height:1.4; margin-top:25px; letter-spacing:-.03em; color:var(--ink); }
+.scenic-footer .footer__mail { display:inline-flex; align-items:center; gap:24px; margin-top:19px; padding-bottom:6px; border-bottom:1px solid var(--line-strong); font-size:12px; color:var(--ink-soft); }
+.scenic-footer__navigation { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+.scenic-footer .footer__col h2 { font-family:var(--font-sans),sans-serif; font-size:12px; font-weight:600; letter-spacing:0; margin:0 0 20px; color:var(--ink); }
+.scenic-footer .footer__col ul { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+.scenic-footer .footer__col a { font-size:12px; color:var(--ink-soft); }
+.scenic-footer .footer__col a:hover { color:var(--accent); }
+.scenic-footer__message { margin-top:70px; max-width:540px; color:#274b3b; }
+.scenic-footer__message > span { font-size:11px; }
+.scenic-footer__message > p { font-size:clamp(44px,5vw,72px); letter-spacing:-.065em; line-height:1.05; font-weight:500; margin-top:18px; }
+.scenic-footer__base { margin-top:auto; display:flex; align-items:end; justify-content:space-between; gap:20px; font-size:10px; color:#fffdf7; padding-top:50px; }
+.scenic-footer__base a { min-height:30px; display:flex; align-items:end; }
+.landscape-scene--footer .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,color-mix(in srgb,var(--paper) 92%,transparent) 16%,color-mix(in srgb,var(--paper) 38%,transparent) 43%,transparent 68%,rgba(17,41,32,.7) 100%); }
+:root[data-theme="dark"] .landscape-scene__art { filter:brightness(.55) saturate(.7); }
+:root[data-theme="dark"] .scenic-footer__message { color:#f1f0e9; text-shadow:0 2px 16px #12261c70; }
+:root[data-theme="dark"] .landscape-scene--hero .landscape-scene__veil, :root[data-theme="dark"] .landscape-scene--footer .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,color-mix(in srgb,var(--paper) 97%,transparent) 28%,color-mix(in srgb,var(--paper) 65%,transparent) 52%,rgba(14,27,20,.16) 76%,rgba(14,27,20,.75) 100%); }
+@media(prefers-color-scheme:dark) { :root:not([data-theme]) .landscape-scene__art { filter:brightness(.55) saturate(.7); } :root:not([data-theme]) .scenic-footer__message { color:#f1f0e9; } }
+/* Matching endpoints and eased turning points create a continuous loop. */
+@keyframes landscape-drift { 0%,100% { transform:scale(1.01) translate3d(-.3%,0,0); } 50% { transform:scale(1.045) translate3d(.3%,-.3%,0); } }
+@keyframes landscape-mist { 0%,100% { transform:translate3d(-7%,4%,0) scale(1.04); } 50% { transform:translate3d(7%,-5%,0) scale(1.08); } }
+@media(max-width:860px) { .nav { height:74px; } .nav .radovar-logo { width:120px; } .nav__panel { top:73px; } .theme-switch button { min-height:30px; } }
+@media(max-width:760px) {
+ .landscape-scene--hero .landscape-scene__art { top:190px; inset-inline:-40%; }
+ .landscape-scene--hero .landscape-scene__art img { object-position:center center; }
+ .landscape-scene--hero .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,var(--paper) 33%,color-mix(in srgb,var(--paper) 85%,transparent) 49%,transparent 71%,rgba(17,41,32,.7) 100%); }
+ .scenic-footer__content { min-height:990px; padding-top:45px; padding-bottom:20px; }
+ .scenic-footer__top { grid-template-columns:1fr; gap:38px; }
+ .scenic-footer .footer__brand .radovar-logo { width:142px; }
+ .scenic-footer .footer__brand p { font-size:20px; margin-top:20px; }
+ .scenic-footer .footer__mail { margin-top:14px; }
+ .scenic-footer__navigation { gap:18px; }
+ .scenic-footer .footer__col h2 { font-size:11px; margin-bottom:16px; }
+ .scenic-footer .footer__col ul { gap:10px; }
+ .scenic-footer .footer__col a { font-size:11px; }
+ .scenic-footer__message { margin-top:56px; max-width:300px; }
+ .scenic-footer__message > p { font-size:44px; }
+ .scenic-footer__base { display:grid; grid-template-columns:1fr auto; gap:10px; font-size:9px; }
+ .scenic-footer__base > span:nth-child(2) { grid-column:1; grid-row:2; }
+ .scenic-footer__base > a { grid-column:2; grid-row:1/3; align-self:end; }
+ .landscape-scene--footer .landscape-scene__art { top:330px; inset-inline:-50%; }
+ .landscape-scene--footer .landscape-scene__art img { object-position:center center; }
+ .landscape-scene--footer .landscape-scene__mist { inset:64% -50% -6%; }
+ .landscape-scene--footer .landscape-scene__mist--distant { inset:58% -50% 12%; }
+ .landscape-scene--footer .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,var(--paper) 31%,color-mix(in srgb,var(--paper) 95%,transparent) 44%,color-mix(in srgb,var(--paper) 48%,transparent) 59%,transparent 75%,rgba(17,41,32,.75) 100%); }
+}
+@media(prefers-reduced-motion:reduce) { .landscape-scene__art, .landscape-scene__mist { animation:none; transform:none; } .landscape-scene__birds, .landscape-scene__walkers { display:none; } }

@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
+import Image from "next/image"
 import { SiteHeader } from "./SiteHeader"
 import { SiteFooter } from "./SiteFooter"
+import "../content.css"
 
 type Props = {
   kicker: string
@@ -10,20 +12,30 @@ type Props = {
   children: ReactNode
 }
 
-/** Shared shell for every long-form page, so Security reads like Terms reads
- *  like Docs. One measure, one heading scale, one rhythm. */
+/** The supporting pages share the same reading measure and quiet paper layout. */
 export function DocPage({ kicker, title, intro, updated, children }: Props) {
   return (
     <>
       <SiteHeader />
-      <main className="shell docWrap" id="top">
+      <main className="shell docWrap docPage" id="top">
         <header className="docHead">
-          <p className="eyebrow">{kicker}</p>
-          <h1>{title}</h1>
-          <p className="docIntro">{intro}</p>
-          {updated ? <p className="docMeta">Last updated {updated}</p> : null}
+          <div className="docPage__heading">
+            <p className="eyebrow">{kicker}</p>
+            <h1>{title}</h1>
+            <p className="docIntro">{intro}</p>
+            {updated ? <p className="docMeta">Last updated {updated}</p> : null}
+          </div>
+          <div className="docPage__detail" aria-hidden="true">
+            <Image
+              src={`${process.env.BASE_PATH || ""}/media/radovar-atelier-pine-v3.webp`}
+              alt=""
+              fill
+              sizes="(max-width: 540px) 60px, (max-width: 760px) 96px, 172px"
+              loading="lazy"
+            />
+          </div>
         </header>
-        <div className="doc">{children}</div>
+        <article className="doc docPage__body">{children}</article>
       </main>
       <SiteFooter />
     </>

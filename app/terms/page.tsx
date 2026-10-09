@@ -4,8 +4,9 @@ import { DocPage } from "../_components/DocPage"
 
 export const metadata: Metadata = {
   title: "Terms",
+  alternates: { canonical: "/terms/" },
   description:
-    "The terms that apply to this website and to Creator while it is in early access.",
+    "The terms that apply to this website and to Codevalanche while it is in early access.",
 }
 
 export default function TermsPage() {
@@ -13,32 +14,32 @@ export default function TermsPage() {
     <DocPage
       kicker="Terms"
       title="The agreement, in language you can actually read."
-      intro="These terms cover this website and the use of Creator during early access. They are deliberately short, because a short agreement you understand is worth more than a long one you scroll past."
+      intro="These terms cover this website and the use of Codevalanche during early access. They are deliberately short, because a short agreement you understand is worth more than a long one you scroll past."
       updated="30 July 2026"
     >
       <h2>Who you are agreeing with</h2>
       <p>
         Radovar is a technology company building local-first AI. In this document,
         &quot;we&quot; and &quot;Radovar&quot; mean that company, and &quot;you&quot; means
-        the person or organisation using this website or Creator.
+        the person or organisation using this website or Codevalanche.
       </p>
 
-      <h2>Creator is in early access</h2>
+      <h2>Codevalanche is in early access</h2>
       <p>
-        Creator is not a finished product. Builds are published as pre-releases, features
+        Codevalanche is not a finished product. Builds are published as pre-releases, features
         change, and behaviour that works today may be different next month. If you are
-        deciding whether to depend on Creator for something that matters, please plan
+        deciding whether to depend on Codevalanche for something that matters, please plan
         around that.
       </p>
       <p>
-        Because of this, Creator is provided as it is, without a warranty that it will be
+        Because of this, Codevalanche is provided as it is, without a warranty that it will be
         uninterrupted, error free, or fit for a particular purpose. We are not liable for
         loss of data, loss of profit, or consequential loss arising from its use. Nothing
         here limits liability that cannot be limited by law.
       </p>
       <div className="note">
         <p>
-          Practical version: keep your work in version control, and read the diffs Creator
+          Practical version: keep your work in version control, and read the diffs Codevalanche
           shows you before you approve them. That advice would be sound even if this were a
           mature product.
         </p>
@@ -46,26 +47,26 @@ export default function TermsPage() {
 
       <h2>Your code stays yours</h2>
       <p>
-        You keep every right in the projects you open with Creator. Using our software gives
+        You keep every right in the projects you open with Codevalanche. Using our software gives
         us no claim over your source code, no licence to it, and no right to train on it.
       </p>
 
       <h2>What we ask of you</h2>
       <ul>
-        <li>Do not use Creator to build or operate something illegal.</li>
+        <li>Do not use Codevalanche to build or operate something illegal.</li>
         <li>
           Do not attempt to break, probe, or overload infrastructure that belongs to us or
-          to a model provider you reach through Creator. If you want to test our security,
+          to a model provider you reach through Codevalanche. If you want to test our security,
           see <Link href="/security/">the Security page</Link> and tell us first.
         </li>
         <li>
-          Do not redistribute Creator builds as though they were your own product.
+          Do not redistribute Codevalanche builds as though they were your own product.
         </li>
       </ul>
 
       <h2>Model providers</h2>
       <p>
-        When you connect Creator to a third-party model provider, your use of that model is
+        When you connect Codevalanche to a third-party model provider, your use of that model is
         governed by the provider terms as well as these. We do not control what a provider
         does with a request you send it, which is why the choice of provider, including the
         option of a local model, is yours and is made explicitly.

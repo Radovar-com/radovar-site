@@ -5,7 +5,8 @@ import { DocPage } from "../_components/DocPage"
 export const metadata: Metadata = {
   title: "Privacy",
   description:
-    "What Radovar collects and what it does not: this website sets no cookies and runs no analytics, and Creator keeps your project on your machine.",
+    "How Radovar handles website preferences, email, and the boundaries between Codevalanche’s local workspace and connected providers.",
+  alternates: { canonical: "/privacy/" },
 }
 
 export default function PrivacyPage() {
@@ -13,15 +14,19 @@ export default function PrivacyPage() {
     <DocPage
       kicker="Privacy"
       title="We collect less than you expect."
-      intro="This page describes what happens to information when you visit radovar.com, when you write to us, and when you use Creator. It is written to be read, not to be survived."
-      updated="30 July 2026"
+      intro="This page describes what happens to information when you visit radovar.com, when you write to us, and when you use Codevalanche. It is written to be read, not to be survived."
+      updated="9 October 2026"
     >
       <h2>This website</h2>
       <p>
         radovar.com is a set of static files. It sets <strong>no cookies</strong>, runs{" "}
         <strong>no analytics</strong>, embeds <strong>no third-party trackers</strong>, and
-        loads no fonts, scripts, or images from anyone else. There is no consent banner on
-        this site because there is nothing to consent to.
+        loads no fonts, scripts, or images from anyone else.
+      </p>
+      <p>
+        When you choose a light or dark theme, the site stores that preference in your
+        browser’s local storage under <code>radovar-theme</code>. The site reads it on
+        later visits to apply your chosen theme.
       </p>
       <p>
         The server that delivers these files keeps ordinary web server logs, which include
@@ -37,16 +42,18 @@ export default function PrivacyPage() {
         to anyone.
       </p>
 
-      <h2>Creator</h2>
+      <h2>Codevalanche</h2>
       <p>
-        Creator runs on your computer and works against a project on your disk. Your source
+        Codevalanche runs on your computer and works against a project on your disk. Your source
         code is not uploaded to Radovar in order for the product to function. We do not
         hold copies of your repositories, and we do not train anything on your work.
       </p>
       <p>
         When you choose a hosted model, the prompt and file context that the agent needs are
-        sent to <strong>that provider</strong>, under that provider terms, not to us. When
-        you choose a local model, nothing leaves the machine.{" "}
+        sent to <strong>that provider</strong>, under that provider’s terms, not to us.
+        A local model can run inference on your machine, but connected tools and runtimes
+        may still make network requests. Their configuration, permissions, and data
+        handling determine what is sent.{" "}
         <Link href="/security/">The Security page</Link> sets out that boundary in more detail.
       </p>
 
@@ -63,6 +70,10 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Changes</h2>
+      <p>
+        9 October 2026: clarified how the website stores your theme preference and how
+        local model inference differs from network activity by connected tools and runtimes.
+      </p>
       <p>
         If this policy changes in a way that affects what we collect, we will change the
         date at the top and describe the change here rather than quietly replacing the text.

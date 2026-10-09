@@ -1,0 +1,380 @@
+/* Supporting pages: an editorial reading layout, with the landscape kept small. */
+.docPage.docWrap {
+  max-width: 1180px;
+  padding-top: clamp(52px, 6.5vw, 90px);
+  padding-bottom: clamp(78px, 8vw, 118px);
+}
+
+.docPage .docHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 172px;
+  align-items: start;
+  column-gap: clamp(38px, 6vw, 80px);
+  padding-bottom: clamp(38px, 5vw, 60px);
+  margin-bottom: clamp(34px, 4vw, 52px);
+  border-bottom: 1px solid var(--line-strong, var(--line));
+}
+
+.docPage__heading {
+  min-width: 0;
+}
+
+.docPage .docHead .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+.docPage .docHead .eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+}
+
+.docPage .docHead h1 {
+  max-width: 760px;
+  margin: 24px 0 23px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(43px, 4.6vw, 66px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.docPage .docIntro {
+  max-width: 60ch;
+  color: var(--ink-soft);
+  font-size: clamp(17px, 1.65vw, 19px);
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.docPage .docMeta {
+  margin-top: 24px;
+  color: var(--ink-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+
+.docPage__detail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin-top: 3px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong, var(--line));
+  background: var(--panel);
+  border-radius: 86px 86px 3px 3px;
+}
+
+.docPage__detail img {
+  object-fit: cover;
+  object-position: 96% 72%;
+}
+
+.docPage .docPage__body {
+  max-width: 68ch;
+  margin-left: clamp(0px, 6.5vw, 76px);
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-wrap: break-word;
+}
+
+.docPage .docPage__body > :first-child {
+  margin-top: 0;
+}
+
+.docPage .doc h2 {
+  margin: 45px 0 14px;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(29px, 2.5vw, 35px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.docPage .doc h3 {
+  margin: 30px 0 12px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+.docPage .doc p {
+  margin-block: 16px;
+  color: var(--ink-soft);
+}
+
+.docPage .doc strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.docPage .doc ul,
+.docPage .doc ol {
+  margin-block: 18px;
+  padding-left: 23px;
+  color: var(--ink-soft);
+}
+
+.docPage .doc li {
+  padding-left: 7px;
+  margin-bottom: 10px;
+}
+
+.docPage .doc li::marker {
+  color: var(--accent);
+}
+
+.docPage .doc a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+.docPage .doc a:hover {
+  color: var(--accent-hover);
+  text-decoration-color: currentColor;
+}
+
+.docPage .doc a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.docPage .doc code {
+  padding: 2px 5px;
+  border-radius: 3px;
+  background: var(--panel);
+  color: var(--ink);
+  font-size: 0.84em;
+  overflow-wrap: anywhere;
+}
+
+.docPage .doc .note {
+  margin-block: 28px;
+  padding: 17px 23px;
+  border-left: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 52%, var(--paper));
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.docPage .doc .note p {
+  margin-block: 0;
+}
+
+.docPage .doc .note p + p {
+  margin-top: 13px;
+}
+
+.docPage .doc .cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 46px;
+}
+
+.docPage .doc .card {
+  position: relative;
+  padding: 21px 26px 0 0;
+  border-top: 1px solid var(--line-strong, var(--line));
+  background: transparent;
+  text-decoration: none;
+}
+
+.docPage .doc .card::after {
+  content: "↗";
+  position: absolute;
+  right: 0;
+  top: 20px;
+  color: var(--accent);
+  font-size: 18px;
+  line-height: 1.4;
+  transition: transform 180ms ease;
+}
+
+.docPage .doc .card:hover::after {
+  transform: translate(2px, -2px);
+}
+
+.docPage .doc .card h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.docPage .doc .card:hover h3 {
+  color: var(--accent);
+}
+
+.docPage .doc .card p {
+  margin: 9px 0 0;
+  color: var(--ink-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.docPage .doc .vtable {
+  margin-block: 25px 28px;
+  border-top: 1px solid var(--line-strong, var(--line));
+}
+
+.docPage .doc .vrow {
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: 22px;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.docPage .doc .vrow > span:empty {
+  display: none;
+}
+
+.docPage .doc .vrow__v {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.docPage .doc .vrow__d {
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.65;
+}
+
+.docPage .doc table {
+  width: 100%;
+  margin-block: 25px;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.docPage .doc th,
+.docPage .doc td {
+  padding: 13px 12px 13px 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.docPage .doc th {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+:root[data-theme="dark"] .docPage__detail img {
+  filter: brightness(0.7) saturate(0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .docPage__detail img {
+    filter: brightness(0.7) saturate(0.7);
+  }
+}
+
+@media (max-width: 760px) {
+  .docPage .docHead {
+    grid-template-columns: minmax(0, 1fr) 96px;
+    column-gap: 24px;
+  }
+
+  .docPage .docHead h1 {
+    font-size: clamp(39px, 6vw, 51px);
+  }
+
+  .docPage__detail {
+    aspect-ratio: 3 / 4;
+    border-radius: 48px 48px 2px 2px;
+  }
+
+  .docPage .docPage__body {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .docPage.docWrap {
+    padding-top: 38px;
+  }
+
+  .docPage .docHead {
+    position: relative;
+    display: block;
+    padding-top: 6px;
+  }
+
+  .docPage .docHead .eyebrow {
+    min-height: 42px;
+    padding-right: 76px;
+  }
+
+  .docPage .docHead h1 {
+    margin-top: 22px;
+    font-size: clamp(36px, 9.5vw, 46px);
+  }
+
+  .docPage .docIntro {
+    font-size: 16px;
+  }
+
+  .docPage__detail {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    aspect-ratio: 1;
+    margin-top: 0;
+    border-radius: 30px 30px 2px 2px;
+  }
+
+  .docPage .docPage__body {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .docPage .doc h2 {
+    margin-top: 36px;
+    font-size: 29px;
+  }
+
+  .docPage .doc .note {
+    padding: 16px 18px;
+    font-size: 13px;
+  }
+
+  .docPage .doc .cards {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 36px;
+  }
+
+  .docPage .doc .vrow {
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 14px;
+  }
+
+  .docPage .doc .vrow__v,
+  .docPage .doc .vrow__d {
+    font-size: 12px;
+  }
+}

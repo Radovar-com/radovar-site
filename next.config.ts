@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
+  // This is a public URL prefix, shared by the server and client components.
+  env: { BASE_PATH: basePath },
   basePath: basePath || undefined,
   turbopack: {
     root: path.resolve(__dirname),
