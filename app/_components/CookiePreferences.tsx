@@ -17,7 +17,11 @@ export function CookiePreferences({ runtime, failed }: { runtime: AnalyticsRunti
   const alive = useRef(true);
   const dialog = useRef<HTMLDivElement>(null);
   const invoker = useRef<HTMLElement | null>(null);
-  const close = () => { setOpen(false); (invoker.current?.isConnected ? invoker.current : document.querySelector<HTMLElement>(".cookie-reopen"))?.focus(); };
+  const close = () => {
+    if (!open) return; // Dismissing the initial banner has no dialog invoker to restore.
+    setOpen(false);
+    (invoker.current?.isConnected ? invoker.current : document.querySelector<HTMLElement>(".cookie-reopen"))?.focus({ preventScroll: true });
+  };
 
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
 

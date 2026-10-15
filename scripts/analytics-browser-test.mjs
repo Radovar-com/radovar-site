@@ -65,8 +65,30 @@ async function referralBoundary(){
   const session=all().filter(e=>e.site_id==='codevalanche'&&e.event_name==='session_started').at(-1);assert.equal(session.context.referrer_domain,policy==='no-referrer'?'unknown':'radovar.com');assert.equal(session.properties.attribution_kind,policy==='no-referrer'?'unknown':'referrer');await ctx.close();
  }
 }
+async function bannerFocusRegression(){
+ const problems=[];
+ for(const action of ['Accept analytics','Decline']){
+  const ctx=await context({enabled:false,viewport:{width:390,height:844}}),p=await ctx.newPage();await ready(p);
+  assert.equal(await p.evaluate(()=>window.RadovarAnalytics.consentManager.getState().state),'unknown');
+  await p.evaluate(()=>window.scrollTo({top:140,behavior:'instant'}));const before=await p.evaluate(()=>scrollY);
+  await p.getByRole('button',{name:action,exact:true}).click();await p.waitForFunction(()=>window.RadovarAnalytics.consentManager.getState().state!=='unknown');await p.waitForTimeout(350);
+  const after=await p.evaluate(()=>({scroll:scrollY,footerFocus:document.activeElement?.matches('.cookie-reopen')}));
+  if(Math.abs(after.scroll-before)>2||after.footerFocus)problems.push({action,before,after});
+  // Deliberately opening the footer dialog may scroll to its invoker; saving/escaping
+  // restores that actual invoker without a second viewport movement.
+  await p.getByRole('button',{name:'Manage cookies',exact:true}).click();const footerScroll=await p.evaluate(()=>scrollY);
+  await p.getByRole('button',{name:'Save preferences',exact:true}).click();await p.waitForFunction(()=>document.querySelector('[role="dialog"]')===null);
+  assert.equal(await p.evaluate(()=>document.activeElement?.matches('.cookie-reopen')),true,'dialog save restores footer invoker');assert.ok(Math.abs(await p.evaluate(()=>scrollY)-footerScroll)<=2,'dialog save keeps invoker viewport');
+  await p.getByRole('button',{name:'Manage cookies',exact:true}).click();await p.keyboard.press('Escape');assert.equal(await p.evaluate(()=>document.activeElement?.matches('.cookie-reopen')),true,'dialog Escape restores footer invoker');await ctx.close();
+ }
+ const ctx=await context({enabled:false,viewport:{width:390,height:844}}),p=await ctx.newPage();await ready(p);await p.evaluate(()=>window.scrollTo({top:140,behavior:'instant'}));const before=await p.evaluate(()=>scrollY);
+ await p.getByRole('button',{name:'Personalize',exact:true}).click();assert.equal(await p.getByRole('dialog',{name:'Cookie preferences'}).isVisible(),true);await p.keyboard.press('Escape');assert.equal(await p.evaluate(()=>document.activeElement?.textContent),'Personalize');assert.ok(Math.abs(await p.evaluate(()=>scrollY)-before)<=2,'Personalize Escape keeps banner invoker viewport');await ctx.close();
+ assert.deepEqual(problems,[],'initial banner choices preserve viewport and do not focus the footer');
+ console.log('PASS banner focus: unknown Accept + Decline preserve near-top viewport/no footer focus; Personalize/Escape and footer Save/Escape restore invokers');
+}
 try{
- if(process.argv.includes('--strict-mode')){
+ if(process.argv.includes('--banner-focus-only')){await bannerFocusRegression();assert.deepEqual(errors,[]);}
+ else if(process.argv.includes('--strict-mode')){
   assert.ok(process.env.RADOVAR_TEST_ORIGIN,'StrictMode requires a real Next development server');
   const strict=await context();await strict.addInitScript(()=>{window.__fixtureEffects={adds:0,removes:0};for(const name of ['addEventListener','removeEventListener']){const original=window[name];window[name]=function(type,...args){if(type==='radovar:preferences')window.__fixtureEffects[name==='addEventListener'?'adds':'removes']++;return original.call(this,type,...args);};}});const p=await strict.newPage();
   let release;const gate=new Promise(resolve=>release=resolve),seen=p.waitForRequest('**/analytics/owned-analytics.js');let sdkRequests=0;
@@ -81,6 +103,7 @@ try{
   await p.goBack();await p.waitForFunction(()=>window.RadovarAnalytics.pageId==='home');await p.getByRole('tab',{name:'Your agents',exact:true}).click();await flush(p);assert.equal(views().length,2);assert.equal(all().filter(e=>e.event_name==='feature_selected').length,1,'one listener after StrictMode effect replay');
   await strict.close();assert.deepEqual(errors,[]);console.log('PASS real Next dev StrictMode: held async import, core controls/route before SDK, one request/client/pageview, latest route, back and one semantic listener');
  }else{
+ await bannerFocusRegression();
  const ctx=await context(),page=await ctx.newPage();await ready(page,'/?utm_source=newsletter&utm_campaign=fall_launch&email=private@example.org#access_token=private');
  assert.equal(await page.locator('[data-owned-consent]').count(),1);assert.equal(requests.length,0,'unknown consent has zero IO');assert.equal(receipts.size,0,'unknown consent issues no receipt');
  await page.getByRole('button',{name:'Decline',exact:true}).click();await flush(page);assert.equal(requests.length,0,'denial has zero events');assert.equal(receipts.size,0,'denial issues no receipt');
