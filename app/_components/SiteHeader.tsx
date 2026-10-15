@@ -7,9 +7,9 @@ import { useEffect, useRef, useState } from "react";
 import { ThemeSwitch } from "./ThemeSwitch";
 
 const NAV = [
-  { href: "/#codevalanche", label: "Product" },
-  { href: "/docs/", label: "Docs" },
-  { href: "/#company", label: "Company" },
+  { id: "home", href: "/#codevalanche", label: "Product" },
+  { id: "docs", href: "/docs/", label: "Docs" },
+  { id: "home", href: "/#company", label: "Company" },
 ];
 
 export function SiteHeader() {
@@ -45,7 +45,7 @@ export function SiteHeader() {
   return (
     <header className="nav">
       <div className="shell nav__inner">
-        <Link className="wordmark" href="/" aria-label="Radovar home">
+        <Link className="wordmark" href="/" aria-label="Radovar home" data-analytics-action="header" data-analytics-target="home" data-analytics-placement="header">
           <Image
             className="radovar-logo"
             src={`${process.env.BASE_PATH || ""}/radovar-logo.svg`}
@@ -60,6 +60,9 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
+              data-analytics-action={item.href.includes("#") ? "anchor" : "header"}
+              data-analytics-target={item.id}
+              data-analytics-placement="header"
               aria-current={current(item.href)}
             >
               {item.label}
@@ -98,6 +101,9 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                data-analytics-action={item.href.includes("#") ? "anchor" : "header"}
+                data-analytics-target={item.id}
+                data-analytics-placement="header"
                 aria-current={current(item.href)}
               >
                 {item.label}

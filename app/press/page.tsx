@@ -30,7 +30,7 @@ export default function PressPage() {
       <p>
         Radovar’s company website is{" "}
         <a href="https://radovar.com">radovar.com</a>. Codevalanche’s product
-        website is <a href="https://codevalanche.com">codevalanche.com</a>.
+        website is <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a>.
       </p>
       <h2>Product context</h2>
       <ul>
@@ -46,7 +46,7 @@ export default function PressPage() {
       <h2>Press enquiries</h2>
       <p>
         For questions, interviews, or a factual check, contact{" "}
-        <a href="mailto:press@radovar.com">press@radovar.com</a>.
+        <a href="mailto:press@radovar.com" data-analytics-action="contact" data-analytics-contact="press" data-analytics-placement="inline">press@radovar.com</a>.
       </p>
     </DocPage>
   );

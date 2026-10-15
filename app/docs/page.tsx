@@ -47,15 +47,15 @@ export default function DocsPage() {
         <p>
           Codevalanche is in early access. Supported tools and workflows may
           change between builds. For product information, visit{" "}
-          <a href="https://codevalanche.com">codevalanche.com</a>.
+          <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a>.
         </p>
       </div>
       <div className="cards">
-        <Link className="card" href="/releases/">
+        <Link className="card" href="/releases/" data-analytics-action="anchor" data-analytics-target="releases_archive" data-analytics-placement="resources">
           <h3>Releases</h3>
           <p>Published builds and release history.</p>
         </Link>
-        <Link className="card" href="/security/">
+        <Link className="card" href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">
           <h3>Security</h3>
           <p>Understand the workspace and provider boundaries.</p>
         </Link>

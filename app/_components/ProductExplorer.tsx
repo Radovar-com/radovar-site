@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { trackFeature } from "../analytics/config";
 
 const views = [
   { name: "Your project", title: "Start where your work lives.", copy: "Open a local repository. Keep its files, conversations, and working context together.", tag: "Project context", lines: ["src / application", "docs / decisions", "tasks / current work"], note: "A familiar starting point. Your own project." },
@@ -12,16 +13,20 @@ const views = [
 export function ProductExplorer() {
   const [active, setActive] = useState(0);
   const view = views[active];
+  const select = (index: number) => {
+    if (index !== active) trackFeature(["project", "agents", "review"][index]);
+    setActive(index);
+  };
   return (
     <div className="product-explorer">
       <div className="explorer-story">
         <div className="explorer-tabs" role="tablist" aria-label="Explore the workspace">
           {views.map((item, index) => (
-            <button key={item.name} id={`explorer-tab-${index}`} type="button" role="tab" aria-selected={active === index} aria-controls="explorer-panel" tabIndex={active === index ? 0 : -1} onClick={() => setActive(index)} onKeyDown={(event) => {
+            <button key={item.name} id={`explorer-tab-${index}`} type="button" role="tab" aria-selected={active === index} aria-controls="explorer-panel" tabIndex={active === index ? 0 : -1} onClick={() => select(index)} onKeyDown={(event) => {
               if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
               event.preventDefault();
               const next = event.key === "Home" ? 0 : event.key === "End" ? views.length - 1 : (index + (event.key === "ArrowRight" ? 1 : views.length - 1)) % views.length;
-              setActive(next);
+              select(next);
               document.getElementById(`explorer-tab-${next}`)?.focus();
             }}>{item.name}</button>
           ))}
@@ -29,7 +34,7 @@ export function ProductExplorer() {
         <div id="explorer-panel" role="tabpanel" aria-labelledby={`explorer-tab-${active}`} tabIndex={0}>
           <h3>{view.title}</h3>
           <p>{view.copy}</p>
-          <a href="https://codevalanche.com">Explore Codevalanche <span aria-hidden="true">↗</span></a>
+          <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="product_panel" data-analytics-section-id="codevalanche">Explore Codevalanche <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <div className="workspace-illustration" role="img" aria-label={`Illustrative Codevalanche workflow: ${view.tag}. ${view.lines.join(". ")}.`}>

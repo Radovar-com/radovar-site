@@ -15,13 +15,15 @@ export default function PrivacyPage() {
       kicker="Privacy"
       title="We collect less than you expect."
       intro="This page describes what happens to information when you visit radovar.com, when you write to us, and when you use Codevalanche. It is written to be read, not to be survived."
-      updated="9 October 2026"
+      updated="15 October 2026"
     >
       <h2>This website</h2>
       <p>
-        radovar.com is a set of static files. It sets <strong>no cookies</strong>, runs{" "}
-        <strong>no analytics</strong>, embeds <strong>no third-party trackers</strong>, and
-        loads no fonts, scripts, or images from anyone else.
+        radovar.com is a static website with a first-party analytics preference manager.
+        Optional website analytics is <strong>not enabled for this release</strong>.
+        Saving a preference does not activate collection. We do not use Google Analytics,
+        session replay, keylogging, or third-party tracking scripts. Fonts and website
+        assets are served with the site.
       </p>
       <p>
         When you choose a light or dark theme, the site stores that preference in your
@@ -29,14 +31,42 @@ export default function PrivacyPage() {
         later visits to apply your chosen theme.
       </p>
       <p>
-        The server that delivers these files keeps ordinary web server logs, which include
-        your IP address and the page requested. We do not build profiles from them and we
-        do not combine them with anything else.
+        The preference manager uses a host-only essential cookie, lasting up to 180 days,
+        to remember your analytics choice. Browser storage also supports that choice and
+        the withdrawal protocol. Use Manage cookies in the footer to accept, decline,
+        customize, or withdraw. Website access works with either choice. Each website
+        keeps its own consent; visiting Codevalanche does not transfer your choice or an
+        anonymous identifier.
+      </p>
+      <p>
+        If enabled in a future qualified release, website analytics requires your explicit
+        choice and a valid consent receipt. It measures registered page, section and button
+        interactions, coarse browser and device categories, and sanitized campaign labels
+        or an external referring domain. It does not collect form values, page text, raw
+        URLs or queries, email addresses, authentication tokens, prompts, or project paths.
+        Missing acquisition information remains unknown. Anonymous IDs last up to 30 days;
+        sessions end after 30 minutes idle or 24 hours. Queues are limited to 100 events
+        and 24 hours. The intended retention is 90 days for raw analytics and 13 months
+        for non-identifying aggregates; collection and provider retention require separate
+        release qualification.
+      </p>
+      <p>
+        Withdrawal stops optional collection on this browser and clears its optional IDs
+        and queue. A minimal revocation proof may remain until the collector acknowledges
+        withdrawal, including after an offline choice. Withdrawal does not claim to delete
+        observations already accepted by a collector. Optional account activity has a
+        separate choice in the signed-in account; a website choice cannot enable it.
+      </p>
+      <p>
+        Hosting providers may process ordinary delivery and security logs, including
+        network addresses and requested resources. Those logs are separate from this
+        optional analytics system. Provider logging and retention must be qualified before
+        optional collection is activated.
       </p>
 
       <h2>When you write to us</h2>
       <p>
-        If you email <a href="mailto:info@radovar.com">info@radovar.com</a>, we hold your
+        If you email <a href="mailto:info@radovar.com" data-analytics-action="contact" data-analytics-contact="info" data-analytics-placement="inline">info@radovar.com</a>, we hold your
         message and address for as long as it takes to have the conversation and to keep a
         record of it. We do not add you to a mailing list, and we do not pass your address
         to anyone.
@@ -54,7 +84,7 @@ export default function PrivacyPage() {
         A local model can run inference on your machine, but connected tools and runtimes
         may still make network requests. Their configuration, permissions, and data
         handling determine what is sent.{" "}
-        <Link href="/security/">The Security page</Link> sets out that boundary in more detail.
+        <Link href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">The Security page</Link> sets out that boundary in more detail.
       </p>
 
       <h2>Your rights</h2>
@@ -71,8 +101,8 @@ export default function PrivacyPage() {
 
       <h2>Changes</h2>
       <p>
-        9 October 2026: clarified how the website stores your theme preference and how
-        local model inference differs from network activity by connected tools and runtimes.
+        15 October 2026: added the first-party preference manager, the disabled analytics
+        release state, collection boundaries, and withdrawal information.
       </p>
       <p>
         If this policy changes in a way that affects what we collect, we will change the

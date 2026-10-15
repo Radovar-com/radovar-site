@@ -31,7 +31,7 @@ export default function ReleasesPage() {
       <div className="note">
         <p>
           For current product and download information, visit{" "}
-          <a href="https://codevalanche.com">codevalanche.com</a>.
+          <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a>.
         </p>
       </div>
 
@@ -67,12 +67,12 @@ export default function ReleasesPage() {
       </div>
       <p>
         This is a selection, not the complete list. See{" "}
-        <Link href="/changelog/">the changelog archive</Link> for publication dates and build counts.
+        <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">the changelog archive</Link> for publication dates and build counts.
       </p>
 
       <h2>Product information</h2>
       <p>
-        Visit <a href="https://codevalanche.com">codevalanche.com</a> for current
+        Visit <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a> for current
         Codevalanche product and download information.
       </p>
     </DocPage>

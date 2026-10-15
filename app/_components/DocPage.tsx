@@ -18,7 +18,7 @@ export function DocPage({ kicker, title, intro, updated, children }: Props) {
     <>
       <SiteHeader />
       <main className="shell docWrap docPage" id="top">
-        <header className="docHead">
+        <header className="docHead" data-analytics-section="intro">
           <div className="docPage__heading">
             <p className="eyebrow">{kicker}</p>
             <h1>{title}</h1>
@@ -35,7 +35,7 @@ export function DocPage({ kicker, title, intro, updated, children }: Props) {
             />
           </div>
         </header>
-        <article className="doc docPage__body">{children}</article>
+        <article className="doc docPage__body" data-analytics-section="resources">{children}</article>
       </main>
       <SiteFooter />
     </>

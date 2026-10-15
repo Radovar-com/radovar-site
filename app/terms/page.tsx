@@ -15,7 +15,7 @@ export default function TermsPage() {
       kicker="Terms"
       title="The agreement, in language you can actually read."
       intro="These terms cover this website and the use of Codevalanche during early access. They are deliberately short, because a short agreement you understand is worth more than a long one you scroll past."
-      updated="30 July 2026"
+      updated="15 October 2026"
     >
       <h2>Who you are agreeing with</h2>
       <p>
@@ -57,7 +57,7 @@ export default function TermsPage() {
         <li>
           Do not attempt to break, probe, or overload infrastructure that belongs to us or
           to a model provider you reach through Codevalanche. If you want to test our security,
-          see <Link href="/security/">the Security page</Link> and tell us first.
+          see <Link href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">the Security page</Link> and tell us first.
         </li>
         <li>
           Do not redistribute Codevalanche builds as though they were your own product.
@@ -74,6 +74,13 @@ export default function TermsPage() {
 
       <h2>This website</h2>
       <p>
+        Optional website analytics requires a separate choice and is not enabled for this
+        release. Declining or withdrawing does not prevent access to the website, product
+        information, account, or downloads. Manage cookies in the footer opens your
+        preferences. <Link href="/privacy/">The Privacy page</Link> explains storage and
+        the separate signed-in account activity choice.
+      </p>
+      <p>
         The text and design of radovar.com belong to Radovar. You are welcome to quote and
         link to it. Please do not present it as your own.
       </p>
@@ -82,7 +89,7 @@ export default function TermsPage() {
       <p>
         If these terms change, the date at the top changes with them. If something here is
         unclear or you need a different arrangement for your organisation, write to{" "}
-        <a href="mailto:info@radovar.com">info@radovar.com</a> and we will talk it through.
+        <a href="mailto:info@radovar.com" data-analytics-action="contact" data-analytics-contact="info" data-analytics-placement="inline">info@radovar.com</a> and we will talk it through.
       </p>
     </DocPage>
   )

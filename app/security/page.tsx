@@ -45,7 +45,7 @@ export default function SecurityPage() {
       <h2>Reporting a vulnerability</h2>
       <p>
         If you believe you have found a security issue in Codevalanche, write to{" "}
-        <a href="mailto:security@radovar.com">security@radovar.com</a> with the
+        <a href="mailto:security@radovar.com" data-analytics-action="contact" data-analytics-contact="security" data-analytics-placement="inline">security@radovar.com</a> with the
         affected version and enough detail to reproduce it. Please avoid
         including credentials or sensitive project data.
       </p>
@@ -54,7 +54,7 @@ export default function SecurityPage() {
         Codevalanche is in early access. Radovar does not claim third-party
         security certification. For a deployment with specific security
         requirements, contact{" "}
-        <a href="mailto:info@radovar.com">info@radovar.com</a> to discuss the
+        <a href="mailto:info@radovar.com" data-analytics-action="contact" data-analytics-contact="info" data-analytics-placement="inline">info@radovar.com</a> to discuss the
         configuration you plan to use.
       </p>
     </DocPage>

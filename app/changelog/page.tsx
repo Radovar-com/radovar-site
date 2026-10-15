@@ -58,13 +58,13 @@ export default function ChangelogPage() {
       <p>
         The counts and version ranges describe publication history. They do not identify
         which features or fixes were included in an individual build. See{" "}
-        <Link href="/releases/">the release archive</Link> for a selection of dated builds
+        <Link href="/releases/" data-analytics-action="anchor" data-analytics-target="releases_archive" data-analytics-placement="resources">the release archive</Link> for a selection of dated builds
         and the background to their version numbers.
       </p>
 
       <h2>Current product information</h2>
       <p>
-        Visit <a href="https://codevalanche.com">codevalanche.com</a> for current
+        Visit <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a> for current
         Codevalanche product and download information.
       </p>
     </DocPage>

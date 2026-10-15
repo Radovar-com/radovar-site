@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Geist } from "next/font/google";
 import "./globals.css";
 import "./landscape.css";
+import { AnalyticsProvider } from "./_components/AnalyticsProvider";
 
 /* Only the weights the page actually renders. Display uses 300 (h1/h2) and
    400 (h3/wordmark); body uses 400 and 500 (nav, buttons). */
@@ -125,10 +127,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
-        <a className="skip-link" href="#top">
+        <Link className="skip-link" href="#top">
           Skip to content
-        </a>
+        </Link>
         {children}
+        <AnalyticsProvider />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
