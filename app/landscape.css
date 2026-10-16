@@ -30,7 +30,7 @@
 .landscape-scene[data-playing="true"] .landscape-scene__mist { animation-play-state:running; }
 .landscape-scene__veil { position:absolute; inset:0; pointer-events:none; }
 .landscape-scene--hero .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,color-mix(in srgb,var(--paper) 96%,transparent) 27%,color-mix(in srgb,var(--paper) 40%,transparent) 51%,transparent 64%,rgba(17,41,32,.18) 83%,rgba(17,41,32,.68) 100%); }
-.scenic-footer.footer { position:relative; isolation:isolate; overflow:hidden; padding:0; border:0; background:var(--paper); }
+.scenic-footer.footer { position:relative; isolation:isolate; overflow:hidden; clip-path:inset(0); /* mobile Safari can let animated layers escape overflow:hidden and extend the scroll */ padding:0; border:0; background:var(--paper); }
 .scenic-footer__content { position:relative; z-index:1; max-width:1440px; min-height:810px; padding-top:65px; padding-bottom:23px; display:flex; flex-direction:column; pointer-events:none; }
 .scenic-footer__content a { pointer-events:auto; }
 .scenic-footer__top { display:grid; grid-template-columns:1fr 1.6fr; gap:9%; }
@@ -62,7 +62,7 @@
  .landscape-scene--hero .landscape-scene__art { top:190px; inset-inline:-40%; }
  .landscape-scene--hero .landscape-scene__art img { object-position:center center; }
  .landscape-scene--hero .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,var(--paper) 33%,color-mix(in srgb,var(--paper) 85%,transparent) 49%,transparent 71%,rgba(17,41,32,.7) 100%); }
- .scenic-footer__content { min-height:990px; padding-top:45px; padding-bottom:20px; }
+ .scenic-footer__content { min-height:780px; padding-top:45px; padding-bottom:20px; }
  .scenic-footer__top { grid-template-columns:1fr; gap:38px; }
  .scenic-footer .footer__brand .radovar-logo { width:142px; }
  .scenic-footer .footer__brand p { font-size:20px; margin-top:20px; }

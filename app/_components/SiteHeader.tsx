@@ -5,9 +5,10 @@ import { RadovarBrand } from "./RadovarBrand";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-const NAV = [
+const NAV: { id?: string; href: string; label: string }[] = [
   { id: "codevalanche", href: "/codevalanche/", label: "Codevalanche" },
   { id: "company", href: "/company/", label: "Company" },
+  { href: "/research/", label: "Research" },
   { id: "press", href: "/press/", label: "Updates" },
   { id: "docs", href: "/docs/", label: "Docs" },
 ];
@@ -50,9 +51,11 @@ export function SiteHeader() {
       return pathname === "/" && hash === href.slice(1)
         ? "location"
         : undefined;
-    return pathname.replace(/\/$/, "") === href.replace(/\/$/, "")
-      ? "page"
-      : undefined;
+    const path = pathname.replace(/\/$/, "");
+    const target = href.replace(/\/$/, "");
+    if (path === target) return "page";
+    // An article inside a section keeps that section marked in the header.
+    return target === "/research" && path.startsWith("/research/") ? "location" : undefined;
   };
 
   return (

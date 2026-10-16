@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const output = path.resolve(process.argv[2] ?? fileURLToPath(new URL('../out/', import.meta.url)));
 const site = 'https://radovar.com';
-const routes = ['/', '/company/', '/codevalanche/', '/docs/', '/security/', '/privacy/', '/terms/', '/press/', '/research/wave-ai/', '/changelog/'];
+const routes = ['/', '/company/', '/codevalanche/', '/docs/', '/security/', '/privacy/', '/terms/', '/press/', '/research/', '/research/wave-ai/', '/changelog/'];
 const named = { amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', nbsp: ' ', rsquo: '’', lsquo: '‘', ldquo: '“', rdquo: '”', mdash: '—', ndash: '–', hellip: '…' };
 
 function decode(text) {

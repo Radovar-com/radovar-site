@@ -8,7 +8,7 @@ import { ThemeSwitch } from "./ThemeSwitch";
 
 const columns = [
   { title: "Product", links: [{ href: "/codevalanche/", label: "Codevalanche" }, { href: "/docs/", label: "Product guide" }, { href: "/changelog/", label: "Release history" }, { href: "https://codevalanche.com", label: "codevalanche.com" }] },
-  { title: "Company", links: [{ href: "/company/", label: "About Radovar" }, { href: "/press/", label: "Updates" }, { href: "/research/wave-ai/", label: "Research" }, { href: "/security/", label: "Security" }, { href: "mailto:info@radovar.com", label: "Contact" }] },
+  { title: "Company", links: [{ href: "/company/", label: "About Radovar" }, { href: "/press/", label: "Updates" }, { href: "/research/", label: "Research" }, { href: "/security/", label: "Security" }, { href: "mailto:info@radovar.com", label: "Contact" }] },
   { title: "Legal", links: [{ href: "/privacy/", label: "Privacy" }, { href: "/terms/", label: "Terms" }] },
 ];
 

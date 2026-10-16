@@ -30,7 +30,11 @@
 .stats div { padding-top:14px; border-top:1px solid var(--line); }
 .stats strong { display:block; color:var(--accent); font-size:26px; font-weight:500; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
 .stats span { display:block; margin-top:6px; color:var(--ink-muted); font-size:13px; line-height:1.5; }
+.docPage .doc table.spec th { width:150px; padding-right:20px; text-align:left; }
 @media (max-width:640px) {
+  .docPage .doc table.spec, .docPage .doc table.spec tbody, .docPage .doc table.spec tr, .docPage .doc table.spec th, .docPage .doc table.spec td { display:block; width:auto; }
+  .docPage .doc table.spec th { padding:16px 0 4px; border-bottom:0; }
+  .docPage .doc table.spec td { padding:0 0 16px; }
   .chart__row { grid-template-columns:minmax(0,1fr); gap:6px; }
   .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }

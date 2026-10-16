@@ -45,7 +45,7 @@ export default function WaveAiResearchPage() {
       intro="From 2 September to 2 October 2026, in a project we called Wave AI, we tested whether a small network of coupled oscillators, simulated in software, can remember and recall information as well as standard neural networks. This is the full account: how we set it up, what we controlled for, every result including the ones that did not work, and what we will not claim."
       updated="16 October 2026"
     >
-      <PageSchema {...page} />
+      <PageSchema {...page} parent={{ title: "Research", path: "/research/" }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(article).replace(/</g, "\\u003c") }} />
 
       <div className="note">
@@ -105,7 +105,7 @@ export default function WaveAiResearchPage() {
       </ul>
 
       <h2 id="conditions">Conditions</h2>
-      <table>
+      <table className="spec">
         <tbody>
           <tr><th scope="row">Hardware</th><td>One Windows 11 desktop PC. Most scientific runs on the CPU, on a single thread; the last diagnostics on an AMD Radeon RX 7800 XT.</td></tr>
           <tr><th scope="row">Software</th><td>Python 3.12 and PyTorch 2.13, with locked dependencies. Ruff and 239 automated tests passed before the pilot; an 88-cell smoke run completed without failures.</td></tr>
@@ -272,7 +272,12 @@ export default function WaveAiResearchPage() {
         ))}
       </div>
       <p>
-        Questions about this work: <a href="mailto:info@radovar.com">info@radovar.com</a>. More from us on the{" "}
+        Radovar is the software company behind{" "}
+        <Link href="/codevalanche/" data-analytics-action="anchor" data-analytics-target="codevalanche" data-analytics-placement="resources">Codevalanche</Link>, a desktop
+        app for coding with AI agents. This research is separate from the product and does not describe how Codevalanche works.
+      </p>
+      <p>
+        More research: <Link href="/research/" data-analytics-action="anchor" data-analytics-placement="resources">all articles</Link>. Questions about this work: <a href="mailto:info@radovar.com">info@radovar.com</a>. More from us on the{" "}
         <Link href="/press/" data-analytics-action="anchor" data-analytics-target="press" data-analytics-placement="resources">Updates</Link> page.
       </p>
     </DocPage>

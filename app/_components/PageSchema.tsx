@@ -1,10 +1,10 @@
 import { SITE_URL } from "../_lib/site-metadata";
 
-type Page = { title: string; description: string; path: string };
+type Page = { title: string; description: string; path: string; parent?: { title: string; path: string } };
 
 /* WebPage + BreadcrumbList for one route, tied to the site-wide Organization,
    WebSite and Codevalanche nodes declared once in the root layout. */
-export function PageSchema({ title, description, path }: Page) {
+export function PageSchema({ title, description, path, parent }: Page) {
   const url = new URL(path, SITE_URL).href;
   const home = `${SITE_URL}/`;
   const schema = {
@@ -29,8 +29,8 @@ export function PageSchema({ title, description, path }: Page) {
               "@type": "BreadcrumbList",
               "@id": `${url}#breadcrumb`,
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Radovar", item: home },
-                { "@type": "ListItem", position: 2, name: title, item: url },
+                ...[{ name: "Radovar", item: home }, ...(parent ? [{ name: parent.title, item: new URL(parent.path, SITE_URL).href }] : []), { name: title, item: url }]
+                  .map((crumb, index) => ({ "@type": "ListItem", position: index + 1, ...crumb })),
               ],
             },
           ]),
