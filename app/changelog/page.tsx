@@ -23,7 +23,7 @@ export default function ChangelogPage() {
   return (
     <DocPage
       kicker="Release history"
-      title="Every Codevalanche build we have published."
+      title="Every early-access build of Codevalanche."
       intro="Twenty early-access builds for Windows, published between 17 June and 2 July 2026, plus the one we pulled. This is a historical record, not the current download page."
       updated="16 October 2026"
     >
