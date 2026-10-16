@@ -11,10 +11,10 @@ import { Spot, type SpotName } from "./_components/Spot";
 import "./site.css";
 import "./home.css";
 
-const latest: { id: string; href: string; label: string; title: string; copy: string; spot: SpotName; tone: "sage" | "mist" | "sand" | "clay" }[] = [
+const latest: { id?: string; href: string; label: string; title: string; copy: string; spot: SpotName; tone: "sage" | "mist" | "sand" | "clay" }[] = [
+  { href: "/research/wave-ai/", label: "Research · 16 October 2026", title: "Can coupled oscillators act as memory for AI?", copy: "A month-long experiment published in full, including the results that did not work.", spot: "compass", tone: "sage" },
   { id: "press", href: "/press/", label: "Update · 16 October 2026", title: "A new radovar.com.", copy: "The company site now says who we are and what we make. Public downloads of Codevalanche are in preparation.", spot: "news", tone: "clay" },
   { id: "security", href: "/security/", label: "Security", title: "Your files, providers and permissions.", copy: "What stays on your PC, and what a hosted model can receive.", spot: "shield", tone: "mist" },
-  { id: "docs", href: "/docs/", label: "Product guide", title: "Your first project in Codevalanche.", copy: "Open a repository, connect an agent and review the result.", spot: "book", tone: "sage" },
   { id: "changelog_archive", href: "/changelog/", label: "Release history · June–July 2026", title: "Twenty early-access builds for Windows.", copy: "Every early-access build, its date, and the one we pulled.", spot: "archive", tone: "sand" },
 ];
 
