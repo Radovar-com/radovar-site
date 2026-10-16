@@ -1,4 +1,4 @@
-/* Supporting pages: an editorial reading layout, with the landscape kept small. */
+/* Supporting pages use a reading layout and native chapter navigation. */
 .docPage.docWrap {
   max-width: 1180px;
   padding-top: clamp(52px, 6.5vw, 90px);
@@ -7,7 +7,7 @@
 
 .docPage .docHead {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 172px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   column-gap: clamp(38px, 6vw, 80px);
   padding-bottom: clamp(38px, 5vw, 60px);
@@ -64,25 +64,17 @@
   font-variant-numeric: tabular-nums;
 }
 
-.docPage__detail {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  margin-top: 3px;
-  overflow: hidden;
-  border: 1px solid var(--line-strong, var(--line));
-  background: var(--panel);
-  border-radius: 86px 86px 3px 3px;
-}
-
-.docPage__detail img {
-  object-fit: cover;
-  object-position: 96% 72%;
-}
+.docPage__layout { display:grid; grid-template-columns:220px minmax(0,1fr); gap:65px; align-items:start; }
+.docPage__contents { position:sticky; top:108px; padding-right:20px; }
+.docPage__contents > p { color:var(--ink); font-size:12px; font-weight:500; margin-bottom:16px; }
+.docPage__contents ol { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+.docPage__contents a { display:block; color:var(--ink-muted); font-size:12px; line-height:1.6; text-decoration:none; }
+.docPage__contents a:hover { color:var(--accent); text-decoration:underline; text-underline-offset:4px; }
+.docPage__contents a:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
 
 .docPage .docPage__body {
   max-width: 68ch;
-  margin-left: clamp(0px, 6.5vw, 76px);
+  margin-left: 0;
   color: var(--ink-soft);
   font-size: 16px;
   line-height: 1.8;
@@ -94,6 +86,8 @@
 }
 
 .docPage .doc h2 {
+  /* The document already reserves 90px for the sticky header. */
+  scroll-margin-top:18px;
   margin: 45px 0 14px;
   color: var(--ink);
   font-family: var(--font-serif), Georgia, serif;
@@ -198,19 +192,8 @@
   text-decoration: none;
 }
 
-.docPage .doc .card::after {
-  content: "↗";
-  position: absolute;
-  right: 0;
-  top: 20px;
-  color: var(--accent);
-  font-size: 18px;
-  line-height: 1.4;
-  transition: transform 180ms ease;
-}
-
-.docPage .doc .card:hover::after {
-  transform: translate(2px, -2px);
+.docPage .doc .card:hover {
+  border-top-color: var(--ink-soft);
 }
 
 .docPage .doc .card h3 {
@@ -281,30 +264,18 @@
   font-weight: 500;
 }
 
-:root[data-theme="dark"] .docPage__detail img {
-  filter: brightness(0.7) saturate(0.7);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) .docPage__detail img {
-    filter: brightness(0.7) saturate(0.7);
-  }
-}
-
 @media (max-width: 760px) {
   .docPage .docHead {
-    grid-template-columns: minmax(0, 1fr) 96px;
-    column-gap: 24px;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .docPage .docHead h1 {
     font-size: clamp(39px, 6vw, 51px);
   }
 
-  .docPage__detail {
-    aspect-ratio: 3 / 4;
-    border-radius: 48px 48px 2px 2px;
-  }
+  .docPage__layout { grid-template-columns:minmax(0,1fr); gap:32px; }
+  .docPage__contents { position:static; padding:0 0 24px; border-bottom:1px solid var(--line); }
+  .docPage__contents ol { grid-template-columns:1fr 1fr; gap:10px 20px; }
 
   .docPage .docPage__body {
     margin-left: 0;
@@ -323,8 +294,7 @@
   }
 
   .docPage .docHead .eyebrow {
-    min-height: 42px;
-    padding-right: 76px;
+    min-height: 20px;
   }
 
   .docPage .docHead h1 {
@@ -334,16 +304,6 @@
 
   .docPage .docIntro {
     font-size: 16px;
-  }
-
-  .docPage__detail {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60px;
-    aspect-ratio: 1;
-    margin-top: 0;
-    border-radius: 30px 30px 2px 2px;
   }
 
   .docPage .docPage__body {

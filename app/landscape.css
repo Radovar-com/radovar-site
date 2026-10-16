@@ -9,7 +9,9 @@
 .nav__cta { border-radius:6px; padding:12px 16px; background:var(--accent); color:var(--paper); }
 .nav__cta:hover { background:var(--accent-hover); color:var(--paper); }
 .nav__toggle { min-height:44px; }
-.theme-switch button { min-height:30px; }
+.theme-toggle { pointer-events:auto; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:44px; height:44px; border:0; border-radius:50%; padding:0; background:transparent; color:inherit; cursor:pointer; transition:background-color .18s ease; }
+.theme-toggle:hover { background:rgba(255,253,247,.12); }
+.theme-toggle:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
 .landscape-scene { position:absolute; inset:0; z-index:0; overflow:hidden; }
 .landscape-scene__art { position:absolute; inset:-1%; animation:landscape-drift 48s ease-in-out infinite; animation-play-state:paused; transform-origin:70% 70%; }
 .landscape-scene[data-playing="true"] .landscape-scene__art { animation-play-state:running; }
@@ -39,6 +41,8 @@
 .scenic-footer__message > p { font-size:clamp(44px,5vw,72px); letter-spacing:-.065em; line-height:1.05; font-weight:500; margin-top:18px; }
 .scenic-footer__base { margin-top:auto; display:flex; align-items:end; justify-content:space-between; gap:20px; font-size:10px; color:#fffdf7; padding-top:50px; }
 .scenic-footer__base a { min-height:30px; display:flex; align-items:end; }
+.scenic-footer__utilities { display:flex; align-items:center; gap:15px; }
+.scenic-footer__utilities a { align-items:center; min-height:44px; }
 .landscape-scene--footer .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,color-mix(in srgb,var(--paper) 92%,transparent) 16%,color-mix(in srgb,var(--paper) 38%,transparent) 43%,transparent 68%,rgba(17,41,32,.7) 100%); }
 :root[data-theme="dark"] .landscape-scene__art { filter:brightness(.55) saturate(.7); }
 :root[data-theme="dark"] .scenic-footer__message { color:#f1f0e9; text-shadow:0 2px 16px #12261c70; }
@@ -47,7 +51,7 @@
 /* Matching endpoints and eased turning points create a continuous loop. */
 @keyframes landscape-drift { 0%,100% { transform:scale(1.01) translate3d(-.3%,0,0); } 50% { transform:scale(1.045) translate3d(.3%,-.3%,0); } }
 @keyframes landscape-mist { 0%,100% { transform:translate3d(-7%,4%,0) scale(1.04); } 50% { transform:translate3d(7%,-5%,0) scale(1.08); } }
-@media(max-width:860px) { .nav { height:74px; } .nav .radovar-logo { width:120px; } .nav__panel { top:73px; } .theme-switch button { min-height:30px; } }
+@media(max-width:860px) { .nav { height:74px; } .nav .radovar-logo { width:120px; } .nav__panel { top:73px; } }
 @media(max-width:760px) {
  .landscape-scene--hero .landscape-scene__art { top:190px; inset-inline:-40%; }
  .landscape-scene--hero .landscape-scene__art img { object-position:center center; }
@@ -65,7 +69,7 @@
  .scenic-footer__message > p { font-size:44px; }
  .scenic-footer__base { display:grid; grid-template-columns:1fr auto; gap:10px; font-size:9px; }
  .scenic-footer__base > span:nth-child(2) { grid-column:1; grid-row:2; }
- .scenic-footer__base > a { grid-column:2; grid-row:1/3; align-self:end; }
+ .scenic-footer__utilities { grid-column:2; grid-row:1/3; align-self:end; gap:6px; }
  .landscape-scene--footer .landscape-scene__art { top:330px; inset-inline:-50%; }
  .landscape-scene--footer .landscape-scene__art img { object-position:center center; }
  .landscape-scene--footer .landscape-scene__mist { inset:64% -50% -6%; }

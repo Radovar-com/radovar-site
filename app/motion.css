@@ -1,0 +1,89 @@
+/*
+ * Micro-motion in the language of the footer landscape: slow drift, birds crossing once, small
+ * movements in the line drawings. Everything here is off for prefers-reduced-motion, and JS-led
+ * motion only starts once Motion.tsx has added html.motion.
+ */
+@media (prefers-reduced-motion:no-preference) {
+  /* Introduction: rises in on first paint, no JS needed. */
+  .introduction h1 > *, .intro-row > *, .introduction .intro-story { animation:motion-rise .95s cubic-bezier(.2,.7,.2,1) both; }
+  .introduction h1 > em { animation-delay:.08s; }
+  .intro-row > .intro-lead { animation-delay:.18s; }
+  .intro-row > .intro-actions { animation-delay:.26s; }
+  .introduction .intro-story { animation-delay:.36s; }
+
+  /* Sections rise into place the first time they scroll into view. */
+  html.motion [data-motion="reveal"] { transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); transition-delay:calc(var(--motion-i, 0) * 90ms); }
+  html.motion [data-motion="reveal"]:not([data-inview]) { opacity:0; transform:translate3d(0, 22px, 0); }
+
+  /* Contour lines drift like the footer mist while the panel is on screen. */
+  html.motion [data-motion="loop"] > .app-shot__terrain { animation:motion-terrain 42s ease-in-out infinite; animation-play-state:paused; transform-origin:50% 50%; }
+  html.motion [data-motion="loop"][data-inview] > .app-shot__terrain { animation-play-state:running; }
+
+  /* The mission's key words underline themselves once the band is read. */
+  html.motion .statement em { background:linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition:background-size 1.2s cubic-bezier(.2,.7,.2,1) .55s; -webkit-box-decoration-break:clone; box-decoration-break:clone; }
+  html.motion .statement[data-inview] em { background-size:100% 1px; }
+
+  /* Timeline points appear one after another. */
+  html.motion .timeline > li::before { transition:transform .55s cubic-bezier(.3,1.5,.5,1); transition-delay:calc(var(--motion-i, 0) * 140ms + .25s); }
+  html.motion .timeline > li:not([data-inview])::before { transform:scale(0); }
+
+  /* Line drawings: one small, meaningful movement on hover or keyboard focus. */
+  .spot__m { transform-box:view-box; transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+  :is(a.card:hover, a.card:focus-visible, .card:hover, .principles article:hover) .spot__m { transform:var(--spot-move); }
+  a.card .spot, .card .spot { transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+
+  /* Buttons settle under the pointer. */
+  .action-link { transition:background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease; }
+  .action-link:active { transform:translateY(1px) scale(.985); }
+
+  /* Birds from the footer cross a section once. */
+  html.motion .flight { display:block; }
+  @media (max-width:900px) { html.motion .flight { display:none; } }
+  .flight[data-inview] .flight__bird { animation:motion-flight var(--duration) cubic-bezier(.45,.05,.35,1) var(--delay) 1 both; }
+  .flight[data-inview] .flight__wing--left { animation:motion-wing-left var(--wing) ease-in-out var(--delay) var(--flaps); }
+  .flight[data-inview] .flight__wing--right { animation:motion-wing-right var(--wing) ease-in-out var(--delay) var(--flaps); }
+}
+
+/* Touch screens have no hover: each drawing makes its movement once as its card arrives. */
+@media (hover:none) and (prefers-reduced-motion:no-preference) {
+  html.motion [data-inview] .spot__m { animation:motion-spot 1.6s cubic-bezier(.2,.8,.2,1) .45s 1 both; }
+}
+
+.spot[data-spot="summit"] { --spot-move:translateY(-10px); }
+.spot[data-spot="cloud"] { --spot-move:translateY(-7px); }
+.spot[data-spot="device"] .spot__m { transform-origin:80px 75px; }
+.spot[data-spot="device"] { --spot-move:scale(1.4); }
+.spot[data-spot="review"] .spot__m { transform-origin:116px 114px; }
+.spot[data-spot="review"] { --spot-move:scale(1.12) rotate(-8deg); }
+.spot[data-spot="paths"] { --spot-move:translateY(-7px); }
+.spot[data-spot="parallel"] { --spot-move:translateX(12px); }
+.spot[data-spot="shield"] { --spot-move:translateY(4px); }
+.spot[data-spot="book"] .spot__m { transform-origin:80px 86px; }
+.spot[data-spot="book"] { --spot-move:rotate(-7deg); }
+.spot[data-spot="archive"] { --spot-move:translateX(14px); }
+.spot[data-spot="news"] .spot__m { transform-origin:56px 60px; }
+.spot[data-spot="news"] { --spot-move:scale(1.12); }
+.spot[data-spot="compass"] .spot__m { transform-origin:80px 80px; }
+.spot[data-spot="compass"] { --spot-move:rotate(28deg); }
+.spot[data-spot="voice"] { --spot-move:translateY(-8px); }
+
+.flight { position:absolute; inset:7% 0 auto 56%; height:26%; z-index:0; display:none; overflow:hidden; pointer-events:none; container-type:size; }
+.flight--hero { inset:10% 0 auto 62%; height:34%; }
+.flight__bird { position:absolute; top:var(--y); left:0; width:calc(34px * var(--size)); height:auto; overflow:visible; opacity:0; color:var(--accent); fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.flight--light .flight__bird { color:#cfe6de; }
+.flight__wing { transform-box:view-box; transform-origin:12px 8px; }
+.flight-host { position:relative; isolation:isolate; overflow:hidden; }
+.flight-host > :not(.flight) { position:relative; z-index:1; }
+
+@keyframes motion-rise { from { opacity:0; transform:translate3d(0, 24px, 0); } }
+@keyframes motion-terrain { 0%, 100% { transform:translate3d(0, 0, 0) scale(1.03); } 50% { transform:translate3d(-2.4%, 1.6%, 0) scale(1.08); } }
+@keyframes motion-flight {
+  0% { opacity:0; transform:translate3d(-56px, 18px, 0); }
+  10% { opacity:.6; }
+  55% { transform:translate3d(55cqw, -12px, 0); }
+  88% { opacity:.6; }
+  100% { opacity:0; transform:translate3d(calc(100cqw + 56px), -30px, 0); }
+}
+@keyframes motion-wing-left { 50% { transform:rotate(-40deg); } }
+@keyframes motion-wing-right { 50% { transform:rotate(40deg); } }
+@keyframes motion-spot { 45% { transform:var(--spot-move); } }

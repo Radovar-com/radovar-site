@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import type { Metadata, Viewport } from "next";
 import { Newsreader, Geist } from "next/font/google";
 import "./globals.css";
 import "./landscape.css";
+import { AnalyticsProvider } from "./_components/AnalyticsProvider";
 
 /* Only the weights the page actually renders. Display uses 300 (h1/h2) and
    400 (h3/wordmark); body uses 400 and 500 (nav, buttons). */
@@ -22,9 +24,9 @@ const sans = Geist({
 });
 
 const SITE = "https://radovar.com";
-const title = "Radovar | Good ideas. Better tools.";
+const title = "Radovar | The company behind Codevalanche";
 const description =
-  "Radovar builds AI tools that bring capability closer to your work. Meet Codevalanche, our local-first AI coding workspace.";
+  "Radovar builds tools for AI-assisted software development. Explore Codevalanche, a desktop workspace for local projects, coding agents and code review.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -32,10 +34,10 @@ export const metadata: Metadata = {
   description,
   applicationName: "Radovar",
   icons: {
-    apple: [{ url: `${process.env.BASE_PATH || ""}/apple-icon.png?v=20261009`, sizes: "180x180", type: "image/png" }],
+    apple: [{ url: `${process.env.BASE_PATH || ""}/apple-icon.png?v=20261016r7`, sizes: "180x180", type: "image/png" }],
     icon: [
-      { url: `${process.env.BASE_PATH || ""}/radovar-icon.svg?v=20261009`, type: "image/svg+xml" },
-      { url: `${process.env.BASE_PATH || ""}/favicon.ico?v=20261009`, sizes: "16x16 32x32 48x48", type: "image/x-icon" },
+      { url: `${process.env.BASE_PATH || ""}/radovar-icon.svg?v=20261016r7`, type: "image/svg+xml" },
+      { url: `${process.env.BASE_PATH || ""}/favicon.ico?v=20261016r7`, sizes: "16x16 32x32 48x48", type: "image/x-icon" },
     ],
   },
   keywords: [
@@ -125,10 +127,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
-        <a className="skip-link" href="#top">
+        <Link className="skip-link" href="#top">
           Skip to content
-        </a>
+        </Link>
         {children}
+        <AnalyticsProvider />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

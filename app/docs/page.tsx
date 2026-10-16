@@ -2,62 +2,86 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { DocPage } from "../_components/DocPage";
 export const metadata: Metadata = {
-  title: "Docs",
+  title: "Getting started with Codevalanche",
   alternates: { canonical: "/docs/" },
   description:
-    "An introduction to Codevalanche: local projects, AI runtimes, accounts, and reviewing your work.",
+    "How to open a local project, connect a supported coding runtime, give an agent a task, and review the changes in Codevalanche.",
 };
 export default function DocsPage() {
   return (
     <DocPage
       kicker="Docs"
-      title="A workspace for the way you build."
-      intro="Codevalanche brings your projects and supported AI tools into one desktop workspace. Here is where to start."
+      title="Your first project in Codevalanche."
+      intro="Open a local repository, connect a coding agent, and work through a specific change. This guide explains the workflow and what to check before you begin."
     >
-      <h2>Start with your project</h2>
+      <h2>1. Open a local repository</h2>
       <p>
-        Open a repository or project folder on your machine. Codevalanche works
-        with the files where they live, so your existing project structure
-        remains the starting point.
+        Start with a repository or project folder on your machine. Codevalanche
+        works with those files; you do not need to move your project into a
+        hosted editor. Before asking an agent to edit anything, save your work
+        and check your version-control status so you can distinguish existing
+        changes from the agent’s changes.
       </p>
-      <h2>Connect your tools</h2>
+      <h2>2. Choose a coding runtime</h2>
       <p>
-        Choose from the runtimes and accounts supported by your installed
-        version. Availability, authentication, and model selection depend on the
-        runtime you connect.
+        Connect a runtime supported by your installed build, such as Claude Code,
+        Codex, or a local-model setup. Follow that runtime’s sign-in and setup
+        instructions. Supported runtimes, account requirements, and model
+        selection vary by build and provider.
       </p>
       <p>
         If you use a hosted AI provider, prompts and relevant project context
         can be sent to that provider. Local-first describes the workspace; it
         does not mean every model runs offline.
       </p>
-      <h2>Describe the work</h2>
+      <h2>3. Give the agent one clear task</h2>
       <p>
-        Give the agent a concrete task and the context it needs. A clear
-        outcome, relevant files, and any constraints help keep the work focused.
+        Use a task conversation to describe the outcome you want, the relevant
+        files, and the limits of the change. Keep unrelated work in a separate
+        task so its conversation and result are easier to follow.
       </p>
-      <h2>Review the result</h2>
+      <div className="note">
+        <p><strong>An example task</strong></p>
+        <p>
+          “On the contact page, explain which fields are required and show an
+          error beside an invalid email address. Keep the current layout and
+          form endpoint. Check the keyboard flow and the mobile layout, then
+          summarize the files you changed.”
+        </p>
+      </div>
       <p>
-        Inspect changes and check the result against the task. Use version
-        control, run the appropriate checks, and review the work before keeping
-        or committing it. Available approval controls depend on the runtime and
-        configuration.
+        This gives the agent a concrete result, boundaries, and a way to check
+        the work. Add project-specific context instead of assuming the agent
+        already knows your conventions.
+      </p>
+      <h2>4. Inspect the changes and check the result</h2>
+      <p>
+        Review the changed files and diffs against the task. Run the appropriate
+        tests or checks and, for a visual change, inspect the result in a preview
+        or browser. Review, check, and preview surfaces depend on the installed
+        build and project setup. Do not treat an agent’s summary as a substitute
+        for checking its work.
+      </p>
+      <p>
+        Decide what to keep before committing. Available approval controls depend
+        on the runtime and configuration; not every operation necessarily waits
+        for an individual approval.
       </p>
       <div className="note">
         <p>
           Codevalanche is in early access. Supported tools and workflows may
           change between builds. For product information, visit{" "}
-          <a href="https://codevalanche.com">codevalanche.com</a>.
+          <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a>.
         </p>
       </div>
       <div className="cards">
-        <Link className="card" href="/releases/">
-          <h3>Releases</h3>
-          <p>Published builds and release history.</p>
+        <Link className="card" href="/releases/" data-analytics-action="anchor" data-analytics-target="releases_archive" data-analytics-placement="resources">
+          <h3>Early release archive</h3>
+          <p>Recorded Windows build numbers and publication dates from June and July 2026.</p>
         </Link>
-        <Link className="card" href="/security/">
-          <h3>Security</h3>
-          <p>Understand the workspace and provider boundaries.</p>
+        <Link className="card" href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">
+          <h3>Before connecting a provider</h3>
+          <p>Understand where project context can go and how runtime permissions affect your work.</p>
         </Link>
       </div>
     </DocPage>

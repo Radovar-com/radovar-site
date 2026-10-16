@@ -24,8 +24,8 @@ export default function ChangelogPage() {
   return (
     <DocPage
       kicker="Changelog"
-      title="Selected early-access release history."
-      intro="This archive records Codevalanche’s publication dates and build counts from June and July 2026."
+      title="Codevalanche release history."
+      intro="Publication dates, retained build counts, and version ranges from June and July 2026. This is a historical record, not the current download page."
       updated="9 October 2026"
     >
       <div className="note">
@@ -54,17 +54,17 @@ export default function ChangelogPage() {
         2 July range contains nine retained builds.
       </p>
 
-      <h2>Reading the archive</h2>
+      <h2>What these records tell you</h2>
       <p>
         The counts and version ranges describe publication history. They do not identify
         which features or fixes were included in an individual build. See{" "}
-        <Link href="/releases/">the release archive</Link> for a selection of dated builds
+        <Link href="/releases/" data-analytics-action="anchor" data-analytics-target="releases_archive" data-analytics-placement="resources">the release archive</Link> for a selection of dated builds
         and the background to their version numbers.
       </p>
 
       <h2>Current product information</h2>
       <p>
-        Visit <a href="https://codevalanche.com">codevalanche.com</a> for current
+        Visit <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a> for current
         Codevalanche product and download information.
       </p>
     </DocPage>
