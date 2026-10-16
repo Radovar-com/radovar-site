@@ -13,8 +13,8 @@ export default function PrivacyPage() {
   return (
     <DocPage
       kicker="Privacy"
-      title="We collect less than you expect."
-      intro="This page describes what happens to information when you visit radovar.com, when you write to us, and when you use Codevalanche. It is written to be read, not to be survived."
+      title="How Radovar handles your information."
+      intro="This page describes website preferences, email communications, and information handling when you use Codevalanche and connected providers."
       updated="15 October 2026"
     >
       <h2>This website</h2>
@@ -91,8 +91,7 @@ export default function PrivacyPage() {
       <p>
         You can ask us what personal data we hold about you, ask for it to be corrected,
         ask for it to be deleted, and object to how we use it. Write to{" "}
-        <a href="mailto:privacy@radovar.com">privacy@radovar.com</a> and we will answer.
-        Given how little we collect, most of these requests are quick to satisfy.
+        <a href="mailto:info@radovar.com" data-analytics-action="contact" data-analytics-contact="info" data-analytics-placement="inline">info@radovar.com</a> and we will answer.
       </p>
       <p>
         If you are not satisfied with our answer, you can raise the matter with the data

@@ -1,21 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { RadovarBrand } from "./RadovarBrand";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ThemeSwitch } from "./ThemeSwitch";
 
 const NAV = [
-  { id: "home", href: "/#codevalanche", label: "Product" },
+  { id: "codevalanche", href: "/codevalanche/", label: "Codevalanche" },
+  { id: "company", href: "/company/", label: "Company" },
+  { id: "press", href: "/press/", label: "Newsroom" },
   { id: "docs", href: "/docs/", label: "Docs" },
-  { id: "home", href: "/#company", label: "Company" },
 ];
+const PRODUCT = "https://codevalanche.com";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [hash, setHash] = useState("");
+  const [compact, setCompact] = useState(false);
   const menu = useRef<HTMLDetailsElement>(null);
+  const scrollMarker = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const marker = scrollMarker.current;
+    if (!marker || !window.IntersectionObserver) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setCompact(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+    });
+    observer.observe(marker);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const syncHash = () => setHash(window.location.hash);
@@ -43,17 +56,12 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="nav">
+    <>
+    <span className="nav-scroll-marker" ref={scrollMarker} aria-hidden="true" />
+    <header className="nav" data-compact={compact ? "true" : "false"}>
       <div className="shell nav__inner">
-        <Link className="wordmark" href="/" aria-label="Radovar home" data-analytics-action="header" data-analytics-target="home" data-analytics-placement="header">
-          <Image
-            className="radovar-logo"
-            src={`${process.env.BASE_PATH || ""}/radovar-logo.svg`}
-            alt="Radovar"
-            width={1184}
-            height={230}
-            priority
-          />
+        <Link className="wordmark header-brand" href="/" aria-label="Radovar home" data-analytics-action="header" data-analytics-target="home" data-analytics-placement="header">
+          <RadovarBrand />
         </Link>
         <nav className="nav__links" aria-label="Primary">
           {NAV.map((item) => (
@@ -69,9 +77,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="nav__actions">
-          <ThemeSwitch />
-        </div>
+        <a className="nav__cta" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">Visit Codevalanche</a>
         <details
           className="nav__menu"
           ref={menu}
@@ -107,12 +113,13 @@ export function SiteHeader() {
                 aria-current={current(item.href)}
               >
                 {item.label}
-                <span aria-hidden="true">→</span>
               </Link>
             ))}
+            <a className="nav__mobile-product" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">Visit Codevalanche</a>
           </nav>
         </details>
       </div>
     </header>
+    </>
   );
 }

@@ -18,8 +18,8 @@ export default function NotFound() {
           The link may be out of date, or the address slightly off. The footer below has
           everything Radovar publishes.
         </p>
-        <Link className="btn btn--primary" href="/" data-analytics-action="anchor" data-analytics-target="home" data-analytics-placement="inline">
-          Back to the home page<span className="btn__arrow" aria-hidden="true">&rarr;</span>
+        <Link className="action-link action-link--primary" href="/" data-analytics-action="anchor" data-analytics-target="home" data-analytics-placement="inline">
+          Back to the home page
         </Link>
       </main>
       <SiteFooter />

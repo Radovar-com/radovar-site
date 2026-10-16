@@ -24,8 +24,8 @@ export default function ReleasesPage() {
   return (
     <DocPage
       kicker="Releases"
-      title="Early release archive."
-      intro="Selected early-access release history for Codevalanche, covering June and July 2026. This archive records an early period in the product’s development."
+      title="Codevalanche’s early Windows releases."
+      intro="Look up selected build numbers and publication dates from June and July 2026. These historical entries do not identify the current recommended download."
       updated="9 October 2026"
     >
       <div className="note">
@@ -35,7 +35,7 @@ export default function ReleasesPage() {
         </p>
       </div>
 
-      <h2>How these releases worked</h2>
+      <h2>About these Windows builds</h2>
       <p>
         These builds were published as signed Windows installers with an update feed
         alongside them. Installed copies could check that feed for updates.
@@ -45,7 +45,7 @@ export default function ReleasesPage() {
         on the same day as part of that early-access development period.
       </p>
 
-      <h2>Version numbers</h2>
+      <h2>Why these versions start with 0.x</h2>
       <p>
         The builds in this archive use <strong>0.x</strong> version numbers and were marked
         pre-release. They document an early stage when interfaces and behaviour were changing.

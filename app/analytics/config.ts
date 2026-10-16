@@ -1,7 +1,9 @@
 // Activation is a separate, qualified release operation. No relative collector URL.
-export const analyticsConfig = Object.freeze({ enabled: false, baseUrl: "", pageVersion: "owned_analytics_1" });
+export const analyticsConfig = Object.freeze({ enabled: false, baseUrl: "", pageVersion: "radovar_home_20261016" });
 export const analyticsAsset = `${process.env.BASE_PATH || ""}/analytics/owned-analytics.js`;
-const pages: Record<string, string> = { "/": "home", "/docs": "docs", "/security": "security", "/privacy": "privacy", "/terms": "terms", "/press": "press", "/releases": "releases_archive", "/changelog": "changelog_archive" };
+const pages: Record<string, string> = { "/": "home", "/docs": "docs", "/security": "security", "/privacy": "privacy", "/terms": "terms", "/press": "press", "/releases": "releases_archive", "/changelog": "changelog_archive", "/codevalanche": "codevalanche", "/company": "company" };
+// Page IDs not yet in the shared SDK page registry: no page view until it registers them.
+export const unregisteredPageIds: ReadonlySet<string> = new Set(["codevalanche", "company"]);
 export function analyticsPageId(pathname: string) {
   const base = process.env.BASE_PATH || "";
   const path = base && (pathname === base || pathname.startsWith(base + "/")) ? pathname.slice(base.length) : pathname;

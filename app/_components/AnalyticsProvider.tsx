@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { analyticsAsset, analyticsConfig, analyticsPageId, type AnalyticsSDK, type AnalyticsRuntime } from "../analytics/config";
+import { analyticsAsset, analyticsConfig, analyticsPageId, unregisteredPageIds, type AnalyticsSDK, type AnalyticsRuntime } from "../analytics/config";
 import { CookiePreferences } from "./CookiePreferences";
 
 /** Optional leaf: rejected loading/bootstrap never rejects the ordinary UI module graph. */
@@ -63,14 +63,15 @@ function AnalyticsLeaf() {
       const start = (path: string) => {
         const next = analyticsPageId(path);
         if (next === pageId) { traversalPath = ""; return; }
+        if (unregisteredPageIds.has(next)) { pageId = next; traversalPath = ""; return; }
         const page = client.startPage({ pageId: next, navigationType: pageId ? traversalPath && analyticsPageId(traversalPath) === next ? "back_forward" : "route" : "initial" });
         pageId = next; traversalPath = "";
         for (const element of document.querySelectorAll<HTMLElement>("[data-analytics-section]")) page.observeSection(element, { sectionId: element.dataset.analyticsSection! });
       };
       const popstate = () => { traversalPath = location.pathname; };
-      const feature = (event: Event) => { const id: unknown = (event as CustomEvent).detail; if (typeof id === "string" && ["project", "agents", "review"].includes(id)) client.track("feature_selected", { feature_id: id, selection_id: id }); };
+      const feature = (event: Event) => { if (unregisteredPageIds.has(pageId)) return; const id: unknown = (event as CustomEvent).detail; if (typeof id === "string" && ["project", "agents", "review"].includes(id)) client.track("feature_selected", { feature_id: id, selection_id: id }); };
       const click = (event: MouseEvent) => {
-        if (event.defaultPrevented || !(event.target instanceof Element)) return;
+        if (event.defaultPrevented || !(event.target instanceof Element) || unregisteredPageIds.has(pageId)) return;
         const link = event.target.closest<HTMLElement>("[data-analytics-action]");
         if (!link) return;
         const data = link.dataset, placement = data.analyticsPlacement || "inline";

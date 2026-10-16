@@ -13,13 +13,13 @@ export default function TermsPage() {
   return (
     <DocPage
       kicker="Terms"
-      title="The agreement, in language you can actually read."
-      intro="These terms cover this website and the use of Codevalanche during early access. They are deliberately short, because a short agreement you understand is worth more than a long one you scroll past."
+      title="Website and early-access terms."
+      intro="These terms cover this website and the use of Codevalanche during early access. They explain acceptable use, the early-access status of the product and how to contact Radovar."
       updated="15 October 2026"
     >
       <h2>Who you are agreeing with</h2>
       <p>
-        Radovar is a technology company building local-first AI. In this document,
+        Radovar is the software company behind Codevalanche. In this document,
         &quot;we&quot; and &quot;Radovar&quot; mean that company, and &quot;you&quot; means
         the person or organisation using this website or Codevalanche.
       </p>

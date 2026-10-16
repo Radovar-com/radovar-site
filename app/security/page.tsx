@@ -10,16 +10,16 @@ export default function SecurityPage() {
   return (
     <DocPage
       kicker="Security"
-      title="Know where the boundaries are."
-      intro="Local-first is a starting point for understanding Codevalanche. Your connected runtime, provider, and permissions matter too."
+      title="Your files, providers, and permissions."
+      intro="Codevalanche opens projects on your computer. What an AI agent can read, change, or send over the network also depends on the runtime and provider you connect."
     >
-      <h2>The local workspace</h2>
+      <h2>Where your project lives</h2>
       <p>
         Codevalanche is a desktop application that works with projects on your
         machine. You can open an existing repository without moving your
         development workflow into a hosted editor.
       </p>
-      <h2>Connected AI providers</h2>
+      <h2>What a hosted provider can receive</h2>
       <p>
         When you use a hosted model, your prompts and relevant file context can
         be sent to the provider. That provider’s terms and data practices apply.
@@ -31,7 +31,13 @@ export default function SecurityPage() {
         including its authentication, telemetry, network access, and tool
         permissions.
       </p>
-      <h2>Review and permissions</h2>
+      <h2>What to check before starting an agent</h2>
+      <ul>
+        <li>Which model and provider will receive the task and its context?</li>
+        <li>Which files, tools, commands, and network resources can the runtime access?</li>
+        <li>Which operations require approval in your current configuration?</li>
+        <li>Is your existing work saved, and do you need a separate working copy?</li>
+      </ul>
       <p>
         Review AI-generated changes and check the work before you keep or commit
         it. Approval behavior and file access depend on the runtime and
@@ -49,7 +55,7 @@ export default function SecurityPage() {
         affected version and enough detail to reproduce it. Please avoid
         including credentials or sensitive project data.
       </p>
-      <h2>Early access</h2>
+      <h2>Early access and security requirements</h2>
       <p>
         Codevalanche is in early access. Radovar does not claim third-party
         security certification. For a deployment with specific security
