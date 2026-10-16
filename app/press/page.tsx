@@ -13,7 +13,8 @@ const page = {
 
 export const metadata = createPageMetadata(page);
 
-const news = [
+const news: { date: string; iso: string; kind: string; href: string; target?: string; title: string; copy: string }[] = [
+  { date: "16 October 2026", iso: "2026-10-16", kind: "Research", href: "/research/wave-ai/", title: "Can coupled oscillators act as memory for AI?", copy: "A month-long experiment, published in full: the setup, the controls, every result including the negative ones, and what we will not claim." },
   { date: "16 October 2026", iso: "2026-10-16", kind: "Company", href: "/company/", target: "company", title: "A new radovar.com.", copy: "The site now introduces Radovar as the company and Codevalanche as its first product. Codevalanche stays in early access for Windows. We are working on a new version, not yet published, and public downloads are in preparation." },
   { date: "2 July 2026", iso: "2026-07-02", kind: "Product", href: "/changelog/", target: "changelog_archive", title: "Codevalanche 0.1.31 published.", copy: "The most recent build in the June and July early-access archive, one of nine published that day." },
   { date: "17 June 2026", iso: "2026-06-17", kind: "Product", href: "/changelog/", target: "changelog_archive", title: "Early-access builds for Windows.", copy: "Signed Windows installers with an update feed. Version 0.1.11 is the earliest build in the archive." },

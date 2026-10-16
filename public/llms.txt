@@ -17,6 +17,7 @@
 - [Codevalanche](https://radovar.com/codevalanche/): what the product does.
 - [Getting started](https://radovar.com/docs/): open a project, connect an agent, review the changes.
 - [Security](https://radovar.com/security/): what stays on your computer and what a hosted model can receive.
+- [Research: can coupled oscillators act as memory for AI?](https://radovar.com/research/wave-ai/): a month-long experiment with its setup, controls, results and limits.
 - [Release history](https://radovar.com/changelog/): every early-access build and its date.
 - [Updates](https://radovar.com/press/): dated updates, company facts and logos.
 - [Privacy](https://radovar.com/privacy/) and [Terms](https://radovar.com/terms/).

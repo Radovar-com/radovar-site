@@ -17,6 +17,7 @@ const pages = [
   { route: '/privacy/', title: 'Privacy | Radovar', description: 'Who is responsible for your data at Radovar, what this website stores, how long we keep email, and what Codevalanche sends to the providers you choose.' },
   { route: '/terms/', title: 'Terms | Radovar', description: 'The terms that apply to this website and to Codevalanche while it is in early access.' },
   { route: '/press/', title: 'Updates | Radovar', description: 'Dated updates, company facts, logos and press contact for Radovar and Codevalanche.' },
+  { route: '/research/wave-ai/', title: 'Wave AI: can coupled oscillators act as memory? | Radovar', description: 'Our month-long experiment testing networks of coupled oscillators as memory for AI models: the setup, the controls, every result including the negative ones, and what we will and will not claim.' },
   { route: '/changelog/', title: 'Release history | Radovar', description: 'Every early-access Codevalanche build published between 17 June and 2 July 2026, with its date, including the one we pulled.' },
 ];
 
@@ -118,7 +119,7 @@ const sitemap = await readFile(path.join(output, 'sitemap.xml'), 'utf8');
 assert.match(sitemap, /<urlset\b[^>]*xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/);
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => decode(match[1]));
 const expected = pages.map(page => `${site}${page.route}`).sort();
-assert.deepEqual(locations.slice().sort(), expected, 'sitemap lists each of the nine canonical pages exactly once, with no 404');
+assert.deepEqual(locations.slice().sort(), expected, 'sitemap lists each of the ten canonical pages exactly once, with no 404');
 assert.equal([...sitemap.matchAll(/<url>[\s\S]*?<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>[\s\S]*?<\/url>/g)].length, locations.length, 'every sitemap entry has a lastmod date');
 const robotsFile = await readFile(path.join(output, 'robots.txt'), 'utf8');
 assert.match(robotsFile, /^User-agent:\s*\*\s*$/mi, 'robots applies to all crawlers');
@@ -132,4 +133,4 @@ assert.equal(social.subarray(0, 8).toString('hex'), '89504e470d0a1a0a', 'share a
 assert.equal(social.subarray(12, 16).toString('ascii'), 'IHDR', 'share asset contains a PNG header');
 assert.equal(social.readUInt32BE(16), 1200, 'share asset is 1200px wide');
 assert.equal(social.readUInt32BE(20), 630, 'share asset is 630px high');
-console.log('PASS SEO export: 9 unique page titles/descriptions, self canonicals, route Open Graph/Twitter tags, Radovar PNG, sitemap, robots, and noindex 404.');
+console.log('PASS SEO export: 10 unique page titles/descriptions, self canonicals, route Open Graph/Twitter tags, Radovar PNG, sitemap, robots, and noindex 404.');
