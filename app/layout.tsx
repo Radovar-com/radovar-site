@@ -5,6 +5,7 @@ import { Newsreader, Geist } from "next/font/google";
 import "./globals.css";
 import "./landscape.css";
 import { AnalyticsProvider } from "./_components/AnalyticsProvider";
+import { SITE_URL as SITE, SITE_DESCRIPTION as description, SOCIAL_IMAGE } from "./_lib/site-metadata";
 
 /* Only the weights the page actually renders. Display uses 300 (h1/h2) and
    400 (h3/wordmark); body uses 400 and 500 (nav, buttons). */
@@ -23,16 +24,14 @@ const sans = Geist({
   display: "swap",
 });
 
-const SITE = "https://radovar.com";
-const title = "Radovar | The company behind Codevalanche";
-const description =
-  "Radovar builds tools for AI-assisted software development. Explore Codevalanche, a desktop workspace for local projects, coding agents and code review.";
+const title = "Radovar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { default: title, template: "%s | Radovar" },
   description,
   applicationName: "Radovar",
+  referrer: "strict-origin-when-cross-origin",
   icons: {
     apple: [{ url: `${process.env.BASE_PATH || ""}/apple-icon.png?v=20261016r7`, sizes: "180x180", type: "image/png" }],
     icon: [
@@ -54,22 +53,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: SITE,
+    url: `${SITE}/`,
     siteName: "Radovar",
-    images: [
-      {
-        url: "/social-card.png",
-        width: 1200,
-        height: 630,
-        alt: "Codevalanche, an AI coding workspace by Radovar.",
-      },
-    ],
+    images: [SOCIAL_IMAGE],
     title,
     description,
     locale: "en_US",
   },
   twitter: {
-    images: ["/social-card.png"],
+    images: [{ url: SOCIAL_IMAGE.url, alt: SOCIAL_IMAGE.alt }],
     card: "summary_large_image",
     title,
     description,
@@ -93,11 +85,19 @@ export const viewport: Viewport = {
    Radovar / Codevalanche relationship rather than guessing it. */
 const jsonLd = {
   "@context": "https://schema.org",
+  "@graph": [{
   "@type": "Organization",
+  "@id": `${SITE}/#organization`,
   name: "Radovar",
   url: SITE,
   description,
   email: "info@radovar.com",
+  logo: {
+    "@type": "ImageObject",
+    url: `${SITE}/radovar-logo.svg`,
+    width: 1184,
+    height: 230,
+  },
   makesOffer: {
     "@type": "Offer",
     itemOffered: {
@@ -110,6 +110,14 @@ const jsonLd = {
         "A local-first AI coding workspace for repositories, supported runtimes, and review.",
     },
   },
+  }, {
+    "@type": "WebSite",
+    "@id": `${SITE}/#website`,
+    name: "Radovar",
+    url: `${SITE}/`,
+    inLanguage: "en",
+    publisher: { "@id": `${SITE}/#organization` },
+  }],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -134,7 +142,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <AnalyticsProvider />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
       </body>
     </html>

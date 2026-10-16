@@ -1,13 +1,13 @@
 import Link from "next/link"
-import type { Metadata } from "next"
+import { createPageMetadata } from "../_lib/site-metadata"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy",
   description:
     "How Radovar handles website preferences, email, and the boundaries between Codevalanche’s local workspace and connected providers.",
-  alternates: { canonical: "/privacy/" },
-}
+  path: "/privacy/",
+})
 
 export default function PrivacyPage() {
   return (

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "../_lib/site-metadata";
 import { DocPage } from "../_components/DocPage";
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Security",
-  alternates: { canonical: "/security/" },
+  path: "/security/",
   description:
     "The boundaries between your local Codevalanche workspace, connected AI runtimes, and model providers.",
-};
+});
 export default function SecurityPage() {
   return (
     <DocPage

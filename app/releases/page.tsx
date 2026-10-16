@@ -1,13 +1,13 @@
 import Link from "next/link"
-import type { Metadata } from "next"
+import { createPageMetadata } from "../_lib/site-metadata"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Releases",
   description:
     "Selected early-access Codevalanche releases from June and July 2026, with a link to current product and download information.",
-  alternates: { canonical: "/releases/" },
-}
+  path: "/releases/",
+})
 
 /* Real published early-access builds, most recent first. Kept short on purpose: the full
    pre-release history is internal iteration and is not useful to a reader. */

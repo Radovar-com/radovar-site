@@ -16,6 +16,12 @@
 .landscape-scene__art { position:absolute; inset:-1%; animation:landscape-drift 48s ease-in-out infinite; animation-play-state:paused; transform-origin:70% 70%; }
 .landscape-scene[data-playing="true"] .landscape-scene__art { animation-play-state:running; }
 .landscape-scene__art img { object-fit:cover; object-position:center center; }
+/* Fade the artwork at its own edge, including the shifted mobile image.
+   A footer-wide veil alone exposes a bright horizontal cut on dark paper. */
+.landscape-scene--footer .landscape-scene__art {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 26%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 26%);
+}
 .landscape-scene__walkers, .landscape-scene__birds { position:absolute; inset:0; width:100%; height:100%; overflow:hidden; pointer-events:none; color:#243e35; }
 .landscape-scene__birds { color:var(--accent); }
 .landscape-scene__mist { position:absolute; inset:51% -12% -6%; opacity:.68; animation:landscape-mist 37s ease-in-out infinite; animation-play-state:paused; pointer-events:none; }

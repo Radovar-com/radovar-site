@@ -9,8 +9,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Never let two deploys race. Queue instead of cancelling, so a push is never
 # silently dropped.
@@ -21,36 +19,54 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24.22.0
           cache: npm
 
       - run: npm ci
 
+      - name: Check types and export-policy regressions
+        run: |
+          npm run typecheck
+          node --test scripts/postbuild-security.test.mjs
+
       # BASE_PATH is a repository variable, not a hardcoded value: it holds
       # /radovar-site while the site is served from the project URL, and is
       # cleared when the custom domain takes over. No code change either way.
       - name: Build static export
-        run: npx next build
+        run: npm run build
         env:
           BASE_PATH: ${{ vars.BASE_PATH }}
 
-      - uses: actions/configure-pages@v5
+      - name: Verify exported metadata and sitemap
+        run: node scripts/seo-export-test.mjs
+        env:
+          BASE_PATH: ${{ vars.BASE_PATH }}
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: out
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

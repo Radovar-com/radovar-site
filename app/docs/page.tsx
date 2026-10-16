@@ -1,12 +1,12 @@
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "../_lib/site-metadata";
 import { DocPage } from "../_components/DocPage";
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Getting started with Codevalanche",
-  alternates: { canonical: "/docs/" },
+  path: "/docs/",
   description:
     "How to open a local project, connect a supported coding runtime, give an agent a task, and review the changes in Codevalanche.",
-};
+});
 export default function DocsPage() {
   return (
     <DocPage

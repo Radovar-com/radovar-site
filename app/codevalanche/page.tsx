@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
+import { createPageMetadata } from "../_lib/site-metadata";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { AppShot } from "../_components/AppShot";
@@ -10,11 +10,11 @@ import { Spot } from "../_components/Spot";
 import "../site.css";
 import "../home.css";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Codevalanche",
-  alternates: { canonical: "/codevalanche/" },
+  path: "/codevalanche/",
   description: "Codevalanche is a desktop app for coding with AI agents: your local projects, cloud agents or local models, and a review of every change in one window.",
-};
+});
 
 const strengths = [
   { spot: "parallel" as const, tone: "mist" as const, title: "Several tasks at once.", copy: "Each task keeps its own conversation, agent and changes. See which one is working, which one needs you and which one is ready for review." },

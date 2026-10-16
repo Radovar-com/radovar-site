@@ -1,13 +1,13 @@
 import Link from "next/link"
-import type { Metadata } from "next"
+import { createPageMetadata } from "../_lib/site-metadata"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Changelog",
   description:
     "An archive of Codevalanche’s early-access release dates, build counts, and version ranges from June and July 2026.",
-  alternates: { canonical: "/changelog/" },
-}
+  path: "/changelog/",
+})
 
 /* Grouped by publication date. Every date and count here comes from the
    published release history. Per-build notes are deliberately absent rather

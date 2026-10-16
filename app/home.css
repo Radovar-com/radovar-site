@@ -112,12 +112,12 @@
 
 :root[data-theme="dark"] .product-heading img { filter:brightness(0) invert(1); }
 :root[data-theme="dark"] .runtime-card--cloud { background:#123c40; }
-:root[data-theme="dark"] .company-section { background:#0c1a19; border-block:1px solid var(--line); }
+:root[data-theme="dark"] .company-section { background:#0c1a19; border:0; }
 :root[data-theme="dark"] .capability-grid article { border-top-color:var(--ink-muted); }
 @media (prefers-color-scheme:dark) {
   :root:not([data-theme]) .product-heading img { filter:brightness(0) invert(1); }
   :root:not([data-theme]) .runtime-card--cloud { background:#123c40; }
-  :root:not([data-theme]) .company-section { background:#0c1a19; border-block:1px solid var(--line); }
+  :root:not([data-theme]) .company-section { background:#0c1a19; border:0; }
   :root:not([data-theme]) .capability-grid article { border-top-color:var(--ink-muted); }
 }
 

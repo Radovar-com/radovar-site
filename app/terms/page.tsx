@@ -1,13 +1,13 @@
 import Link from "next/link"
-import type { Metadata } from "next"
+import { createPageMetadata } from "../_lib/site-metadata"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Terms",
-  alternates: { canonical: "/terms/" },
+  path: "/terms/",
   description:
     "The terms that apply to this website and to Codevalanche while it is in early access.",
-}
+})
 
 export default function TermsPage() {
   return (
