@@ -1,16 +1,19 @@
 import Link from "next/link";
 import { createPageMetadata } from "../_lib/site-metadata";
+import { PageSchema } from "../_components/PageSchema";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { Spot, type SpotName } from "../_components/Spot";
 import { Flight } from "../_components/Motion";
 import "../site.css";
 
-export const metadata = createPageMetadata({
+const page = {
   title: "About Radovar",
   path: "/company/",
   description: "Radovar is the software company behind Codevalanche. Our mission is to make work with AI agents something people can understand, check and trust.",
-});
+};
+
+export const metadata = createPageMetadata(page);
 
 const principles: { spot: SpotName; tone: "sage" | "mist" | "sand" | "clay"; title: string; copy: string }[] = [
   { spot: "compass", tone: "sage", title: "People decide.", copy: "Agents can move fast. The decision about what to keep belongs to the person responsible for the work, and our products are built around that moment." },
@@ -141,6 +144,7 @@ export default function CompanyPage() {
         </section>
         </div>
       </main>
+      <PageSchema {...page} />
       <SiteFooter />
     </>
   );

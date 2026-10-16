@@ -1,11 +1,14 @@
 import { createPageMetadata } from "../_lib/site-metadata";
+import { PageSchema } from "../_components/PageSchema";
 import { DocPage } from "../_components/DocPage";
-export const metadata = createPageMetadata({
+const page = {
   title: "Security",
   path: "/security/",
   description:
     "The boundaries between your local Codevalanche workspace, connected AI runtimes, and model providers.",
-});
+};
+
+export const metadata = createPageMetadata(page);
 export default function SecurityPage() {
   return (
     <DocPage
@@ -13,6 +16,7 @@ export default function SecurityPage() {
       title="Your files, providers, and permissions."
       intro="Codevalanche opens projects on your computer. What an AI agent can read, change, or send over the network also depends on the runtime and provider you connect."
     >
+      <PageSchema {...page} />
       <h2>Where your project lives</h2>
       <p>
         Codevalanche is a desktop application that works with projects on your

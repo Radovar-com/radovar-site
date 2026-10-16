@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SiteFooter } from "./_components/SiteFooter";
+import { PageSchema } from "./_components/PageSchema";
+import { SITE_DESCRIPTION } from "./_lib/site-metadata";
 import { AppShot, Terrain } from "./_components/AppShot";
 import { Flight } from "./_components/Motion";
 import { ProductExplorer } from "./_components/ProductExplorer";
@@ -125,6 +127,7 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+      <PageSchema title="Radovar" path="/" description={SITE_DESCRIPTION} />
       <SiteFooter />
     </>
   );

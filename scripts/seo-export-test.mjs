@@ -84,7 +84,25 @@ for (const page of pages) {
   assert.match(one(tags, 'name', 'viewport'), /width=device-width/, `${page.route}: mobile viewport`);
   assert.equal([...html.matchAll(/<h1(?:\s|>)/gi)].length, 1, `${page.route}: one H1`);
   assert.ok(!tags.some(tag => tag.name === 'keywords'), `${page.route}: no meta keywords`);
+  const graph = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)]
+    .flatMap(match => { const data = JSON.parse(match[1]); return data['@graph'] ?? [data]; });
+  const webPage = graph.find(node => node['@type'] === 'WebPage');
+  assert.equal(webPage?.url, canonical, `${page.route}: WebPage structured data names the canonical URL`);
+  assert.equal(webPage.isPartOf['@id'], `${site}/#website`, `${page.route}: WebPage belongs to the site`);
+  if (page.route !== '/') {
+    const crumbs = graph.find(node => node['@type'] === 'BreadcrumbList')?.itemListElement ?? [];
+    assert.deepEqual(crumbs.map(item => item.item), [`${site}/`, canonical], `${page.route}: breadcrumb Home > page`);
+  }
+  if (page.route === '/codevalanche/') {
+    const faq = graph.find(node => node['@type'] === 'FAQPage');
+    assert.ok(faq?.mainEntity.length >= 5, '/codevalanche/: FAQPage structured data');
+    for (const question of faq.mainEntity) assert.ok(html.includes(`<dt>${question.name.replace(/'/g, '&#x27;')}</dt>`), `/codevalanche/: FAQ question is visible: ${question.name}`);
+  }
 }
+const llmsFull = await readFile(path.join(output, 'llms-full.txt'), 'utf8');
+for (const page of pages) assert.ok(llmsFull.includes(`URL: ${site}${page.route}\n`), `llms-full.txt covers ${page.route}`);
+assert.ok(!/creator(\.support)?@radovar\.com/i.test(llmsFull), 'llms-full.txt has no private mailbox');
+assert.match(await readFile(path.join(output, 'llms.txt'), 'utf8'), /https:\/\/radovar\.com\/llms-full\.txt/, 'llms.txt links the full text');
 
 // The old release archive address stays for existing links but points at the merged page.
 const releases = await readFile(path.join(output, 'releases', 'index.html'), 'utf8');

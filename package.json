@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "build": "node scripts/build-responsive-shots.mjs && node scripts/build-social-assets.mjs && next build && node scripts/postbuild-security.mjs",
+    "build": "node scripts/build-responsive-shots.mjs && node scripts/build-social-assets.mjs && next build && node scripts/postbuild-security.mjs && node scripts/build-llms-full.mjs",
     "start": "next start"
   },
   "dependencies": {

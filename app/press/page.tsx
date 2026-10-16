@@ -1,14 +1,17 @@
 import Link from "next/link";
 import { createPageMetadata } from "../_lib/site-metadata";
+import { PageSchema } from "../_components/PageSchema";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import "../site.css";
 
-export const metadata = createPageMetadata({
+const page = {
   title: "Updates",
   path: "/press/",
   description: "Dated updates, company facts, logos and press contact for Radovar and Codevalanche.",
-});
+};
+
+export const metadata = createPageMetadata(page);
 
 const news = [
   { date: "16 October 2026", iso: "2026-10-16", kind: "Company", href: "/company/", target: "company", title: "A new radovar.com.", copy: "The site now introduces Radovar as the company and Codevalanche as its first product. Codevalanche stays in early access for Windows. We are working on a new version, not yet published, and public downloads are in preparation." },
@@ -105,6 +108,7 @@ export default function PressPage() {
         </section>
         </div>
       </main>
+      <PageSchema {...page} />
       <SiteFooter />
     </>
   );

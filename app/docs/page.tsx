@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { createPageMetadata } from "../_lib/site-metadata";
+import { PageSchema } from "../_components/PageSchema";
 import { DocPage } from "../_components/DocPage";
-export const metadata = createPageMetadata({
+const page = {
   title: "Getting started with Codevalanche",
   path: "/docs/",
   description:
     "How to open a local project, connect a supported coding runtime, give an agent a task, and review the changes in Codevalanche.",
-});
+};
+
+export const metadata = createPageMetadata(page);
 export default function DocsPage() {
   return (
     <DocPage
@@ -14,6 +17,7 @@ export default function DocsPage() {
       title="Your first project in Codevalanche."
       intro="Open a local repository, connect a coding agent, and work through a specific change. This guide explains the workflow and what to check before you begin."
     >
+      <PageSchema {...page} />
       <h2>1. Open a local repository</h2>
       <p>
         Start with a repository or project folder on your machine. Codevalanche

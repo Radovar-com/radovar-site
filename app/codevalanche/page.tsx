@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { createPageMetadata } from "../_lib/site-metadata";
+import { PageSchema } from "../_components/PageSchema";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { AppShot } from "../_components/AppShot";
@@ -10,17 +12,37 @@ import { Spot } from "../_components/Spot";
 import "../site.css";
 import "../home.css";
 
-export const metadata = createPageMetadata({
+const page = {
   title: "Codevalanche",
   path: "/codevalanche/",
   description: "Codevalanche is a desktop app for coding with AI agents: your local projects, cloud agents or local models, and a review of every change in one window.",
-});
+};
+
+export const metadata = createPageMetadata(page);
 
 const strengths = [
   { spot: "parallel" as const, tone: "mist" as const, title: "Several tasks at once.", copy: "Each task keeps its own conversation, agent and changes. See which one is working, which one needs you and which one is ready for review." },
   { spot: "review" as const, tone: "sage" as const, title: "You decide what stays.", copy: "Read every file change and run the checks before you keep the result. A confident answer is where the review starts." },
   { spot: "archive" as const, tone: "sand" as const, title: "Your project, where it already is.", copy: "Open the repository that is already on your PC, with its files, folders and version control. Nothing to import or rebuild." },
 ];
+
+/* One source for the visible answers and the FAQPage data, so the two never drift. */
+const questions: { q: string; a: string; more?: ReactNode }[] = [
+  { q: "What is Codevalanche?", a: "A desktop app for Windows for coding with AI agents. It opens a project on your computer, lets you give a task to an agent or a local model, keeps the conversation for each task together and shows the changed files and diffs before you keep them." },
+  { q: "Who makes Codevalanche?", a: "Radovar, the software company behind this website. Codevalanche is its first product, and codevalanche.com is the product's own website." },
+  { q: "How is it different from using Claude Code or Codex directly?", a: "Claude Code and Codex are agents. Codevalanche is the workspace around them: your projects, the choice of agent or local model for each task, the conversation that guided the work and the review of what changed, in one window." },
+  { q: "Can I use an existing project?", a: "Yes. Open a local folder or repository and start with a focused task. Keep important work in version control and review changes before committing them." },
+  { q: "Which agents can I connect?", a: "The agents and accounts supported by your installed build. Codevalanche is designed around tools such as Claude Code, Codex and supported local models." },
+  { q: "Does my code leave my computer?", a: "Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.", more: <Link href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">Read more about security</Link> },
+  { q: "When can I download it?", a: "Codevalanche is in early access for Windows. Early-access builds shipped in June and July 2026, and public downloads are in preparation. codevalanche.com will carry them as soon as they ship.", more: <>Radovar keeps the <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">early-access release history</Link>.</> },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://radovar.com/codevalanche/#faq",
+  mainEntity: questions.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })),
+};
 
 export default function CodevalanchePage() {
   const base = process.env.BASE_PATH || "";
@@ -100,13 +122,13 @@ export default function CodevalanchePage() {
 
         <section className="band band--panel" data-analytics-section="resources" aria-labelledby="questions-title">
           <div className="shell reader-questions reader-questions--plain">
-            <h2 id="questions-title">Before your first task.</h2>
+            <h2 id="questions-title">Questions and answers.</h2>
             <dl>
-              <div><dt>Can I use an existing project?</dt><dd>Yes. Open a local folder or repository and start with a focused task. Keep important work in version control and review changes before committing them.</dd></div>
-              <div><dt>Which agents can I connect?</dt><dd>The agents and accounts supported by your installed build. Codevalanche is designed around tools such as Claude Code, Codex and supported local models.</dd></div>
-              <div><dt>Does local-first mean everything is offline?</dt><dd>Your repository stays on disk. A hosted model can still receive prompts and relevant file context. The provider and runtime you choose determine those boundaries. <Link href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">Read more about security</Link>.</dd></div>
-              <div><dt>Where can I get it?</dt><dd>Codevalanche is in early access for Windows. Early-access builds shipped in June and July 2026, and public downloads are in preparation. codevalanche.com will carry them as soon as they ship. Radovar keeps the <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">early-access release history</Link>.</dd></div>
+              {questions.map((item) => (
+                <div key={item.q}><dt>{item.q}</dt><dd>{item.a}{item.more ? <> {item.more}</> : null}</dd></div>
+              ))}
             </dl>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />
           </div>
           <div className="shell">
             <div className="closing product-closing flight-host">
@@ -123,6 +145,7 @@ export default function CodevalanchePage() {
           </div>
         </section>
       </main>
+      <PageSchema {...page} />
       <SiteFooter />
     </>
   );

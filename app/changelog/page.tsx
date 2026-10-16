@@ -1,12 +1,15 @@
 import { createPageMetadata } from "../_lib/site-metadata"
+import { PageSchema } from "../_components/PageSchema"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata = createPageMetadata({
+const page = {
   title: "Release history",
   description:
     "Every early-access Codevalanche build published between 17 June and 2 July 2026, with its date, including the one we pulled.",
   path: "/changelog/",
-})
+}
+
+export const metadata = createPageMetadata(page)
 
 /* The complete list, grouped by publication date. Every version and date comes
    from the published release history; 0.1.24 was pulled and stays listed. */
@@ -27,6 +30,7 @@ export default function ChangelogPage() {
       intro="Twenty early-access builds for Windows, published between 17 June and 2 July 2026, plus the one we pulled. This is a historical record, not the current download page."
       updated="16 October 2026"
     >
+      <PageSchema {...page} />
       <div className="note">
         <p>
           <strong>Current status.</strong> Codevalanche is in early access for Windows and public

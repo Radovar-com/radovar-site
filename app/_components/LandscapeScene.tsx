@@ -41,7 +41,7 @@ function SkyBirds() {
   );
 }
 
-const mist = { backgroundImage: `url("${process.env.BASE_PATH || ""}/media/radovar-valley-mist-v1.webp")` };
+const mist = { backgroundImage: `url("${process.env.BASE_PATH || ""}/media/radovar-valley-mist-v2.webp")` };
 
 export function LandscapeScene({ variant, priority = false }: { variant: "hero" | "footer"; priority?: boolean }) {
   const scene = useRef<HTMLDivElement>(null);
@@ -76,7 +76,7 @@ export function LandscapeScene({ variant, priority = false }: { variant: "hero" 
   return (
     <div ref={scene} className={`landscape-scene landscape-scene--${variant}`} data-playing={playing}>
       <div className="landscape-scene__art" aria-hidden="true">
-        <Image src={`${process.env.BASE_PATH || ""}/media/radovar-atelier-pine-v3.webp`} alt="" fill sizes="100vw" priority={priority} />
+        <Image src={`${process.env.BASE_PATH || ""}/media/radovar-atelier-pine-v4.webp`} alt="" fill sizes="100vw" priority={priority} />
         <GardenWalkers />
         <SkyBirds />
       </div>

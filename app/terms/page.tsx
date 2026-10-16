@@ -1,13 +1,16 @@
 import Link from "next/link"
 import { createPageMetadata } from "../_lib/site-metadata"
+import { PageSchema } from "../_components/PageSchema"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata = createPageMetadata({
+const page = {
   title: "Terms",
   path: "/terms/",
   description:
     "The terms that apply to this website and to Codevalanche while it is in early access.",
-})
+}
+
+export const metadata = createPageMetadata(page)
 
 export default function TermsPage() {
   return (
@@ -17,6 +20,7 @@ export default function TermsPage() {
       intro="These terms cover this website and the use of Codevalanche during early access. They explain acceptable use, the early-access status of the product and how to contact Radovar."
       updated="15 October 2026"
     >
+      <PageSchema {...page} />
       <h2>Who you are agreeing with</h2>
       <p>
         Radovar is the software company behind Codevalanche. In this document,

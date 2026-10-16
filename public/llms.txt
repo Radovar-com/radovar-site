@@ -26,3 +26,7 @@
 - General: info@radovar.com
 - Press: press@radovar.com
 - Security: security@radovar.com
+
+## Full text
+
+- [Full site text](https://radovar.com/llms-full.txt): every page above as plain text.

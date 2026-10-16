@@ -1,13 +1,16 @@
 import Link from "next/link"
 import { createPageMetadata } from "../_lib/site-metadata"
+import { PageSchema } from "../_components/PageSchema"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata = createPageMetadata({
+const page = {
   title: "Privacy",
   description:
     "Who is responsible for your data at Radovar, what this website stores, how long we keep email, and what Codevalanche sends to the providers you choose.",
   path: "/privacy/",
-})
+}
+
+export const metadata = createPageMetadata(page)
 
 const info = <a href="mailto:info@radovar.com" data-analytics-action="contact" data-analytics-contact="info" data-analytics-placement="inline">info@radovar.com</a>
 
@@ -19,6 +22,7 @@ export default function PrivacyPage() {
       intro="Who is responsible for your data, what this website stores, how long we keep your email, and what Codevalanche sends to the providers you choose."
       updated="16 October 2026"
     >
+      <PageSchema {...page} />
       <h2>Who is responsible</h2>
       <p>
         Radovar, the company behind Codevalanche, is the controller for the personal data
