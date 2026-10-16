@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 const NAV = [
   { id: "codevalanche", href: "/codevalanche/", label: "Codevalanche" },
   { id: "company", href: "/company/", label: "Company" },
-  { id: "press", href: "/press/", label: "Newsroom" },
+  { id: "press", href: "/press/", label: "Updates" },
   { id: "docs", href: "/docs/", label: "Docs" },
 ];
 const PRODUCT = "https://codevalanche.com";
@@ -77,7 +77,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <a className="nav__cta" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">Visit Codevalanche</a>
+        <a className="nav__cta" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">codevalanche.com</a>
         <details
           className="nav__menu"
           ref={menu}
@@ -115,7 +115,7 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <a className="nav__mobile-product" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">Visit Codevalanche</a>
+            <a className="nav__mobile-product" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">codevalanche.com</a>
           </nav>
         </details>
       </div>

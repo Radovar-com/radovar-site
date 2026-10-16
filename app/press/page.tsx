@@ -5,13 +5,14 @@ import { SiteFooter } from "../_components/SiteFooter";
 import "../site.css";
 
 export const metadata = createPageMetadata({
-  title: "Newsroom",
+  title: "Updates",
   path: "/press/",
-  description: "News, company facts, logos and press contact for Radovar and Codevalanche.",
+  description: "Dated updates, company facts, logos and press contact for Radovar and Codevalanche.",
 });
 
 const news = [
-  { date: "2 July 2026", iso: "2026-07-02", kind: "Product", href: "/releases/", target: "releases_archive", title: "Codevalanche 0.1.31 published.", copy: "The most recent build in the June and July early-access archive, one of nine published that day." },
+  { date: "16 October 2026", iso: "2026-10-16", kind: "Company", href: "/company/", target: "company", title: "A new radovar.com.", copy: "The site now introduces Radovar as the company and Codevalanche as its first product. Codevalanche stays in early access for Windows, and public downloads are in preparation." },
+  { date: "2 July 2026", iso: "2026-07-02", kind: "Product", href: "/changelog/", target: "changelog_archive", title: "Codevalanche 0.1.31 published.", copy: "The most recent build in the June and July early-access archive, one of nine published that day." },
   { date: "17 June 2026", iso: "2026-06-17", kind: "Product", href: "/changelog/", target: "changelog_archive", title: "Early-access builds for Windows.", copy: "Signed Windows installers with an update feed. Version 0.1.11 is the earliest build in the archive." },
   { date: "Guide", iso: "", kind: "Security", href: "/security/", target: "security", title: "Your files, providers and permissions.", copy: "What stays on your PC, what a hosted model can receive and how to report a vulnerability." },
 ];
@@ -23,9 +24,9 @@ export default function PressPage() {
       <SiteHeader />
       <main id="top" className="site-page press-page">
         <section className="shell page-hero" data-analytics-section="intro" aria-labelledby="press-title">
-          <p className="kicker">Newsroom</p>
+          <p className="kicker">Updates</p>
           <h1 id="press-title">Radovar and Codevalanche: <em>the facts.</em></h1>
-          <p className="page-hero__lead">Product news, a company overview, the names to use and the logos to download when you write about Radovar or Codevalanche.</p>
+          <p className="page-hero__lead">Dated updates, a company overview, the names to use and the logos to download when you write about Radovar or Codevalanche.</p>
         </section>
 
         <div data-analytics-section="resources">
@@ -33,13 +34,13 @@ export default function PressPage() {
           <div className="band__head">
             <div>
               <p className="kicker">Latest</p>
-              <h2 id="news-title">News and records.</h2>
+              <h2 id="news-title">Updates, newest first.</h2>
             </div>
-            <p>Every date here comes from the published release history.</p>
+            <p>Every entry is dated. Product dates come from the published release history.</p>
           </div>
           <div className="news-list">
             {news.map((item) => (
-              <Link href={item.href} key={item.href} data-analytics-action="anchor" data-analytics-target={item.target} data-analytics-placement="resources">
+              <Link href={item.href} key={item.title} data-analytics-action="anchor" data-analytics-target={item.target} data-analytics-placement="resources">
                 {item.iso ? <time dateTime={item.iso}>{item.date}</time> : <span className="news-list__kind">{item.date}</span>}
                 <span className="news-list__kind">{item.kind}</span>
                 <h3>{item.title}</h3>
@@ -63,7 +64,7 @@ export default function PressPage() {
                 <div><dt>Company</dt><dd>Radovar, a software company building tools for working with AI agents.</dd></div>
                 <div><dt>Mission</dt><dd>Make work with AI agents something people can understand, check and trust.</dd></div>
                 <div><dt>Product</dt><dd>Codevalanche, a desktop app for coding with AI agents.</dd></div>
-                <div><dt>Status</dt><dd>Codevalanche is in early access for Windows.</dd></div>
+                <div><dt>Status</dt><dd>Codevalanche is in early access for Windows. Early-access builds were published in June and July 2026. Public downloads are in preparation.</dd></div>
               </dl>
               <dl>
                 <div><dt>What Codevalanche does</dt><dd>It works with projects on the user’s machine, connects supported coding agents and accounts such as Claude Code, Codex and local models, keeps each task’s conversation together and shows changed files and diffs before they are committed.</dd></div>

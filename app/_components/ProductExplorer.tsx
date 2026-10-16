@@ -34,7 +34,7 @@ export function ProductExplorer() {
         <div id="explorer-panel" role="tabpanel" aria-labelledby={`explorer-tab-${active}`} tabIndex={0}>
           <h3>{view.title}</h3>
           <p>{view.copy}</p>
-          <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="product_panel" data-analytics-section-id="codevalanche">Explore Codevalanche</a>
+          <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="product_panel" data-analytics-section-id="codevalanche">Visit codevalanche.com</a>
         </div>
       </div>
       <AppShot key={view.image} className="explorer-shot" src={`/media/codevalanche/${view.image}`} mobileSrc={`/media/codevalanche/${view.detail[0]}`} mobileSize={[view.detail[1], view.detail[2]]} alt={view.alt} caption="Codevalanche on Windows, with a sample project." />

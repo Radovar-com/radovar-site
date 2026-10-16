@@ -1,71 +1,77 @@
-import Link from "next/link"
 import { createPageMetadata } from "../_lib/site-metadata"
 import { DocPage } from "../_components/DocPage"
 
 export const metadata = createPageMetadata({
-  title: "Changelog",
+  title: "Release history",
   description:
-    "An archive of Codevalanche’s early-access release dates, build counts, and version ranges from June and July 2026.",
+    "Every early-access Codevalanche build published between 17 June and 2 July 2026, with its date, including the one we pulled.",
   path: "/changelog/",
 })
 
-/* Grouped by publication date. Every date and count here comes from the
-   published release history. Per-build notes are deliberately absent rather
-   than reconstructed after the fact. */
-const PERIODS = [
-  { date: "2 July 2026", builds: 9, range: "0.1.22 to 0.1.31" },
-  { date: "27 June 2026", builds: 5, range: "0.1.17 to 0.1.21" },
-  { date: "24 June 2026", builds: 3, range: "0.1.14 to 0.1.16" },
-  { date: "23 June 2026", builds: 2, range: "0.1.12 to 0.1.13" },
-  { date: "17 June 2026", builds: 1, range: "0.1.11" },
+/* The complete list, grouped by publication date. Every version and date comes
+   from the published release history; 0.1.24 was pulled and stays listed. */
+const DAYS: { date: string; iso: string; versions: string[] }[] = [
+  { date: "2 July 2026", iso: "2026-07-02", versions: ["0.1.31", "0.1.30", "0.1.29", "0.1.28", "0.1.27", "0.1.26", "0.1.25", "0.1.24", "0.1.23", "0.1.22"] },
+  { date: "27 June 2026", iso: "2026-06-27", versions: ["0.1.21", "0.1.20", "0.1.19", "0.1.18", "0.1.17"] },
+  { date: "24 June 2026", iso: "2026-06-24", versions: ["0.1.16", "0.1.15", "0.1.14"] },
+  { date: "23 June 2026", iso: "2026-06-23", versions: ["0.1.13", "0.1.12"] },
+  { date: "17 June 2026", iso: "2026-06-17", versions: ["0.1.11"] },
 ]
+const PULLED = "0.1.24"
 
 export default function ChangelogPage() {
   return (
     <DocPage
-      kicker="Changelog"
-      title="Codevalanche release history."
-      intro="Publication dates, retained build counts, and version ranges from June and July 2026. This is a historical record, not the current download page."
-      updated="9 October 2026"
+      kicker="Release history"
+      title="Every Codevalanche build we have published."
+      intro="Twenty early-access builds for Windows, published between 17 June and 2 July 2026, plus the one we pulled. This is a historical record, not the current download page."
+      updated="16 October 2026"
     >
       <div className="note">
         <p>
-          <strong>About this record.</strong> The builds listed here, through 0.1.31, were
-          published without written release notes. This archive preserves their dates and
-          version ranges without reconstructing feature or fix details from memory.
+          <strong>Current status.</strong> Codevalanche is in early access for Windows and public
+          downloads are in preparation. Visit{" "}
+          <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a> for
+          current product and download information.
         </p>
       </div>
 
-      <h2>Archived publication dates</h2>
+      <h2>All published builds</h2>
       <div className="vtable">
-        {PERIODS.map((p) => (
-          <div className="vrow" key={p.date}>
-            <span className="vrow__v">{p.builds}</span>
-            <span className="vrow__d">
-              {p.date} &nbsp;&middot;&nbsp; {p.range}
-            </span>
-            <span />
-          </div>
-        ))}
+        {DAYS.flatMap((day) =>
+          day.versions.map((v) => (
+            <div className="vrow" key={v}>
+              <span className="vrow__v">{v}</span>
+              <span className="vrow__d">
+                <time dateTime={day.iso}>{day.date}</time>
+                {v === PULLED ? <> &nbsp;&middot;&nbsp; pulled after a problem was found</> : null}
+              </span>
+              <span />
+            </div>
+          )),
+        )}
       </div>
       <p>
-        Twenty retained builds are recorded between 17 June and 2 July 2026. Several were
-        published on the same day. Version 0.1.24 was subsequently pulled, so the
-        2 July range contains nine retained builds.
+        Twenty builds remain published. Several came out on the same day. Version 0.1.24 was
+        published on 2 July and then pulled after a problem was found. It was not replaced
+        under the same number, which is why the list keeps it.
       </p>
 
-      <h2>What these records tell you</h2>
+      <h2>About these Windows builds</h2>
       <p>
-        The counts and version ranges describe publication history. They do not identify
-        which features or fixes were included in an individual build. See{" "}
-        <Link href="/releases/" data-analytics-action="anchor" data-analytics-target="releases_archive" data-analytics-placement="resources">the release archive</Link> for a selection of dated builds
-        and the background to their version numbers.
+        The builds were published as signed Windows installers with an update feed
+        alongside them. Installed copies could check that feed for updates.
+      </p>
+      <p>
+        They use <strong>0.x</strong> version numbers and were marked pre-release. They
+        document an early stage when interfaces and behaviour were changing.
       </p>
 
-      <h2>Current product information</h2>
+      <h2>Why there are no release notes</h2>
       <p>
-        Visit <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a> for current
-        Codevalanche product and download information.
+        These builds were published without written release notes. We keep their versions
+        and dates as they were, rather than reconstructing feature or fix details from
+        memory after the fact.
       </p>
     </DocPage>
   )

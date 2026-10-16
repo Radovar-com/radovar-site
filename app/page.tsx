@@ -10,10 +10,10 @@ import "./site.css";
 import "./home.css";
 
 const latest: { id: string; href: string; label: string; title: string; copy: string; spot: SpotName; tone: "sage" | "mist" | "sand" | "clay" }[] = [
-  { id: "releases_archive", href: "/releases/", label: "Release archive · June–July 2026", title: "Twenty early-access builds for Windows.", copy: "Dates and version history of the first public Codevalanche builds.", spot: "archive", tone: "sand" },
+  { id: "press", href: "/press/", label: "Update · 16 October 2026", title: "A new radovar.com.", copy: "The company site now says who we are and what we make. Public downloads of Codevalanche are in preparation.", spot: "news", tone: "clay" },
   { id: "security", href: "/security/", label: "Security", title: "Your files, providers and permissions.", copy: "What stays on your PC, and what a hosted model can receive.", spot: "shield", tone: "mist" },
   { id: "docs", href: "/docs/", label: "Product guide", title: "Your first project in Codevalanche.", copy: "Open a repository, connect an agent and review the result.", spot: "book", tone: "sage" },
-  { id: "press", href: "/press/", label: "Newsroom", title: "Radovar and Codevalanche: the facts.", copy: "Company overview, product description and press contact.", spot: "news", tone: "clay" },
+  { id: "changelog_archive", href: "/changelog/", label: "Release history · June–July 2026", title: "Twenty early-access builds for Windows.", copy: "Every early-access build, its date, and the one we pulled.", spot: "archive", tone: "sand" },
 ];
 
 export default function HomePage() {
@@ -27,7 +27,7 @@ export default function HomePage() {
           <div className="shell introduction__content">
             <h1 id="intro-title"><span>Radovar keeps people</span> <em>in charge of AI agents.</em></h1>
             <div className="intro-row">
-              <p className="intro-lead">Radovar is a software company. AI agents can now write code, change files and run commands on real projects. We build the tools around them, so the person responsible for the work can see what an agent did and decide what to keep.</p>
+              <p className="intro-lead">Radovar is a software company. We build the tools around AI agents, so the person responsible for the work can see what an agent did and decide what to keep. Our first product, Codevalanche, is a Windows desktop app where Claude Code, Codex or a local model works in your own repository, and nothing stays until you have checked it.</p>
               <div className="intro-actions">
                 <Link className="intro-link action-link action-link--primary" href="#company" data-analytics-action="anchor" data-analytics-target="home" data-analytics-placement="intro">Our mission</Link>
                 <Link className="intro-company-link action-link" href="#codevalanche" data-analytics-action="anchor" data-analytics-target="home" data-analytics-placement="intro">What we build</Link>
@@ -38,7 +38,7 @@ export default function HomePage() {
               <ol aria-label="Why Radovar exists">
                 <li><span className="intro-story__step">01 · The question</span><p className="intro-story__title">Who is in charge of the result?</p><p>Agents can already do real work in a codebase. When they do, someone still has to answer for what changed.</p></li>
                 <li><span className="intro-story__step">02 · Our answer</span><p className="intro-story__title">The person, every time.</p><p>Software where you choose the agent, follow every step it takes and keep only the changes you have checked.</p></li>
-                <li><span className="intro-story__step">03 · Our first product</span><p className="intro-story__title">Codevalanche.</p><p>A desktop app for coding with AI agents, in early access for Windows since June 2026.</p></li>
+                <li><span className="intro-story__step">03 · Our first product</span><p className="intro-story__title">Codevalanche.</p><p>A Windows desktop app for coding with AI agents. Early-access builds shipped in June and July 2026, and public downloads are in preparation.</p></li>
               </ol>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function HomePage() {
             <h2 id="company-title" className="statement">Make work with AI agents something people can <em>understand, check and trust.</em></h2>
             <div className="statement-follow">
               <p>We think the tools around an agent matter as much as the agent itself: the project it works in, the conversation that guides it and the review that decides what stays.</p>
-              <p>Six principles guide what we build and what we leave out. The first one is the simplest: people decide. Codevalanche is the first product built on them.</p>
+              <p>Three ideas guide what we build: people decide, the work stays visible, and you choose the agent and the model. Codevalanche is the first product built on them.</p>
             </div>
             <div className="company-actions">
               <Link className="action-link" href="/company/" data-analytics-action="anchor" data-analytics-target="company" data-analytics-placement="inline">About Radovar</Link>
@@ -72,8 +72,8 @@ export default function HomePage() {
                 <li>Every change visible and checked before you keep it.</li>
               </ul>
               <div className="feature__actions">
-                <Link className="action-link action-link--primary" href="/codevalanche/" data-analytics-action="anchor" data-analytics-target="codevalanche" data-analytics-placement="product_panel">Explore Codevalanche</Link>
-                <a className="action-link" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="product_panel" data-analytics-section-id="codevalanche">Visit the product site</a>
+                <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="product_panel" data-analytics-section-id="codevalanche">Visit codevalanche.com</a>
+                <Link className="action-link" href="/codevalanche/" data-analytics-action="anchor" data-analytics-target="codevalanche" data-analytics-placement="product_panel">Explore Codevalanche</Link>
               </div>
             </div>
             <AppShot
@@ -100,7 +100,7 @@ export default function HomePage() {
               <p className="kicker">Latest</p>
               <h2 id="latest-title">From Radovar.</h2>
             </div>
-            <div className="band__head-action"><Link className="action-link" href="/press/" data-analytics-action="anchor" data-analytics-target="press" data-analytics-placement="resources">Visit the newsroom</Link></div>
+            <div className="band__head-action"><Link className="action-link" href="/press/" data-analytics-action="anchor" data-analytics-target="press" data-analytics-placement="resources">All updates</Link></div>
           </div>
           <div className="cards cards--four">
             {latest.map((item) => (
@@ -116,7 +116,7 @@ export default function HomePage() {
             <Flight tone="light" />
             <div>
               <h2>Codevalanche is in early access for Windows.</h2>
-              <p>See what it can do today, which agents it supports and how to get it.</p>
+              <p>Public downloads are in preparation. codevalanche.com shows what it does, which agents it supports and when you can get it.</p>
             </div>
             <div className="closing__actions">
               <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="resources" data-analytics-section-id="resources">Visit codevalanche.com</a>

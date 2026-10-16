@@ -1,79 +1,28 @@
 import Link from "next/link"
-import { createPageMetadata } from "../_lib/site-metadata"
+import type { Metadata } from "next"
 import { DocPage } from "../_components/DocPage"
 
-export const metadata = createPageMetadata({
-  title: "Releases",
-  description:
-    "Selected early-access Codevalanche releases from June and July 2026, with a link to current product and download information.",
-  path: "/releases/",
-})
-
-/* Real published early-access builds, most recent first. Kept short on purpose: the full
-   pre-release history is internal iteration and is not useful to a reader. */
-const ARCHIVE = [
-  { v: "0.1.31", d: "2 July 2026" },
-  { v: "0.1.30", d: "2 July 2026" },
-  { v: "0.1.29", d: "2 July 2026" },
-  { v: "0.1.21", d: "27 June 2026" },
-  { v: "0.1.16", d: "24 June 2026" },
-  { v: "0.1.11", d: "17 June 2026" },
-]
+/* The release archive and the changelog were two partial views of one record.
+   They now live together on /changelog/; this address stays for old links. */
+export const metadata: Metadata = {
+  title: "Release history",
+  description: "The Codevalanche release archive has moved to the release history page.",
+  alternates: { canonical: "/changelog/" },
+  robots: { index: false, follow: true },
+}
 
 export default function ReleasesPage() {
   return (
     <DocPage
-      kicker="Releases"
-      title="Codevalanche’s early Windows releases."
-      intro="Look up selected build numbers and publication dates from June and July 2026. These historical entries do not identify the current recommended download."
-      updated="9 October 2026"
+      kicker="Release history"
+      title="The release archive has moved."
+      intro="Every published Codevalanche build, with its date, is now on one page."
+      updated="16 October 2026"
     >
-      <div className="note">
-        <p>
-          For current product and download information, visit{" "}
-          <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a>.
-        </p>
-      </div>
-
-      <h2>About these Windows builds</h2>
+      <meta httpEquiv="refresh" content={`0; url=${process.env.BASE_PATH || ""}/changelog/`} />
       <p>
-        These builds were published as signed Windows installers with an update feed
-        alongside them. Installed copies could check that feed for updates.
-      </p>
-      <p>
-        This archive records twenty retained builds between 17 June and 2 July 2026. Several were published
-        on the same day as part of that early-access development period.
-      </p>
-
-      <h2>Why these versions start with 0.x</h2>
-      <p>
-        The builds in this archive use <strong>0.x</strong> version numbers and were marked
-        pre-release. They document an early stage when interfaces and behaviour were changing.
-      </p>
-      <p>
-        Version 0.1.24 was published and then pulled after a problem was found. It was not
-        replaced under the same number, which accounts for the gap in the release history.
-      </p>
-
-      <h2>Selected early-access builds</h2>
-      <div className="vtable">
-        {ARCHIVE.map((r) => (
-          <div className="vrow" key={r.v}>
-            <span className="vrow__v">{r.v}</span>
-            <span className="vrow__d">{r.d}</span>
-            <span />
-          </div>
-        ))}
-      </div>
-      <p>
-        This is a selection, not the complete list. See{" "}
-        <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">the changelog archive</Link> for publication dates and build counts.
-      </p>
-
-      <h2>Product information</h2>
-      <p>
-        Visit <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a> for current
-        Codevalanche product and download information.
+        Go to the{" "}
+        <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">release history</Link>.
       </p>
     </DocPage>
   )

@@ -36,7 +36,7 @@ try {
     await page.locator('#codevalanche .feature .app-shot').scrollIntoViewIfNeeded();
     await page.waitForFunction(() => [...document.querySelectorAll('#codevalanche .feature .app-shot__img')].some(image => image.offsetParent && image.complete && image.naturalWidth > 0));
     const productShot = await page.locator('#codevalanche .feature .app-shot__img').evaluateAll(images => images.filter(image => image.offsetParent).map(image => ({ src: image.currentSrc, alt: image.alt })));
-    check(productShot.length === 1 && productShot[0].alt.includes('Codevalanche') && productShot[0].src.includes(colorScheme === 'dark' ? '-dark.webp' : 'approval-detail.webp') && (await page.locator('#codevalanche .feature figcaption').innerText()).length > 0, `${width}/${colorScheme}: product section shows a real Codevalanche screenshot in the current theme`);
+    check(productShot.length === 1 && productShot[0].alt.includes('Codevalanche') && (colorScheme === 'dark' ? productShot[0].src.includes('approval-detail-dark') : productShot[0].src.includes('approval-detail') && !productShot[0].src.includes('-dark')) && (await page.locator('#codevalanche .feature figcaption').innerText()).length > 0, `${width}/${colorScheme}: product section shows a real Codevalanche screenshot in the current theme`);
     check(await page.locator('#codevalanche .feature').count() === 1 && await page.locator('#company .statement').count() === 1 && await page.locator('[data-analytics-section="resources"] .cards--four .card').count() === 4, `${width}/${colorScheme}: product feature, mission and latest links available`);
     check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${width}/${colorScheme}: homepage fits viewport`);
     await page.screenshot({ path: path.join(output, `hero-${width}-${colorScheme}.png`) });
@@ -51,12 +51,12 @@ try {
       if (route === '/codevalanche/') {
         await page.waitForFunction(() => [...document.querySelectorAll('.page-hero ~ .shell .app-shot__img')].some(image => image.offsetParent && image.complete && image.naturalWidth > 0));
         const shown = await page.locator('main .app-shot--stage .app-shot__img').evaluateAll(images => images.filter(image => image.offsetParent).map(image => ({ src: image.currentSrc, alt: image.alt })));
-        check(shown.length === 1 && shown[0].alt.includes('Codevalanche') && shown[0].src.includes(colorScheme === 'dark' ? '-dark.webp' : '-light.webp') && shown[0].src.includes('detail') === (width <= 760), `${width}/${colorScheme}: product screenshot follows the theme and uses the close-up on phones`);
+        check(shown.length === 1 && shown[0].alt.includes('Codevalanche') && shown[0].src.includes(colorScheme === 'dark' ? '-dark' : '-light') && shown[0].src.includes('detail') === (width <= 760), `${width}/${colorScheme}: product screenshot follows the theme and uses the close-up on phones`);
         check((await page.locator('main .app-shot--stage figcaption').innerText()).includes('sample project'), `${width}/${colorScheme}: product screenshot caption says it uses a sample project`);
       }
       if (width === 1440) await page.screenshot({ path: path.join(output, `page${route.replaceAll('/', '-')}${colorScheme}.png`), fullPage: true });
     }
-    if (!process.argv.includes('--hero-only')) for (const route of ['/docs/', '/security/', '/changelog/', '/releases/', '/privacy/', '/terms/']) {
+    if (!process.argv.includes('--hero-only')) for (const route of ['/docs/', '/security/', '/changelog/', '/privacy/', '/terms/']) {
       await ready(page, route);
       check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${width}/${colorScheme}: ${route} fits viewport`);
       check(await page.locator('.docHead img').count() === 0, `${width}/${colorScheme}: ${route} has no recycled landscape thumbnail`);
@@ -95,7 +95,7 @@ try {
     await ctx.route('https://**/*', route => route.abort());
     const page = await ctx.newPage();
     const allowed = new Set(['info@radovar.com', 'press@radovar.com', 'security@radovar.com']);
-    for (const route of ['/', '/company/', '/codevalanche/', '/press/', '/docs/', '/security/', '/changelog/', '/releases/', '/privacy/', '/terms/']) {
+    for (const route of ['/', '/company/', '/codevalanche/', '/press/', '/docs/', '/security/', '/changelog/', '/privacy/', '/terms/']) {
       await ready(page, route);
       const addresses = await page.evaluate(() => [...new Set([...document.querySelectorAll('a[href^="mailto:"]')].map(link => link.getAttribute('href').slice(7).split('?')[0].toLowerCase()).concat((document.body.innerText.match(/[\w.+-]+@radovar\.com/gi) ?? []).map(text => text.toLowerCase())))]);
       check(addresses.every(address => allowed.has(address)), `${route}: only the public info, press and security mailboxes are referenced (${addresses.join(', ')})`);

@@ -5,7 +5,7 @@ import { Newsreader, Geist } from "next/font/google";
 import "./globals.css";
 import "./landscape.css";
 import { AnalyticsProvider } from "./_components/AnalyticsProvider";
-import { SITE_URL as SITE, SITE_DESCRIPTION as description, SOCIAL_IMAGE } from "./_lib/site-metadata";
+import { HOME_TITLE, SITE_URL as SITE, SITE_DESCRIPTION as description, SOCIAL_IMAGE } from "./_lib/site-metadata";
 
 /* Only the weights the page actually renders. Display uses 300 (h1/h2) and
    400 (h3/wordmark); body uses 400 and 500 (nav, buttons). */
@@ -24,7 +24,7 @@ const sans = Geist({
   display: "swap",
 });
 
-const title = "Radovar";
+const title = HOME_TITLE;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -39,18 +39,10 @@ export const metadata: Metadata = {
       { url: `${process.env.BASE_PATH || ""}/favicon.ico?v=20261016r7`, sizes: "16x16 32x32 48x48", type: "image/x-icon" },
     ],
   },
-  keywords: [
-    "Radovar",
-    "Codevalanche",
-    "local-first AI",
-    "AI agents",
-    "privacy",
-    "desktop AI",
-  ],
   authors: [{ name: "Radovar" }],
   creator: "Radovar",
   publisher: "Radovar",
-  alternates: { canonical: "/" },
+  alternates: { canonical: "/", types: { "application/rss+xml": [{ url: "/feed.xml", title: "Radovar updates" }] } },
   openGraph: {
     type: "website",
     url: `${SITE}/`,
@@ -85,39 +77,48 @@ export const viewport: Viewport = {
    Radovar / Codevalanche relationship rather than guessing it. */
 const jsonLd = {
   "@context": "https://schema.org",
-  "@graph": [{
-  "@type": "Organization",
-  "@id": `${SITE}/#organization`,
-  name: "Radovar",
-  url: SITE,
-  description,
-  email: "info@radovar.com",
-  logo: {
-    "@type": "ImageObject",
-    url: `${SITE}/radovar-logo.svg`,
-    width: 1184,
-    height: 230,
-  },
-  makesOffer: {
-    "@type": "Offer",
-    itemOffered: {
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE}/#organization`,
+      name: "Radovar",
+      url: `${SITE}/`,
+      description,
+      email: "info@radovar.com",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE}/radovar-logo.svg`,
+        width: 1184,
+        height: 230,
+      },
+      contactPoint: [
+        { "@type": "ContactPoint", contactType: "customer support", email: "info@radovar.com", availableLanguage: ["en", "ro"] },
+        { "@type": "ContactPoint", contactType: "press", email: "press@radovar.com", availableLanguage: ["en", "ro"] },
+        { "@type": "ContactPoint", contactType: "security", email: "security@radovar.com", availableLanguage: ["en"] },
+      ],
+      brand: { "@id": `${SITE}/#codevalanche` },
+    },
+    {
       "@type": "SoftwareApplication",
+      "@id": `${SITE}/#codevalanche`,
       name: "Codevalanche",
-      url: "https://codevalanche.com",
+      url: "https://codevalanche.com/",
+      sameAs: [`${SITE}/codevalanche/`],
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Windows",
       description:
-        "A local-first AI coding workspace for repositories, supported runtimes, and review.",
+        "A desktop app for coding with AI agents: your local projects, cloud agents or supported local models, and a review of every change in one window.",
+      publisher: { "@id": `${SITE}/#organization` },
     },
-  },
-  }, {
-    "@type": "WebSite",
-    "@id": `${SITE}/#website`,
-    name: "Radovar",
-    url: `${SITE}/`,
-    inLanguage: "en",
-    publisher: { "@id": `${SITE}/#organization` },
-  }],
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      name: "Radovar",
+      url: `${SITE}/`,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

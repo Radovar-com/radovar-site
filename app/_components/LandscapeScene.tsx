@@ -41,6 +41,8 @@ function SkyBirds() {
   );
 }
 
+const mist = { backgroundImage: `url("${process.env.BASE_PATH || ""}/media/radovar-valley-mist-v1.webp")` };
+
 export function LandscapeScene({ variant, priority = false }: { variant: "hero" | "footer"; priority?: boolean }) {
   const scene = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -78,8 +80,10 @@ export function LandscapeScene({ variant, priority = false }: { variant: "hero" 
         <GardenWalkers />
         <SkyBirds />
       </div>
-      <div className="landscape-scene__mist landscape-scene__mist--distant" aria-hidden="true"><Image src={`${process.env.BASE_PATH || ""}/media/radovar-valley-mist-v1.webp`} alt="" fill sizes="100vw" /></div>
-      <div className="landscape-scene__mist" aria-hidden="true"><Image src={`${process.env.BASE_PATH || ""}/media/radovar-valley-mist-v1.webp`} alt="" fill sizes="100vw" /></div>
+      {/* Both mist layers paint one decorative file as a CSS background, so the
+          page references it once instead of through two <img> elements. */}
+      <div className="landscape-scene__mist landscape-scene__mist--distant" aria-hidden="true" style={mist} />
+      <div className="landscape-scene__mist" aria-hidden="true" style={mist} />
       <div className="landscape-scene__veil" aria-hidden="true" />
     </div>
   );

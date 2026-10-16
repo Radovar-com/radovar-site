@@ -75,9 +75,9 @@ export default function DocsPage() {
         </p>
       </div>
       <div className="cards">
-        <Link className="card" href="/releases/" data-analytics-action="anchor" data-analytics-target="releases_archive" data-analytics-placement="resources">
-          <h3>Early release archive</h3>
-          <p>Recorded Windows build numbers and publication dates from June and July 2026.</p>
+        <Link className="card" href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">
+          <h3>Release history</h3>
+          <p>Every Windows build published in June and July 2026, with its date.</p>
         </Link>
         <Link className="card" href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">
           <h3>Before connecting a provider</h3>

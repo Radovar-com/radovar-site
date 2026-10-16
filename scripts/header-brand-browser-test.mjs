@@ -147,7 +147,7 @@ try {
   await compact(page, true);
   await pinned(page, 'After Product anchor navigation');
   check(await page.locator('#codevalanche').evaluate(element => element.getBoundingClientRect().bottom > 80 && element.getBoundingClientRect().top < window.innerHeight), 'Product navigation reaches its intended visible section');
-  for (const [name, route] of [['Company', '/company/'], ['Codevalanche', '/codevalanche/'], ['Newsroom', '/press/']]) {
+  for (const [name, route] of [['Company', '/company/'], ['Codevalanche', '/codevalanche/'], ['Updates', '/press/']]) {
     await page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name, exact: true }).click();
     await page.waitForURL((url) => url.pathname === route);
     await page.locator('main h1').waitFor();

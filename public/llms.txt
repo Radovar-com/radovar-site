@@ -1,0 +1,28 @@
+# Radovar
+
+> Radovar is a software company that builds tools for working with AI agents on real projects, so the person responsible for the work can see what an agent did and decide what to keep. Its first product is Codevalanche.
+
+## Codevalanche
+
+- Codevalanche is a desktop app for Windows for coding with AI agents.
+- It works with projects on the user's own computer, connects supported cloud agents such as Claude Code and Codex with the user's own accounts, and supports local models on the user's hardware.
+- Changed files, diffs and checks are shown next to the conversation that produced them, before the user keeps a change.
+- Status: early access for Windows. Twenty early-access builds were published between 17 June and 2 July 2026. Public downloads are in preparation.
+- "Local-first" describes the project workspace. When a hosted model is used, the prompt and relevant file context go to that provider.
+- Product website: https://codevalanche.com/
+
+## Key pages
+
+- [About Radovar](https://radovar.com/company/): mission, principles and story so far.
+- [Codevalanche](https://radovar.com/codevalanche/): what the product does.
+- [Getting started](https://radovar.com/docs/): open a project, connect an agent, review the changes.
+- [Security](https://radovar.com/security/): what stays on your computer and what a hosted model can receive.
+- [Release history](https://radovar.com/changelog/): every early-access build and its date.
+- [Updates](https://radovar.com/press/): dated updates, company facts and logos.
+- [Privacy](https://radovar.com/privacy/) and [Terms](https://radovar.com/terms/).
+
+## Contact
+
+- General: info@radovar.com
+- Press: press@radovar.com
+- Security: security@radovar.com

@@ -139,7 +139,9 @@ try {
   await page.getByRole('button', { name: 'Switch to dark theme', exact: true }).click();
   assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
   await page.evaluate(() => { window.__securityOriginalDocument = true; });
-  for (const route of routes.slice(1)) {
+  // /releases/ only forwards to /changelog/ now, so the footer no longer links to it.
+  const clientRoutes = routes.slice(1).filter(route => route !== '/releases/');
+  for (const route of clientRoutes) {
     await page.locator(`footer a[href="${prefix}${route}"]`).first().click();
     await page.waitForURL(origin + prefix + route);
     await page.waitForFunction((expected) => window.RadovarAnalytics.pageId === expected, pageIds[route]);
@@ -149,11 +151,15 @@ try {
     await takeViolations(page);
   }
   await page.goBack();
-  await page.waitForURL(origin + prefix + routes.at(-2));
-  await page.waitForFunction((expected) => window.RadovarAnalytics.pageId === expected, pageIds[routes.at(-2)]);
+  await page.waitForURL(origin + prefix + clientRoutes.at(-2));
+  await page.waitForFunction((expected) => window.RadovarAnalytics.pageId === expected, pageIds[clientRoutes.at(-2)]);
   assert.equal(await page.evaluate(() => window.__securityOriginalDocument), true, 'Back retains the client document');
   await takeViolations(page);
-  for (const route of [...routes, '/missing-security-fixture/']) {
+  await page.goto(origin + prefix + '/releases/');
+  await page.waitForURL(origin + prefix + '/changelog/');
+  await page.getByRole('heading', { level: 1 }).waitFor();
+  await takeViolations(page);
+  for (const route of [...clientRoutes, '/', '/missing-security-fixture/']) {
     await ready(page, route);
     await page.getByRole('heading', { level: 1 }).waitFor();
     await takeViolations(page);

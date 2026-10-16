@@ -7,8 +7,8 @@ import "../motion.css";
 import { ThemeSwitch } from "./ThemeSwitch";
 
 const columns = [
-  { title: "Product", links: [{ href: "/codevalanche/", label: "Codevalanche" }, { href: "/docs/", label: "Product guide" }, { href: "/changelog/", label: "Changelog" }, { href: "/releases/", label: "Release archive" }, { href: "https://codevalanche.com", label: "codevalanche.com" }] },
-  { title: "Company", links: [{ href: "/company/", label: "About Radovar" }, { href: "/press/", label: "Newsroom" }, { href: "/security/", label: "Security" }, { href: "mailto:info@radovar.com", label: "Contact" }] },
+  { title: "Product", links: [{ href: "/codevalanche/", label: "Codevalanche" }, { href: "/docs/", label: "Product guide" }, { href: "/changelog/", label: "Release history" }, { href: "https://codevalanche.com", label: "codevalanche.com" }] },
+  { title: "Company", links: [{ href: "/company/", label: "About Radovar" }, { href: "/press/", label: "Updates" }, { href: "/security/", label: "Security" }, { href: "mailto:info@radovar.com", label: "Contact" }] },
   { title: "Legal", links: [{ href: "/privacy/", label: "Privacy" }, { href: "/terms/", label: "Terms" }] },
 ];
 
@@ -23,15 +23,15 @@ export function SiteFooter() {
         <div className="scenic-footer__top">
           <div className="footer__brand">
             <Link className="wordmark" href="/" aria-label="Radovar home" data-analytics-action="footer" data-analytics-target="home" data-analytics-placement="footer"><Image className="radovar-logo" src={`${process.env.BASE_PATH || ""}/radovar-logo.svg?v=20261016-original`} alt="Radovar" width={1184} height={230} /></Link>
-            <p>Good ideas deserve<br />a conversation.</p>
+            <p>Questions, press or partnerships?<br />Write to us.</p>
             <a className="footer__mail" href="mailto:info@radovar.com" data-analytics-action="contact" data-analytics-contact="info" data-analytics-placement="footer">info@radovar.com</a>
           </div>
           <div className="scenic-footer__navigation">
             {columns.map((column) => <nav key={column.title} className="footer__col" aria-labelledby={`footer-${column.title}`}><h2 id={`footer-${column.title}`}>{column.title}</h2><ul>{column.links.map((link) => <li key={link.href}><Link href={link.href} data-analytics-action={link.href.startsWith("https:") ? "product" : link.href.startsWith("mailto:") ? "contact" : link.href.includes("#") ? "anchor" : "footer"} data-analytics-target={footerTargets[link.href]} data-analytics-section-id="footer" data-analytics-placement="footer">{link.label}</Link></li>)}{column.title === "Legal" ? <li><ManageCookies /></li> : null}</ul></nav>)}
           </div>
         </div>
-        <div className="scenic-footer__message"><span>A world of possibilities.</span><p>Let’s build<br />something useful.</p></div>
-        <div className="scenic-footer__base"><span>© 2026 Radovar</span><span>Codevalanche, a product by Radovar.</span><div className="scenic-footer__utilities"><Link href="#top" data-analytics-action="anchor" data-analytics-target="current" data-analytics-placement="footer">Back to top</Link><ThemeSwitch /></div></div>
+        <div className="scenic-footer__message"><span>Makers of Codevalanche.</span><p>People in charge<br />of AI agents.</p></div>
+        <div className="scenic-footer__base"><span>© 2026 Radovar.</span>{" "}<span>Codevalanche is a product by Radovar.</span>{" "}<div className="scenic-footer__utilities"><Link href="#top" data-analytics-action="anchor" data-analytics-target="current" data-analytics-placement="footer">Back to top</Link><ThemeSwitch /></div></div>
       </div>
     </footer>
   );

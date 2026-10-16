@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Radovar updates</title>
+    <link>https://radovar.com/press/</link>
+    <atom:link href="https://radovar.com/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Dated updates from Radovar, the company behind Codevalanche.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 16 Oct 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>A new radovar.com</title>
+      <link>https://radovar.com/company/</link>
+      <guid isPermaLink="false">radovar-update-2026-10-16-site</guid>
+      <pubDate>Fri, 16 Oct 2026 12:00:00 GMT</pubDate>
+      <description>The site now introduces Radovar as the company and Codevalanche as its first product. Codevalanche stays in early access for Windows, and public downloads are in preparation.</description>
+    </item>
+    <item>
+      <title>Codevalanche 0.1.31 published</title>
+      <link>https://radovar.com/changelog/</link>
+      <guid isPermaLink="false">radovar-update-2026-07-02-0.1.31</guid>
+      <pubDate>Thu, 02 Jul 2026 12:00:00 GMT</pubDate>
+      <description>The most recent build in the June and July early-access archive, one of nine published that day.</description>
+    </item>
+    <item>
+      <title>Early-access builds for Windows</title>
+      <link>https://radovar.com/changelog/</link>
+      <guid isPermaLink="false">radovar-update-2026-06-17-0.1.11</guid>
+      <pubDate>Wed, 17 Jun 2026 12:00:00 GMT</pubDate>
+      <description>Signed Windows installers with an update feed. Version 0.1.11 is the earliest build in the archive.</description>
+    </item>
+  </channel>
+</rss>

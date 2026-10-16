@@ -40,7 +40,7 @@ export default function CodevalanchePage() {
                 <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="intro" data-analytics-section-id="codevalanche">Visit codevalanche.com</a>
                 <Link className="action-link" href="/docs/" data-analytics-action="anchor" data-analytics-target="docs" data-analytics-placement="intro">Read the guide</Link>
               </div>
-              <p className="page-hero__meta">Early access for Windows. Supported agents and models vary by build.</p>
+              <p className="page-hero__meta">Early access for Windows. Public downloads are in preparation. Supported agents and models vary by build.</p>
             </div>
           </div>
         </section>
@@ -105,7 +105,7 @@ export default function CodevalanchePage() {
               <div><dt>Can I use an existing project?</dt><dd>Yes. Open a local folder or repository and start with a focused task. Keep important work in version control and review changes before committing them.</dd></div>
               <div><dt>Which agents can I connect?</dt><dd>The agents and accounts supported by your installed build. Codevalanche is designed around tools such as Claude Code, Codex and supported local models.</dd></div>
               <div><dt>Does local-first mean everything is offline?</dt><dd>Your repository stays on disk. A hosted model can still receive prompts and relevant file context. The provider and runtime you choose determine those boundaries. <Link href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">Read more about security</Link>.</dd></div>
-              <div><dt>Where can I get it?</dt><dd>Codevalanche is in early access for Windows. The product website carries current availability and download information. Radovar keeps the <Link href="/releases/" data-analytics-action="anchor" data-analytics-target="releases_archive" data-analytics-placement="resources">early-access release archive</Link>.</dd></div>
+              <div><dt>Where can I get it?</dt><dd>Codevalanche is in early access for Windows. Early-access builds shipped in June and July 2026, and public downloads are in preparation. codevalanche.com will carry them as soon as they ship. Radovar keeps the <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">early-access release history</Link>.</dd></div>
             </dl>
           </div>
           <div className="shell">

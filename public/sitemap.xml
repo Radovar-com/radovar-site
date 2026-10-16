@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://radovar.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://radovar.com/company/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radovar.com/codevalanche/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radovar.com/docs/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radovar.com/security/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://radovar.com/releases/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://radovar.com/changelog/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://radovar.com/press/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://radovar.com/privacy/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://radovar.com/terms/</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://radovar.com/</loc><lastmod>2026-10-16</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://radovar.com/company/</loc><lastmod>2026-10-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radovar.com/codevalanche/</loc><lastmod>2026-10-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radovar.com/docs/</loc><lastmod>2026-10-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radovar.com/security/</loc><lastmod>2026-10-16</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://radovar.com/press/</loc><lastmod>2026-10-16</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radovar.com/changelog/</loc><lastmod>2026-10-16</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://radovar.com/privacy/</loc><lastmod>2026-10-16</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://radovar.com/terms/</loc><lastmod>2026-10-15</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
 </urlset>
