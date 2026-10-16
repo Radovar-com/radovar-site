@@ -1,14 +1,14 @@
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "../_lib/site-metadata";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import "../site.css";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Newsroom",
-  alternates: { canonical: "/press/" },
+  path: "/press/",
   description: "News, company facts, logos and press contact for Radovar and Codevalanche.",
-};
+});
 
 const news = [
   { date: "2 July 2026", iso: "2026-07-02", kind: "Product", href: "/releases/", target: "releases_archive", title: "Codevalanche 0.1.31 published.", copy: "The most recent build in the June and July early-access archive, one of nine published that day." },
@@ -28,7 +28,8 @@ export default function PressPage() {
           <p className="page-hero__lead">Product news, a company overview, the names to use and the logos to download when you write about Radovar or Codevalanche.</p>
         </section>
 
-        <section className="shell band band--tight" data-analytics-section="resources" aria-labelledby="news-title">
+        <div data-analytics-section="resources">
+        <section className="shell band band--tight" aria-labelledby="news-title">
           <div className="band__head">
             <div>
               <p className="kicker">Latest</p>
@@ -73,7 +74,7 @@ export default function PressPage() {
           </div>
         </section>
 
-        <section className="shell band" data-analytics-section="resources" aria-labelledby="logos-title">
+        <section className="shell band" aria-labelledby="logos-title">
           <div className="band__head">
             <div>
               <p className="kicker">Logos</p>
@@ -87,7 +88,7 @@ export default function PressPage() {
           </div>
         </section>
 
-        <section className="shell band band--tight" data-analytics-section="resources" aria-labelledby="press-contact-title">
+        <section className="shell band band--tight" aria-labelledby="press-contact-title">
           <div className="band__head">
             <div>
               <p className="kicker">Contact</p>
@@ -101,6 +102,7 @@ export default function PressPage() {
             <Link href="/company/" data-analytics-action="anchor" data-analytics-target="company" data-analytics-placement="resources"><span>Company</span><strong>About Radovar</strong><p>Our mission, principles and story so far.</p></Link>
           </div>
         </section>
+        </div>
       </main>
       <SiteFooter />
     </>

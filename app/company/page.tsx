@@ -1,16 +1,16 @@
 import Link from "next/link";
-import type { Metadata } from "next";
+import { createPageMetadata } from "../_lib/site-metadata";
 import { SiteHeader } from "../_components/SiteHeader";
 import { SiteFooter } from "../_components/SiteFooter";
 import { Spot, type SpotName } from "../_components/Spot";
 import { Flight } from "../_components/Motion";
 import "../site.css";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "About Radovar",
-  alternates: { canonical: "/company/" },
+  path: "/company/",
   description: "Radovar is the software company behind Codevalanche. Our mission is to make work with AI agents something people can understand, check and trust.",
-};
+});
 
 const principles: { spot: SpotName; tone: "sage" | "mist" | "sand" | "clay"; title: string; copy: string }[] = [
   { spot: "compass", tone: "sage", title: "People decide.", copy: "Agents can move fast. The decision about what to keep belongs to the person responsible for the work, and our products are built around that moment." },
@@ -35,7 +35,8 @@ export default function CompanyPage() {
           <Spot name="summit" tone="mist" />
         </section>
 
-        <section className="band band--dark" data-analytics-section="company" aria-labelledby="mission-title">
+        <div data-analytics-section="company">
+        <section className="band band--dark" aria-labelledby="mission-title">
           <div className="shell">
             <p className="kicker">Our mission</p>
             <h2 id="mission-title" className="statement">Make work with AI agents something people can <em>understand, check and trust.</em></h2>
@@ -46,7 +47,7 @@ export default function CompanyPage() {
           </div>
         </section>
 
-        <section className="shell band" data-analytics-section="company" aria-labelledby="principles-title">
+        <section className="shell band" aria-labelledby="principles-title">
           <div className="band__head">
             <div>
               <p className="kicker">What we believe</p>
@@ -88,7 +89,7 @@ export default function CompanyPage() {
           </div>
         </section>
 
-        <section className="band band--dark flight-host" data-analytics-section="company" aria-labelledby="story-title">
+        <section className="band band--dark flight-host" aria-labelledby="story-title">
           <Flight tone="light" />
           <div className="shell">
             <div className="band__head">
@@ -106,7 +107,10 @@ export default function CompanyPage() {
           </div>
         </section>
 
-        <section className="shell band" data-analytics-section="resources" aria-labelledby="trust-title">
+        </div>
+
+        <div data-analytics-section="resources">
+        <section className="shell band" aria-labelledby="trust-title">
           <div className="band__head">
             <div>
               <p className="kicker">Trust</p>
@@ -121,7 +125,7 @@ export default function CompanyPage() {
           </div>
         </section>
 
-        <section className="shell band band--tight" data-analytics-section="resources" aria-labelledby="contact-title">
+        <section className="shell band band--tight" aria-labelledby="contact-title">
           <div className="band__head">
             <div>
               <p className="kicker">Contact</p>
@@ -135,6 +139,7 @@ export default function CompanyPage() {
             <a href="mailto:security@radovar.com" data-analytics-action="contact" data-analytics-contact="security" data-analytics-placement="inline"><span>Security</span><strong>security@radovar.com</strong><p>Report a vulnerability in Codevalanche.</p></a>
           </div>
         </section>
+        </div>
       </main>
       <SiteFooter />
     </>

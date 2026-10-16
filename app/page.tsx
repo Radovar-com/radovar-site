@@ -120,7 +120,7 @@ export default function HomePage() {
             </div>
             <div className="closing__actions">
               <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="resources" data-analytics-section-id="resources">Visit codevalanche.com</a>
-              <Link className="action-link" href="/codevalanche/" data-analytics-action="anchor" data-analytics-target="codevalanche" data-analytics-placement="resources">Learn more</Link>
+              <Link className="action-link" href="/codevalanche/" data-analytics-action="anchor" data-analytics-target="codevalanche" data-analytics-placement="resources">Explore Codevalanche</Link>
             </div>
           </div>
         </section>

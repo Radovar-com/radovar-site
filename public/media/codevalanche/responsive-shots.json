@@ -1,0 +1,128 @@
+{
+  "/media/codevalanche/approval-detail.webp": {
+    "width": 1400,
+    "height": 1256,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/approval-detail-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/approval-detail-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/approval-detail.webp",
+        "width": 1400
+      }
+    ]
+  },
+  "/media/codevalanche/approval-detail-dark.webp": {
+    "width": 1400,
+    "height": 1256,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/approval-detail-dark-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/approval-detail-dark-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/approval-detail-dark.webp",
+        "width": 1400
+      }
+    ]
+  },
+  "/media/codevalanche/task-brief-detail.webp": {
+    "width": 1000,
+    "height": 882,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/task-brief-detail-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/task-brief-detail-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/task-brief-detail.webp",
+        "width": 1000
+      }
+    ]
+  },
+  "/media/codevalanche/ai-providers-detail.webp": {
+    "width": 1000,
+    "height": 1032,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/ai-providers-detail-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/ai-providers-detail-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/ai-providers-detail.webp",
+        "width": 1000
+      }
+    ]
+  },
+  "/media/codevalanche/changes-detail.webp": {
+    "width": 1000,
+    "height": 1092,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/changes-detail-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/changes-detail-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/changes-detail.webp",
+        "width": 1000
+      }
+    ]
+  },
+  "/media/codevalanche/task-review-detail-light.webp": {
+    "width": 1200,
+    "height": 1068,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/task-review-detail-light-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/task-review-detail-light-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/task-review-detail-light.webp",
+        "width": 1200
+      }
+    ]
+  },
+  "/media/codevalanche/task-review-detail-dark.webp": {
+    "width": 1200,
+    "height": 1068,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/task-review-detail-dark-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/task-review-detail-dark-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/task-review-detail-dark.webp",
+        "width": 1200
+      }
+    ]
+  }
+}

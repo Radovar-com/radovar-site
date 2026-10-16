@@ -145,6 +145,7 @@ a.card:focus-visible { outline:2px solid var(--accent); outline-offset:6px; bord
 :root[data-theme="dark"] .spot .spot__paper { fill:#2a2a24; }
 :root[data-theme="dark"] .spot .spot__ink { fill:#e8e6dc; }
 :root[data-theme="dark"] .band--dark, :root[data-theme="dark"] .closing { background:#0c1a19; box-shadow:inset 0 0 0 1px var(--line); }
+:root[data-theme="dark"] .band--dark.company-section { box-shadow:none; }
 :root[data-theme="dark"] .band--dark .timeline li::before { box-shadow:0 0 0 5px #0c1a19; }
 @media (prefers-color-scheme:dark) {
   :root:not([data-theme]) .kicker img, :root:not([data-theme]) .feature h2 img { filter:brightness(0) invert(1); }
@@ -156,6 +157,7 @@ a.card:focus-visible { outline:2px solid var(--accent); outline-offset:6px; bord
   :root:not([data-theme]) .spot .spot__paper { fill:#2a2a24; }
   :root:not([data-theme]) .spot .spot__ink { fill:#e8e6dc; }
   :root:not([data-theme]) .band--dark, :root:not([data-theme]) .closing { background:#0c1a19; box-shadow:inset 0 0 0 1px var(--line); }
+  :root:not([data-theme]) .band--dark.company-section { box-shadow:none; }
   :root:not([data-theme]) .band--dark .timeline li::before { box-shadow:0 0 0 5px #0c1a19; }
 }
 

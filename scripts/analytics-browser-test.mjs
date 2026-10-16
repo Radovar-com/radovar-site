@@ -57,6 +57,9 @@ async function referralBoundary(){
    const response=await route.fetch({url:origin+(url.pathname.startsWith('/collector/')?'':prefix)+url.pathname+url.search});await route.fulfill({response});
   });
   await p.goto('https://radovar.com/');await p.getByRole('button',{name:'Accept analytics',exact:true}).click();
+  // This routed local document models both available and withheld referrers.
+  // Match its metadata to its synthetic response header after hydration too.
+  await p.evaluate(policy=>document.querySelector('meta[name="referrer"]')?.setAttribute('content',policy),policy);
   assert.equal(await p.evaluate(()=>localStorage.getItem('owned_analytics:radovar:identity')),null,'disabled Radovar has no optional visitor ID');
   const before=events.size;await p.locator('#codevalanche .feature a[href="https://codevalanche.com"]').click();await p.waitForURL('https://codevalanche.com/');await p.waitForFunction(()=>window.referralFixture);
   assert.equal(await p.evaluate(()=>window.referralFixture.manager.getState().state),'unknown','Radovar choice is not Codevalanche consent');assert.equal(events.size,before,'no collection before separate destination consent');assert.equal(new URL(p.url()).search,'');assert.equal(await p.evaluate(()=>localStorage.getItem('owned_analytics:radovar:identity')),null);
@@ -86,8 +89,50 @@ async function bannerFocusRegression(){
  assert.deepEqual(problems,[],'initial banner choices preserve viewport and do not focus the footer');
  console.log('PASS banner focus: unknown Accept + Decline preserve near-top viewport/no footer focus; Personalize/Escape and footer Save/Escape restore invokers');
 }
+async function pageCatalogRegression(){
+ const ctx=await context({viewport:{width:1280,height:720}}),p=await ctx.newPage();
+ try{
+  await ready(p);await choice(p,true);await flush(p);
+  const sessionId=views().at(-1).session_id,observed=()=>all().filter(event=>event.session_id===sessionId),pageViews=()=>observed().filter(event=>event.event_name==='page_viewed');
+  await p.evaluate(()=>{window.__catalogDocument={};window.__catalogRuntime=window.RadovarAnalytics;});
+  await p.locator('.nav__links [data-analytics-target="company"]').click();await p.waitForFunction(()=>window.RadovarAnalytics.pageId==='company');await flush(p);
+  assert.deepEqual(pageViews().map(event=>event.page_id),['home','company'],'SPA company starts its own SDK page');
+  const homeInstance=pageViews()[0].page_instance_id,homeAfterLeave=observed().filter(event=>event.page_instance_id===homeInstance&&event.event_name==='page_engagement_reported');
+  await p.keyboard.press('Shift');await p.waitForTimeout(1300);await flush(p);
+  await p.getByRole('link',{name:'Explore Codevalanche',exact:true}).click();await p.waitForFunction(()=>window.RadovarAnalytics.pageId==='codevalanche');
+  await p.getByRole('tab',{name:'Your agents',exact:true}).click();await flush(p);
+  await p.goBack();await p.waitForFunction(()=>window.RadovarAnalytics.pageId==='company');await p.keyboard.press('Shift');await p.waitForTimeout(1300);await flush(p);
+  const sequence=pageViews();assert.deepEqual(sequence.map(event=>event.page_id),['home','company','codevalanche','company']);assert.equal(new Set(sequence.map(event=>event.page_instance_id)).size,4,'each committed route/back receives its own page instance');assert.deepEqual(sequence.map(event=>event.properties.navigation_type),['initial','route','route','back_forward']);
+  assert.equal(await p.evaluate(()=>Boolean(window.__catalogDocument)&&window.__catalogRuntime===window.RadovarAnalytics),true,'route and Back retain one document and analytics client');
+  assert.deepEqual(observed().filter(event=>event.page_instance_id===homeInstance&&event.event_name==='page_engagement_reported'),homeAfterLeave,'home engagement stops when company commits');
+  assert.ok(observed().some(event=>event.event_name==='page_exited'&&event.page_instance_id===homeInstance&&event.properties.exit_kind==='navigation'));
+  assert.deepEqual(observed().filter(event=>event.event_name==='navigation_used').map(event=>[event.page_id,event.properties.target_page_id]),[['home','company'],['company','codevalanche']],'new destination catalog IDs survive sanitization exactly once');
+  assert.ok(observed().some(event=>event.event_name==='feature_selected'&&event.page_id==='codevalanche'&&event.properties.feature_id==='agents'),'product interactions use the product page instance');
+  for(const event of sequence.filter(event=>event.page_id==='company'))assert.ok(observed().some(sample=>sample.event_name==='page_engagement_reported'&&sample.page_instance_id===event.page_instance_id&&sample.properties.active_ms_total>=1000),'company engagement belongs to each company instance');
+ }finally{await ctx.close();}
+ await sectionCatalogRegression();
+ console.log('PASS Radovar catalog: SPA home/company/product/Back instances, navigation and engagement attribution');
+}
+async function sectionCatalogRegression(){
+ const sections=await context({viewport:{width:1280,height:720}}),s=await sections.newPage();
+ try{
+  for(const [route,blocks] of [['/press/',[['news-title','resources']]],['/company/',[['mission-title','company'],['trust-title','resources']]]]){
+   await ready(s,route);await choice(s,true);await flush(s);const instance=views().at(-1).page_instance_id;
+   const ids=await s.locator('[data-analytics-section]').evaluateAll(elements=>elements.map(element=>element.dataset.analyticsSection));assert.equal(new Set(ids).size,ids.length,route+' registers one observer per semantic section');
+   for(const [heading,id] of blocks){
+    const block=s.locator(`[aria-labelledby="${heading}"]`);assert.equal(await block.evaluate(element=>element.closest('[data-analytics-section]')?.dataset.analyticsSection),id,'the earlier block belongs to its semantic observer');
+    await block.evaluate(element=>window.scrollTo({top:scrollY+element.getBoundingClientRect().top+20,behavior:'instant'}));await s.keyboard.press('Shift');await s.waitForTimeout(1400);await flush(s);
+    assert.ok(all().some(event=>event.page_instance_id===instance&&event.event_name==='section_viewed'&&event.properties.section_id===id),route+' observes earlier '+id+' content');
+   }
+  }
+ }finally{await sections.close();}
+ console.log('PASS Radovar sections: one registration per semantic ID; earlier newsroom/company/resource section exposure');
+}
 try{
- if(process.argv.includes('--banner-focus-only')){await bannerFocusRegression();assert.deepEqual(errors,[]);}
+ if(process.argv.includes('--catalog-only')){await pageCatalogRegression();assert.deepEqual(errors,[]);}
+ else if(process.argv.includes('--sections-only')){await sectionCatalogRegression();assert.deepEqual(errors,[]);}
+ else if(process.argv.includes('--referral-only')){await referralBoundary();assert.deepEqual(errors,[]);}
+ else if(process.argv.includes('--banner-focus-only')){await bannerFocusRegression();assert.deepEqual(errors,[]);}
  else if(process.argv.includes('--strict-mode')){
   assert.ok(process.env.RADOVAR_TEST_ORIGIN,'StrictMode requires a real Next development server');
   const strict=await context();await strict.addInitScript(()=>{window.__fixtureEffects={adds:0,removes:0};for(const name of ['addEventListener','removeEventListener']){const original=window[name];window[name]=function(type,...args){if(type==='radovar:preferences')window.__fixtureEffects[name==='addEventListener'?'adds':'removes']++;return original.call(this,type,...args);};}});const p=await strict.newPage();
@@ -115,9 +160,7 @@ try{
  await page.locator('.intro-link').click();await flush(page);assert.equal(views().length,1,'rerender and anchor do not add pageviews');assert.equal(views()[0].page_instance_id,firstInstance);assert.deepEqual(all().filter(e=>e.event_name==='feature_selected').map(e=>e.properties.feature_id),['agents','review','project']);
  // Next Link navigation retains the document/client; back creates one new route page instance.
  await page.locator('.nav__links a').filter({hasText:'Docs'}).click();await page.waitForURL(site+prefix+'/docs/');await page.waitForFunction(()=>window.RadovarAnalytics.pageId==='docs');await flush(page);assert.ok(all().some(e=>e.event_name==='navigation_used'&&e.properties.target_page_id==='docs'),'Next Link semantic navigation');assert.equal(views().filter(e=>e.page_id==='docs').length,1);await page.goBack();await page.waitForFunction(()=>window.RadovarAnalytics.pageId==='home',null,{timeout:4000});await flush(page);assert.equal(views().filter(e=>e.page_id==='home').length,2);assert.equal(views().at(-1).properties.navigation_type,'back_forward');assert.equal(await page.locator('#intro-title').isVisible(),true);assert.equal(new URL(page.url()).pathname,prefix+'/');assert.equal(new URL(page.url()).hash,'#company');await page.goForward();await page.waitForFunction(()=>window.RadovarAnalytics.pageId==='docs');assert.match(await page.getByRole('heading',{level:1}).innerText(),/Codevalanche/,'Forward restores the Codevalanche guide');await flush(page);assert.equal(views().filter(e=>e.page_id==='docs').length,2);
- for(const [route,id] of [['/docs/','docs'],['/security/','security'],['/privacy/','privacy'],['/terms/','terms'],['/press/','press'],['/releases/','releases_archive'],['/changelog/','changelog_archive'],['/missing-fixture/','not_found']]){const before=views().length;await ready(page,route);await flush(page);assert.equal(views().length,before+1,route);assert.equal(views().at(-1).page_id,id);assert.equal(await page.locator('[data-owned-consent]').count(),1);}
- // Pages awaiting SDK page registration keep consent UI but emit nothing of their own.
- for(const route of ['/company/','/codevalanche/']){const before=views().length;await ready(page,route);await flush(page);assert.equal(views().length,before,route+' has no pageview before registration');assert.ok(!all().some(e=>['company','codevalanche'].includes(e.page_id)),route+' emits no unregistered page_id');assert.equal(await page.locator('[data-owned-consent]').count(),1);assert.equal(await page.evaluate(()=>window.RadovarAnalytics.pageId),route.slice(1,-1));}
+ for(const [route,id] of [['/docs/','docs'],['/security/','security'],['/privacy/','privacy'],['/terms/','terms'],['/press/','press'],['/releases/','releases_archive'],['/changelog/','changelog_archive'],['/company/','company'],['/codevalanche/','codevalanche'],['/missing-fixture/','not_found']]){const before=views().length;await ready(page,route);await flush(page);assert.equal(views().length,before+1,route);assert.equal(views().at(-1).page_id,id);assert.equal(await page.locator('[data-owned-consent]').count(),1);}
  await ready(page,'/docs/');await flush(page);const beforeContentsViews=views().length;await page.getByRole('navigation',{name:'On this page',exact:true}).locator('a').first().click();await page.waitForFunction(()=>location.hash.startsWith('#article-'));await flush(page);assert.equal(views().length,beforeContentsViews,'chapter anchors do not add pageviews');const contentsEvent=all().filter(e=>e.event_name==='navigation_used').at(-1);assert.equal(contentsEvent.properties.target_page_id,'docs');assert.equal(contentsEvent.properties.placement,'resources','new chapter links use the existing semantic navigation contract');
  await ready(page);await page.setViewportSize({width:390,height:480});assert.ok(await page.locator('#company').evaluate(element=>element.getBoundingClientRect().height>innerHeight),'section actually taller than viewport');await page.locator('#company').scrollIntoViewIfNeeded();await page.waitForTimeout(1400);await flush(page);assert.ok(all().some(e=>e.event_name==='section_viewed'&&e.properties.section_id==='company'),'tall section reach');await page.setViewportSize({width:1280,height:720});
  // Ordinary product-link navigation: no prevention, awaited queue or flush in click path.
@@ -134,6 +177,6 @@ try{
  for(const mode of ['blocked','held','throwing','bootstrap']){const isolation=await context({enabled:false,viewport:{width:390,height:844}}),p=await isolation.newPage();let release;const gate=new Promise(resolve=>release=resolve),seen=p.waitForRequest('**/analytics/owned-analytics.js');let count=0;if(mode==='bootstrap')await isolation.addInitScript(()=>{window.__RADOVAR_ANALYTICS_TEST_CONFIG__={enabled:false,baseUrl:'',get pageVersion(){window.fixtureBootstrapAttempted=true;return 'invalid bootstrap/version';}};});await isolation.route('**/analytics/owned-analytics.js',async route=>{count++;if(mode==='blocked')return route.abort();if(mode==='held')await gate;if(mode==='throwing')return route.fulfill({contentType:'text/javascript',body:'throw new Error("fixture SDK evaluation failed");'});return route.continue();});await p.goto(site+prefix+'/');await seen;if(mode==='bootstrap')await p.waitForFunction(()=>window.fixtureBootstrapAttempted===true);await core(p);if(mode==='held'){release();await p.waitForFunction(()=>window.RadovarAnalytics);assert.equal(count,1);}await p.locator('.footer__col a').filter({hasText:'Product guide'}).click();await p.waitForURL(site+prefix+'/docs/');await isolation.close();}
  const screenshotDir=process.env.RADOVAR_SCREENSHOT_DIR;if(screenshotDir)await mkdir(screenshotDir,{recursive:true});
  for(const width of [320,390,768,1440])for(const colorScheme of ['light','dark']){const visual=await context({enabled:false,viewport:{width,height:900},colorScheme}),v=await visual.newPage();await ready(v);assert.equal(await v.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,`${width}/${colorScheme} overflow`);await v.getByRole('button',{name:'Decline',exact:true}).click();await v.getByRole('button',{name:'Manage cookies',exact:true}).first().click();assert.equal(await v.getByRole('dialog').isVisible(),true);await v.getByRole('checkbox',{name:'Account analytics'}).isDisabled().then(assert.ok);await v.keyboard.press('Shift+Tab');assert.equal(await v.evaluate(()=>document.activeElement.textContent),'Save preferences');await v.keyboard.press('Tab');assert.equal(await v.evaluate(()=>document.activeElement.textContent),'Close preferences');if(screenshotDir&&[320,1440].includes(width))await v.screenshot({path:path.join(screenshotDir,`cmp-${width}-${colorScheme}.png`)});await v.keyboard.press('Escape');assert.equal(await v.evaluate(()=>document.activeElement.textContent),'Manage cookies');if(screenshotDir){await v.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0);});await v.screenshot({path:path.join(screenshotDir,`radovar-${width}-${colorScheme}.png`),fullPage:true});}await visual.close();}
- await referralBoundary();assert.deepEqual(errors,[]);console.log(`PASS Radovar integration: ${events.size} T1-validated events; eight pages + 404; route/back/hash/rerender; consent/cross-tab/disabled/storage/API outage; real blocked/held/throwing SDK and bootstrap exception; pending receipt/revoke UI race; eight visual combinations; native referral with available/missing referrer and separate consent${prefix?' BASE_PATH='+prefix:''}`);
+ await pageCatalogRegression();await referralBoundary();assert.deepEqual(errors,[]);console.log(`PASS Radovar integration: ${events.size} T1-validated events; ten pages + 404; route/back/hash/rerender; consent/cross-tab/disabled/storage/API outage; real blocked/held/throwing SDK and bootstrap exception; pending receipt/revoke UI race; eight visual combinations; native referral with available/missing referrer and separate consent${prefix?' BASE_PATH='+prefix:''}`);
  }
 }finally{await browser.close();server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
