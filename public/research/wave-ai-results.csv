@@ -1,0 +1,76 @@
+probe,date,task,model,metric,value,unit,seeds,notes
+1,2026-10-01,memory with distractors and a correction (main),explicit memory (control),accuracy,99.61,percent,7;19;31,frozen dynamics; 8 oscillators; 512 test examples per seed
+1,2026-10-01,memory with distractors and a correction (main),no history (control),accuracy,24.22,percent,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),Wave complete,accuracy,25.20,percent,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),Wave amplitude only,accuracy,25.72,percent,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),Wave no non-linearity,accuracy,23.76,percent,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),Wave no coupling,accuracy,25.98,percent,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),complex SSM,accuracy,24.15,percent,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),ESN,accuracy,22.92,percent,7;19;31,
+1,2026-10-01,recent-write diagnostic,explicit memory (control),accuracy,99.61,percent,7;19;31,post-hoc diagnostic; not a replacement for the main test
+1,2026-10-01,recent-write diagnostic,no history (control),accuracy,24.22,percent,7;19;31,
+1,2026-10-01,recent-write diagnostic,Wave complete,accuracy,97.40,percent,7;19;31,
+1,2026-10-01,recent-write diagnostic,Wave amplitude only,accuracy,75.85,percent,7;19;31,
+1,2026-10-01,recent-write diagnostic,Wave no non-linearity,accuracy,98.44,percent,7;19;31,
+1,2026-10-01,recent-write diagnostic,Wave no coupling,accuracy,97.85,percent,7;19;31,
+1,2026-10-01,recent-write diagnostic,complex SSM,accuracy,98.18,percent,7;19;31,
+1,2026-10-01,recent-write diagnostic,ESN,accuracy,98.11,percent,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),Wave complete,latency per batch of 16,98.008,ms,7;19;31,eager CPU; 1 thread; RK4 with 20 sub-steps; mean of per-seed medians
+1,2026-10-01,memory with distractors and a correction (main),Wave amplitude only,latency per batch of 16,94.887,ms,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),Wave no non-linearity,latency per batch of 16,94.170,ms,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),Wave no coupling,latency per batch of 16,93.803,ms,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),complex SSM,latency per batch of 16,0.382,ms,7;19;31,
+1,2026-10-01,memory with distractors and a correction (main),ESN,latency per batch of 16,0.549,ms,7;19;31,
+2,2026-10-01,short association (main),no history,accuracy,23.76,percent,7;19;31,3000 updates; 1024 tests per seed per task
+2,2026-10-01,short association (main),Wave fixed,accuracy,25.07,percent,7;19;31,
+2,2026-10-01,short association (main),Wave trained,accuracy,25.42,percent,7;19;31,232 trainable core parameters + 1761 scorer
+2,2026-10-01,short association (main),SSM trained,accuracy,26.33,percent,7;19;31,192 trainable core parameters + 1761 scorer
+2,2026-10-01,short association (main),GRU trained,accuracy,28.65,percent,7;19;31,1392 trainable core parameters + 1761 scorer
+2,2026-10-01,recent information,no history,accuracy,23.99,percent,7;19;31,descriptive; not used for checkpoint selection
+2,2026-10-01,recent information,Wave fixed,accuracy,41.15,percent,7;19;31,
+2,2026-10-01,recent information,Wave trained,accuracy,52.90,percent,7;19;31,
+2,2026-10-01,recent information,SSM trained,accuracy,46.29,percent,7;19;31,
+2,2026-10-01,recent information,GRU trained,accuracy,56.05,percent,7;19;31,
+2,2026-10-01,transfer to a 32-event history,no history,accuracy,25.13,percent,7;19;31,trained on 8 events
+2,2026-10-01,transfer to a 32-event history,Wave fixed,accuracy,24.64,percent,7;19;31,
+2,2026-10-01,transfer to a 32-event history,Wave trained,accuracy,25.52,percent,7;19;31,
+2,2026-10-01,transfer to a 32-event history,SSM trained,accuracy,27.12,percent,7;19;31,
+2,2026-10-01,transfer to a 32-event history,GRU trained,accuracy,25.94,percent,7;19;31,
+3,2026-10-01,8-step association with fresh data,no history,accuracy,25.03,percent,7;19;31,31200 distinct association episodes per seed; 1024 test examples per seed
+3,2026-10-01,8-step association with fresh data,Wave fixed,accuracy,26.66,percent,7;19;31,
+3,2026-10-01,8-step association with fresh data,Wave trained,accuracy,29.30,percent,7;19;31,
+3,2026-10-01,8-step association with fresh data,SSM trained,accuracy,32.26,percent,7;19;31,
+3,2026-10-01,8-step association with fresh data,GRU trained,accuracy,38.02,percent,7;19;31,
+3,2026-10-01,8-step association with fresh data,latest-value rule,accuracy,49.64,percent,7;19;31,symbolic baseline that ignores the key
+3,2026-10-01,32-step test with fresh data,no history,accuracy,25.23,percent,7;19;31,
+3,2026-10-01,32-step test with fresh data,Wave fixed,accuracy,25.00,percent,7;19;31,
+3,2026-10-01,32-step test with fresh data,Wave trained,accuracy,25.26,percent,7;19;31,
+3,2026-10-01,32-step test with fresh data,SSM trained,accuracy,26.17,percent,7;19;31,
+3,2026-10-01,32-step test with fresh data,GRU trained,accuracy,30.63,percent,7;19;31,
+4,2026-10-02,32-step association from the final state,addressing control,accuracy,98.2,percent,7;19;31,24000 distinct episodes per seed; holdout generated after checkpoints were sealed
+4,2026-10-02,32-step association from the final state,question only,accuracy,25.3,percent,7;19;31,
+4,2026-10-02,32-step association from the final state,Wave trained,accuracy,25.0,percent,7;19;31,
+4,2026-10-02,32-step association from the final state,SSM trained,accuracy,25.6,percent,7;19;31,
+4,2026-10-02,32-step association from the final state,GRU trained,accuracy,25.3,percent,7;19;31,
+5,2026-10-02,32-step association with a shared query-key readout,lookup control,accuracy,97.0,percent,7;19;31,
+5,2026-10-02,32-step association with a shared query-key readout,question only,accuracy,24.2,percent,7;19;31,
+5,2026-10-02,32-step association with a shared query-key readout,Wave + shared readout,accuracy,94.3,percent,7;19;31,
+5,2026-10-02,32-step association with a shared query-key readout,SSM + shared readout,accuracy,88.2,percent,7;19;31,
+5,2026-10-02,32-step association with a shared query-key readout,GRU + shared readout,accuracy,96.1,percent,7;19;31,
+5,2026-10-02,32-step association with a shared query-key readout,Wave + shared readout,both questions correct,89.6,percent,7;19;31,original key and swapped key both answered correctly
+5,2026-10-02,32-step association with a shared query-key readout,SSM + shared readout,both questions correct,79.9,percent,7;19;31,
+5,2026-10-02,32-step association with a shared query-key readout,GRU + shared readout,both questions correct,92.8,percent,7;19;31,
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,lookup control,accuracy,81.1,percent,7;19;31,control trained for 1500 updates; models for 800; reference only
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,question only,accuracy,24.8,percent,7;19;31,
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,Wave + shared readout,accuracy,72.0,percent,7;19;31,2091 trainable real degrees of freedom (corrected after audit)
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,SSM + shared readout,accuracy,53.5,percent,7;19;31,1955 trainable real degrees of freedom (corrected after audit)
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,GRU + shared readout,accuracy,76.5,percent,7;19;31,3155 trainable real degrees of freedom (corrected after audit)
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,latest-value rule,accuracy,30.8,percent,7;19;31,
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,Wave + shared readout,both questions correct,60.2,percent,7;19;31,
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,SSM + shared readout,both questions correct,35.6,percent,7;19;31,
+6,2026-10-02,64 steps; 8 keys; 2 writes per key; shared query-key readout,GRU + shared readout,both questions correct,65.1,percent,7;19;31,
+7,2026-10-02,64 steps; 8 keys; answer from a 128-number final state,GRU (lr 0.001),accuracy,26.6,percent,7;19;31,positive-control gate failed; Wave and SSM were not compared
+7,2026-10-02,64 steps; 8 keys; answer from a 128-number final state,GRU (lr 0.003),accuracy,25.0,percent,7;19;31,
+7,2026-10-02,reading an ideal hand-built memory,learned scorer,accuracy,38.6,percent,7;19;31,4096 independent test episodes
+7,2026-10-02,reading an ideal hand-built memory,explicit key-matching reader,accuracy,100.0,percent,7;19;31,a programmed rule with 2 learned scales; correct before training
+7,2026-10-02,reading an ideal hand-built memory,question only,accuracy,24.8,percent,7;19;31,

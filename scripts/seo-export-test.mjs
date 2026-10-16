@@ -18,7 +18,7 @@ const pages = [
   { route: '/terms/', title: 'Terms | Radovar', description: 'The terms that apply to this website and to Codevalanche while it is in early access.' },
   { route: '/press/', title: 'Updates | Radovar', description: 'Dated updates, company facts, logos and press contact for Radovar and Codevalanche.' },
   { route: '/research/', title: 'Research | Radovar', description: 'Experiments Radovar runs on AI systems, published in full with their methods, controls, results and limits, including the results that did not work.' },
-  { route: '/research/wave-ai/', title: 'Wave AI: can coupled oscillators act as memory? | Radovar', description: 'Our month-long experiment testing networks of coupled oscillators as memory for AI models: the setup, the controls, every result including the negative ones, and what we will and will not claim.' },
+  { route: '/research/wave-ai/', image: `${site}/research/wave-ai-social.png`, imageAlt: 'Can coupled oscillators act as memory for AI? Accuracy on the 64-step memory task: Wave 72.0%, GRU 76.5%, SSM 53.5%.', title: 'Wave AI: can coupled oscillators act as memory? | Radovar', description: 'Our month-long experiment testing networks of coupled oscillators as memory for AI models: the setup, the controls, every result including the negative ones, and what we will and will not claim.' },
   { route: '/changelog/', title: 'Release history | Radovar', description: 'Every early-access Codevalanche build published between 17 June and 2 July 2026, with its date, including the one we pulled.' },
 ];
 
@@ -72,12 +72,12 @@ for (const page of pages) {
   for (const [property, value] of Object.entries({
     'og:type': 'website', 'og:site_name': 'Radovar', 'og:locale': 'en_US',
     'og:title': page.title, 'og:description': page.description, 'og:url': canonical,
-    'og:image': image, 'og:image:width': '1200', 'og:image:height': '630',
-    'og:image:type': 'image/png', 'og:image:alt': 'Radovar, makers of Codevalanche',
+    'og:image': page.image ?? image, 'og:image:width': '1200', 'og:image:height': '630',
+    'og:image:type': 'image/png', 'og:image:alt': page.imageAlt ?? 'Radovar, makers of Codevalanche',
   })) assert.equal(one(tags, 'property', property), value, `${page.route}: ${property}`);
   for (const [name, value] of Object.entries({
     'twitter:card': 'summary_large_image', 'twitter:title': page.title,
-    'twitter:description': page.description, 'twitter:image': image, 'twitter:image:alt': 'Radovar, makers of Codevalanche',
+    'twitter:description': page.description, 'twitter:image': page.image ?? image, 'twitter:image:alt': page.imageAlt ?? 'Radovar, makers of Codevalanche',
   })) assert.equal(one(tags, 'name', name), value, `${page.route}: ${name}`);
   const robots = one(tags, 'name', 'robots').toLowerCase().split(/[,\s]+/);
   assert.ok(robots.includes('index') && robots.includes('follow'), `${page.route}: index and follow`);

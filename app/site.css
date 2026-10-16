@@ -93,6 +93,8 @@ a.card:focus-visible { outline:2px solid var(--accent); outline-offset:6px; bord
 
 /* Timeline */
 .timeline { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(20px,3vw,40px); counter-reset:step; }
+.timeline--four { grid-template-columns:repeat(4,minmax(0,1fr)); }
+@media(max-width:1100px) { .timeline--four { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .timeline li { position:relative; padding-top:30px; border-top:2px solid var(--band-line,var(--line)); }
 .timeline li::before { content:""; position:absolute; top:-7px; left:0; width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 5px var(--paper); }
 .band--dark .timeline li::before { background:#8fcbc9; box-shadow:0 0 0 5px #0f2422; }
@@ -176,7 +178,7 @@ a.card:focus-visible { outline:2px solid var(--accent); outline-offset:6px; bord
   .page-hero__actions .action-link { flex:1 1 auto; }
   .band__head { gap:18px; }
   .band__head-action { justify-self:start; }
-  .cards, .cards--two, .cards--four, .contacts, .timeline { grid-template-columns:1fr; }
+  .cards, .cards--two, .cards--four, .contacts, .timeline, .timeline--four { grid-template-columns:1fr; }
   .cards { gap:36px; }
   .card .spot { aspect-ratio:16/7; margin-bottom:18px; }
   .card .spot svg { width:min(32%,120px); }

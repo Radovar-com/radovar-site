@@ -102,9 +102,10 @@ export default function CompanyPage() {
               </div>
               <p>We publish what we ship and keep the record, including the build we pulled.</p>
             </div>
-            <ol className="timeline">
+            <ol className="timeline timeline--four">
               <li><time dateTime="2026-06">June 2026</time><h3>Early access on Windows.</h3><p>Codevalanche is published as signed Windows installers, with an update feed that installed copies can check for new builds.</p></li>
               <li><time dateTime="2026-07">July 2026</time><h3>Twenty builds in just over two weeks.</h3><p>Between 17 June and 2 July we publish twenty early-access builds. One, version 0.1.24, is pulled after a problem is found, and the <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="inline">release history</Link> still lists it.</p></li>
+              <li><time dateTime="2026-09">September 2026</time><h3>A first research experiment.</h3><p>From 2 September to 2 October we test whether coupled oscillators can act as memory for AI models, against standard neural networks, and <Link href="/research/wave-ai/" data-analytics-action="anchor" data-analytics-placement="inline">publish the full results</Link>, including what did not work.</p></li>
               <li><time dateTime="2026-10-16">October 2026</time><h3>A company site, and public downloads in preparation.</h3><p>radovar.com relaunches as the home of the company. Codevalanche stays in early access for Windows while we work on a new version, not yet published, and prepare public downloads. It works with cloud agents such as Claude Code and Codex and with supported local models.</p></li>
             </ol>
           </div>

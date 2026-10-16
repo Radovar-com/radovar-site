@@ -12,7 +12,10 @@ const page = {
     "Our month-long experiment testing networks of coupled oscillators as memory for AI models: the setup, the controls, every result including the negative ones, and what we will and will not claim.",
 };
 
-export const metadata = createPageMetadata(page);
+export const metadata = createPageMetadata({
+  ...page,
+  image: { url: "/research/wave-ai-social.png", alt: "Can coupled oscillators act as memory for AI? Accuracy on the 64-step memory task: Wave 72.0%, GRU 76.5%, SSM 53.5%." },
+});
 
 const base = process.env.BASE_PATH || "";
 
@@ -28,6 +31,20 @@ const article = {
   publisher: { "@id": `${SITE_URL}/#organization` },
   mainEntityOfPage: `${SITE_URL}${page.path}`,
   about: ["Reservoir computing", "Stuart–Landau oscillators", "Associative memory", "Recurrent neural networks"],
+};
+
+const dataset = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "@id": `${SITE_URL}${page.path}#data`,
+  name: "Wave AI memory experiment: summary results",
+  description: "Accuracy, latency and parameter notes for every model in the seven Wave AI probes (1–2 October 2026), averaged over seeds 7, 19 and 31.",
+  url: `${SITE_URL}${page.path}#data`,
+  creator: { "@id": `${SITE_URL}/#organization` },
+  datePublished: "2026-10-16",
+  temporalCoverage: "2026-09-02/2026-10-02",
+  isAccessibleForFree: true,
+  distribution: [{ "@type": "DataDownload", encodingFormat: "text/csv", contentUrl: `${SITE_URL}/research/wave-ai-results.csv` }],
 };
 
 const labFigures = [
@@ -46,6 +63,7 @@ export default function WaveAiResearchPage() {
       updated="16 October 2026"
     >
       <PageSchema {...page} parent={{ title: "Research", path: "/research/" }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dataset).replace(/</g, "\\u003c") }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(article).replace(/</g, "\\u003c") }} />
 
       <div className="note">
@@ -271,6 +289,12 @@ export default function WaveAiResearchPage() {
           </figure>
         ))}
       </div>
+      <h2 id="data">The data</h2>
+      <p>
+        Every number on this page, model by model and probe by probe, is in one file you can download and check:{" "}
+        <a href={`${base}/research/wave-ai-results.csv`} download>wave-ai-results.csv</a> (CSV, 75 rows). Values are averages
+        over seeds 7, 19 and 31, as reported by the lab after each probe.
+      </p>
       <p>
         Radovar is the software company behind{" "}
         <Link href="/codevalanche/" data-analytics-action="anchor" data-analytics-target="codevalanche" data-analytics-placement="resources">Codevalanche</Link>, a desktop

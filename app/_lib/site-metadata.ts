@@ -12,7 +12,8 @@ export const SOCIAL_IMAGE = {
 };
 
 /** A route owns its canonical and share metadata, rather than inheriting home. */
-export function createPageMetadata({ title, description, path }: { title: string; description: string; path: string }): Metadata {
+export function createPageMetadata({ title, description, path, image }: { title: string; description: string; path: string; image?: { url: string; alt: string } }): Metadata {
+  const share = image ? { ...SOCIAL_IMAGE, url: new URL(image.url, SITE_URL).href, alt: image.alt } : SOCIAL_IMAGE;
   const socialTitle = path === "/" ? HOME_TITLE : `${title} | Radovar`;
   return {
     title,
@@ -25,13 +26,13 @@ export function createPageMetadata({ title, description, path }: { title: string
       description,
       siteName: "Radovar",
       locale: "en_US",
-      images: [SOCIAL_IMAGE],
+      images: [share],
     },
     twitter: {
       card: "summary_large_image",
       title: socialTitle,
       description,
-      images: [{ url: SOCIAL_IMAGE.url, alt: SOCIAL_IMAGE.alt }],
+      images: [{ url: share.url, alt: share.alt }],
     },
   };
 }
