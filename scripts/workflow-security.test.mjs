@@ -34,3 +34,12 @@ test('build gates audit and real browser policy/refusal tests using an immutable
   assert.ok(actions.length >= 4);
   for (const action of actions) assert.match(action, /^[^@]+@[a-f0-9]{40}$/i);
 });
+
+test('Pages uploader also pins its nested artifact action under the full-SHA policy', () => {
+  // The old v3 uploader referenced upload-artifact@v4 internally, so a pinned
+  // outer action still failed job setup before any required check could run.
+  const uploader = workflow.match(/uses:\s*(actions\/upload-pages-artifact@[^\s#]+)/)?.[1];
+  assert.equal(uploader, 'actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9');
+  assert.doesNotMatch(workflow, /upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa/);
+  assert.match(workflow, /path: radovar\/out/);
+});
