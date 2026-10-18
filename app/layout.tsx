@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import type { Metadata, Viewport } from "next";
-import { Newsreader, Geist } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "./landscape.css";
 import { AnalyticsProvider } from "./_components/AnalyticsProvider";
@@ -9,17 +9,22 @@ import { HOME_TITLE, SITE_URL as SITE, SITE_DESCRIPTION as description, SOCIAL_I
 
 /* Only the weights the page actually renders. Display uses 300 (h1/h2) and
    400 (h3/wordmark); body uses 400 and 500 (nav, buttons). */
-const serif = Newsreader({
-  subsets: ["latin"],
-  weight: ["300", "400"],
-  style: ["normal", "italic"],
+const Newsreader = localFont({
+  src: [
+    { path: "../public/fonts/newsreader-latin.woff2", weight: "300 400", style: "normal" },
+    { path: "../public/fonts/newsreader-italic-latin.woff2", weight: "300 400", style: "italic" },
+  ],
+  declarations: [{ prop: "font-family", value: "Newsreader" }],
+  adjustFontFallback: "Times New Roman",
   variable: "--font-serif",
   display: "swap",
 });
 
-const sans = Geist({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const Geist = localFont({
+  src: "../public/fonts/geist-latin.woff2",
+  weight: "400 700",
+  declarations: [{ prop: "font-family", value: "Geist" }],
+  adjustFontFallback: "Arial",
   variable: "--font-sans",
   display: "swap",
 });
@@ -125,7 +130,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${serif.variable} ${sans.variable}`}
+      className={`${Newsreader.variable} ${Geist.variable}`}
       suppressHydrationWarning
     >
       <head>
