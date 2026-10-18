@@ -1,0 +1,10 @@
+# Routing and DNS activation are separate operator actions after review.
+name = "radovar-site-headers"
+main = "worker.mjs"
+compatibility_date = "2026-10-18"
+workers_dev = false
+
+# routes = [
+#   { pattern = "radovar.com/*", zone_name = "radovar.com" },
+#   { pattern = "www.radovar.com/*", zone_name = "radovar.com" },
+# ]
