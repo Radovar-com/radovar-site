@@ -90,6 +90,7 @@ const jsonLd = {
       url: `${SITE}/`,
       description,
       email: "info@radovar.com",
+      sameAs: ["https://x.com/radovarcom"],
       logo: {
         "@type": "ImageObject",
         url: `${SITE}/radovar-logo.svg`,

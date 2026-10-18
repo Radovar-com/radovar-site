@@ -83,3 +83,6 @@
  .landscape-scene--footer .landscape-scene__veil { background:linear-gradient(to bottom,var(--paper) 0%,var(--paper) 31%,color-mix(in srgb,var(--paper) 95%,transparent) 44%,color-mix(in srgb,var(--paper) 48%,transparent) 59%,transparent 75%,rgba(17,41,32,.75) 100%); }
 }
 @media(prefers-reduced-motion:reduce) { .landscape-scene__art, .landscape-scene__mist { animation:none; transform:none; } .landscape-scene__birds, .landscape-scene__walkers { display:none; } }
+.scenic-footer .footer__social { display:block; width:max-content; margin-top:14px; font-size:12px; color:var(--ink-soft); text-decoration:underline; text-underline-offset:4px; text-decoration-color:var(--line-strong); }
+.scenic-footer .footer__social span { color:var(--ink-muted); margin-left:4px; }
+.scenic-footer .footer__social:hover { color:var(--ink); }
