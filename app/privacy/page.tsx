@@ -20,7 +20,7 @@ export default function PrivacyPage() {
       kicker="Privacy"
       title="How Radovar handles your information."
       intro="Who is responsible for your data, what this website stores, how long we keep your email, and what Codevalanche sends to the providers you choose."
-      updated="16 October 2026"
+      updated="18 October 2026"
     >
       <PageSchema {...page} />
       <h2>Who is responsible</h2>
@@ -55,8 +55,11 @@ export default function PrivacyPage() {
         Manage cookies.
       </p>
       <p>
-        Like any website host, ours processes ordinary delivery and security logs, such as
-        network addresses and the files requested, to serve and protect the site.
+        GitHub Pages hosts this website. Cloudflare is configured for DNS and, when
+        enabled for website traffic, delivery and security. These services may process
+        IP addresses and request details separately from optional measurement, even if
+        you decline it. Provider logs have separate retention settings. Cloudflare RUM
+        and Google Analytics are disabled.
       </p>
 
       <h2>When you write to us</h2>
@@ -117,6 +120,10 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Changes</h2>
+      <p>
+        18 October 2026: named GitHub Pages and Cloudflare for hosting, DNS and security;
+        distinguished request metadata from optional measurement.
+      </p>
       <p>
         16 October 2026: named who is responsible for your data, added the legal basis and
         a concrete retention period for email, and replaced the technical description of
