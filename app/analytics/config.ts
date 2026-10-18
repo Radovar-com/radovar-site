@@ -1,7 +1,9 @@
+import sdkManifest from "../../public/analytics/manifest.json" with { type: "json" };
+
 // Activation is a separate, qualified release operation. No relative collector URL.
 export const analyticsConfig = Object.freeze({ enabled: false, baseUrl: "", pageVersion: "radovar_site_20261016" });
-export const analyticsAsset = `${process.env.BASE_PATH || ""}/analytics/owned-analytics.js`;
-const pages: Record<string, string> = { "/": "home", "/docs": "docs", "/security": "security", "/privacy": "privacy", "/terms": "terms", "/press": "press", "/releases": "releases_archive", "/changelog": "changelog_archive", "/codevalanche": "codevalanche", "/company": "company" };
+export const analyticsAsset = `${process.env.BASE_PATH || ""}/analytics/owned-analytics.js?v=${sdkManifest.sha256}`;
+const pages: Record<string, string> = { "/": "home", "/docs": "docs", "/security": "security", "/privacy": "privacy", "/terms": "terms", "/press": "press", "/releases": "releases_archive", "/changelog": "changelog_archive", "/codevalanche": "codevalanche", "/company": "company", "/research": "research", "/research/wave-ai": "research_wave_ai" };
 export function analyticsPageId(pathname: string) {
   const base = process.env.BASE_PATH || "";
   const path = base && (pathname === base || pathname.startsWith(base + "/")) ? pathname.slice(base.length) : pathname;

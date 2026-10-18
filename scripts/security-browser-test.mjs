@@ -13,8 +13,8 @@ const output = path.resolve(process.env.RADOVAR_SECURITY_OUT ?? path.join(root, 
 const shared = process.env.OWNED_ANALYTICS_SITE_ROOT ?? path.resolve(root, '../owned-analytics-site-20261015');
 const { chromium } = createRequire(path.join(shared, 'package.json'))('playwright');
 const prefix = process.env.BASE_PATH ?? '';
-const routes = ['/', '/codevalanche/', '/company/', '/press/', '/docs/', '/security/', '/privacy/', '/terms/', '/changelog/', '/releases/'];
-const pageIds = { '/': 'home', '/codevalanche/': 'codevalanche', '/company/': 'company', '/press/': 'press', '/docs/': 'docs', '/security/': 'security', '/privacy/': 'privacy', '/terms/': 'terms', '/changelog/': 'changelog_archive', '/releases/': 'releases_archive' };
+const routes = ['/', '/codevalanche/', '/company/', '/press/', '/docs/', '/security/', '/privacy/', '/terms/', '/changelog/', '/releases/', '/research/', '/research/wave-ai/'];
+const pageIds = { '/': 'home', '/codevalanche/': 'codevalanche', '/company/': 'company', '/press/': 'press', '/docs/': 'docs', '/security/': 'security', '/privacy/': 'privacy', '/terms/': 'terms', '/changelog/': 'changelog_archive', '/releases/': 'releases_archive', '/research/': 'research', '/research/wave-ai/': 'research_wave_ai' };
 const inline = /<script\b([^>]*?)>([\s\S]*?)<\/script\s*>/gi;
 const cspMeta = /<meta http-equiv="Content-Security-Policy" content="([^"]+)" data-radovar-security="export">/g;
 const problems = [];
@@ -140,7 +140,7 @@ try {
   assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
   await page.evaluate(() => { window.__securityOriginalDocument = true; });
   // /releases/ only forwards to /changelog/ now, so the footer no longer links to it.
-  const clientRoutes = routes.slice(1).filter(route => route !== '/releases/');
+  const clientRoutes = routes.slice(1).filter(route => route !== '/releases/' && !route.startsWith('/research/'));
   for (const route of clientRoutes) {
     await page.locator(`footer a[href="${prefix}${route}"]`).first().click();
     await page.waitForURL(origin + prefix + route);
@@ -159,7 +159,7 @@ try {
   await page.waitForURL(origin + prefix + '/changelog/');
   await page.getByRole('heading', { level: 1 }).waitFor();
   await takeViolations(page);
-  for (const route of [...clientRoutes, '/', '/missing-security-fixture/']) {
+  for (const route of [...clientRoutes, '/research/', '/research/wave-ai/', '/', '/missing-security-fixture/']) {
     await ready(page, route);
     await page.getByRole('heading', { level: 1 }).waitFor();
     await takeViolations(page);

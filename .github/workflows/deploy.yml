@@ -5,39 +5,73 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
+defaults:
+  run:
+    working-directory: radovar
+
+env:
+  BASE_PATH: ${{ vars.BASE_PATH }}
+  OWNED_ANALYTICS_SITE_ROOT: ${{ github.workspace }}/shared-codevalanche
+
 # Never let two deploys race. Queue instead of cancelling, so a push is never
 # silently dropped.
 concurrency:
-  group: pages
+  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'publish' }}
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: read
       pages: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
+          path: radovar
+          persist-credentials: false
+
+      # Browser tests use the same reviewed SDK contract validator and pinned
+      # Playwright as Codevalanche. Keep this immutable and outside Radovar's TS tree.
+      - name: Check out shared browser-test contract
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: Radovar-com/codevalanche-site
+          ref: 46cd62502c0f7878efec739efda8e544e39e03ec
+          path: shared-codevalanche
           persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 24.22.0
           cache: npm
+          cache-dependency-path: |
+            radovar/package-lock.json
+            shared-codevalanche/package-lock.json
 
       - run: npm ci
+
+      - name: Audit pinned dependencies
+        run: npm audit --audit-level=high
+
+      - name: Install shared browser-test dependencies
+        working-directory: shared-codevalanche
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
 
       - name: Check types and export-policy regressions
         run: |
           npm run typecheck
-          node --test scripts/postbuild-security.test.mjs
+          node --test scripts/*.test.mjs
 
       # BASE_PATH is a repository variable, not a hardcoded value: it holds
       # /radovar-site while the site is served from the project URL, and is
@@ -52,14 +86,20 @@ jobs:
         env:
           BASE_PATH: ${{ vars.BASE_PATH }}
 
+      - name: Verify browser CSP enforcement and optional analytics refusal
+        run: |
+          node scripts/security-browser-test.mjs
+          node scripts/analytics-browser-test.mjs
+
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
 
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
-          path: out
+          path: radovar/out
 
   deploy:
     needs: build
+    if: github.repository == 'Radovar-com/radovar-site' && github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     permissions:
       pages: write
