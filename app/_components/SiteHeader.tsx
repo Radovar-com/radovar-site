@@ -80,7 +80,7 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <a className="nav__cta" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">codevalanche.com</a>
+        <a className="nav__cta" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">Try Codevalanche</a>
         <details
           className="nav__menu"
           ref={menu}
@@ -118,7 +118,7 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <a className="nav__mobile-product" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">codevalanche.com</a>
+            <a className="nav__mobile-product" href={PRODUCT} data-analytics-action="product" data-analytics-placement="header" data-analytics-section-id="codevalanche">Try Codevalanche</a>
           </nav>
         </details>
       </div>
