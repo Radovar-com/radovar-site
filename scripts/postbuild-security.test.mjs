@@ -63,7 +63,7 @@ test('puts one shared hash policy after the leading charset without changing app
     const directives = new Map(policy.split('; ').map((part) => { const [name, ...values] = part.split(' '); return [name, values]; }));
     assert.deepEqual(new Set(directives.get('script-src')), new Set(["'self'", hash(theme), hash(next), hash(jsonLd)]));
     assert.deepEqual(directives.get('script-src-attr'), ["'none'"]);
-    assert.deepEqual(directives.get('connect-src'), ["'self'"], 'future external collectors remain blocked');
+    assert.deepEqual(directives.get('connect-src'), ["'self'", 'https://hvevaxsfeyiikjhcsafi.supabase.co'], 'only the reviewed collector origin is permitted');
     assert.deepEqual(directives.get('style-src'), ["'self'", "'unsafe-inline'"]);
     assert.deepEqual(directives.get('object-src'), ["'none'"]);
     assert.deepEqual(directives.get('base-uri'), ["'self'"]);

@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { analyticsConfig, analyticsCollectorOrigin } from '../app/analytics/config.ts';
 
 const output = path.resolve(process.argv[2] ?? fileURLToPath(new URL('../out/', import.meta.url)));
 const tagAttributes = /([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
@@ -113,9 +114,8 @@ try {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data:",
     "font-src 'self' data:",
-    // The published analytics flag is off. Qualification of a future external
-    // collector must include an explicit, coordinated CSP allowlist change.
-    "connect-src 'self'",
+    // Match the reviewed activation config; do not permit arbitrary HTTPS hosts.
+    `connect-src 'self'${analyticsConfig.enabled ? ` ${analyticsCollectorOrigin}` : ''}`,
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
@@ -130,7 +130,7 @@ try {
   for (const { filename, html, policyPosition } of documents) {
     await writeFile(filename, html.slice(0, policyPosition) + meta + html.slice(policyPosition));
   }
-  console.log(`CSP: hardened ${documents.length} static HTML files with ${hashes.size} shared inline SHA-256 hashes; external collectors remain blocked.`);
+  console.log(`CSP: hardened ${documents.length} static HTML files with ${hashes.size} shared inline SHA-256 hashes; connect-src permits self${analyticsConfig.enabled ? ' and the reviewed collector only' : ' only'}.`);
 } catch (error) {
   console.error(`CSP postbuild failed: ${error.message}`);
   process.exitCode = 1;

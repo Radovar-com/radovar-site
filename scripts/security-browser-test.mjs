@@ -54,7 +54,7 @@ assert.equal(new Set(documents.map(({ policy }) => policy)).size, 1, 'same polic
 const policy = documents[0].policy;
 const directives = new Map(policy.split('; ').map((part) => { const [name, ...values] = part.split(' '); return [name, values]; }));
 assert.deepEqual(new Set(directives.get('script-src')), new Set(["'self'", ...observedHashes]), 'no stale, unbounded, or missing inline-script permission');
-assert.deepEqual(directives.get('connect-src'), ["'self'"]);
+assert.deepEqual(directives.get('connect-src'), ["'self'", 'https://hvevaxsfeyiikjhcsafi.supabase.co']);
 assert.ok(!policy.includes('unsafe-eval'));
 assert.ok(!directives.get('script-src').includes("'unsafe-inline'"));
 assert.equal(directives.has('frame-ancestors'), false, 'meta does not claim unsupported frame-ancestor enforcement');
@@ -114,7 +114,7 @@ async function ready(page, route = '/') {
   assert.equal(await page.evaluate(() => document.characterSet), 'UTF-8', 'export charset works without a response encoding header');
   await page.waitForFunction(() => window.RadovarAnalytics?.consentManager);
   await page.waitForFunction((expected) => window.RadovarAnalytics.pageId === expected, pageIds[route.split('?')[0]] ?? 'not_found');
-  assert.equal(await page.evaluate(() => window.RadovarAnalytics.status()), 'not_configured', 'actual export keeps analytics disabled');
+  assert.equal(await page.evaluate(() => window.RadovarAnalytics.status()), 'not_configured', 'localhost export never inherits production collection');
 }
 
 async function takeViolations(page) {
@@ -135,7 +135,7 @@ try {
   await page.getByRole('dialog', { name: 'Cookie preferences', exact: true }).waitFor();
   await page.getByRole('button', { name: 'Accept analytics', exact: true }).click();
   await page.waitForFunction(() => document.querySelector('[role="dialog"]') === null);
-  assert.equal(await page.evaluate(() => window.RadovarAnalytics.consentManager.getCollectionContext({ touchActivity: false })), null, 'consent cannot enable the disabled production collector');
+  assert.equal(await page.evaluate(() => window.RadovarAnalytics.consentManager.getCollectionContext({ touchActivity: false })), null, 'consent cannot enable a production collector on localhost');
   await page.getByRole('button', { name: 'Switch to dark theme', exact: true }).click();
   assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
   await page.evaluate(() => { window.__securityOriginalDocument = true; });
