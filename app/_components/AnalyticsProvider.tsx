@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { analyticsAsset, analyticsConfig, analyticsPageId, type AnalyticsSDK, type AnalyticsRuntime } from "../analytics/config";
+import { analyticsAsset, analyticsPageId, resolveAnalyticsConfig, type AnalyticsSDK, type AnalyticsRuntime } from "../analytics/config";
 import { CookiePreferences } from "./CookiePreferences";
 
 /** Optional leaf: rejected loading/bootstrap never rejects the ordinary UI module graph. */
@@ -35,7 +35,7 @@ function AnalyticsLeaf() {
       const sdk = await import(/* webpackIgnore: true */ analyticsAsset) as AnalyticsSDK;
       if (cancelled) return;
       const local = ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
-      const config = local && window.__RADOVAR_ANALYTICS_TEST_CONFIG__ || analyticsConfig;
+      const config = resolveAnalyticsConfig(location, window.__RADOVAR_ANALYTICS_TEST_CONFIG__);
       let baseUrl = "";
       try {
         const url = new URL(config.baseUrl);

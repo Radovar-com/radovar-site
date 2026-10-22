@@ -62,7 +62,7 @@ export function CookiePreferences({ runtime, failed }: { runtime: AnalyticsRunti
         <p role="status">{message}</p>
         <div className="cmp-actions"><button type="button" onClick={() => void choose(true)}>Accept analytics</button><button type="button" onClick={() => void choose(false)}>Decline</button><button type="button" onClick={personalize}>Personalize</button></div>
       </section> : null}
-      {(status === "unavailable" || consent?.state === "pending_revoke") && consent?.state !== "unknown" ? <p className="cmp-availability" role="status">{message}</p> : null}
+      {(status === "unavailable" || consent?.state === "pending_revoke") && consent?.state !== "unknown" ? <p className="cmp-availability" role="status">{message}{" "}<button className="cookie-reopen" type="button" onClick={personalize}>Review cookie preferences</button></p> : null}
       {open ? <div className="cmp-overlay"><div className="cmp-card" ref={dialog} role="dialog" aria-modal="true" aria-labelledby="cookie-title" onKeyDown={event => {
         if (event.key === "Escape") { event.preventDefault(); close(); }
         if (event.key === "Tab") {
