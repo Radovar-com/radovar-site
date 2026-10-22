@@ -51,7 +51,7 @@ export default function PrivacyPage() {
           <strong>Optional measurement.</strong> After you accept, a random browser identifier
           lasts up to 30 days. A visit ends after 30 minutes of inactivity and lasts at most
           24 hours. We measure page and section views, scrolling, visible time and actions
-          such as opening the product link. Events can include browser, device and language
+          such as opening the product link, and page performance where available. Events can include browser, device and language
           categories, a referring domain and campaign labels. They do not include what you
           type, page text, your email address or complete browsing URLs.
         </li>
