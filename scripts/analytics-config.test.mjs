@@ -52,3 +52,10 @@ test('test overrides are loopback-only and cannot send preview data to productio
   assert.equal(resolveAnalyticsConfig({ hostname: 'preview.invalid', protocol: 'https:' }, fixture).enabled, false);
   assert.notEqual(resolveAnalyticsConfig({ hostname: 'radovar.com', protocol: 'https:' }, fixture).baseUrl, fixture.baseUrl);
 });
+
+test('an active analytics release cannot publish a privacy notice denying analytics', async () => {
+  const { analyticsConfig } = await import('../app/analytics/config.ts');
+  const source = await readFile(new URL('../app/privacy/page.tsx', import.meta.url), 'utf8');
+  const currentNotice = source.split('<h2>Changes</h2>')[0];
+  if (analyticsConfig.enabled) assert.doesNotMatch(currentNotice, /We do not run analytics|If we ever turn on website measurement|if it is ever switched on/i, 'the notice must match the activated collector');
+});

@@ -23,6 +23,9 @@ explicit approval. Preparing a branch or preview is not evidence of live collect
   Do not silently grant consent or send identifiers before a valid receipt.
 - No queries, form content, email addresses or credentials belong in events.
   Never generate production test rows from a preview or copy grants between sites.
+- Keep the dated Privacy notice consistent with activation and actual storage,
+  processors, consent and retention. An active build must not claim that the
+  website runs no analytics; the config test guards that contradiction.
 
 ## Release verification
 

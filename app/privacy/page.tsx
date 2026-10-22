@@ -20,7 +20,7 @@ export default function PrivacyPage() {
       kicker="Privacy"
       title="How Radovar handles your information."
       intro="Who is responsible for your data, what this website stores, how long we keep your email, and what Codevalanche sends to the providers you choose."
-      updated="18 October 2026"
+      updated="22 October 2026"
     >
       <PageSchema {...page} />
       <h2>Who is responsible</h2>
@@ -32,9 +32,9 @@ export default function PrivacyPage() {
 
       <h2>What this website stores</h2>
       <p>
-        <strong>We do not run analytics on this website.</strong> We do not use Google
-        Analytics, advertising cookies, session replay or third-party tracking scripts.
-        Fonts and images are served from this site.
+        <strong>Our own website analytics is optional and starts only if you accept it.</strong>{" "}
+        We do not use Google Analytics, advertising cookies, session replay or third-party
+        tracking scripts. Fonts, images and our analytics script are served from this site.
       </p>
       <ul>
         <li>
@@ -44,21 +44,37 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Your cookie choice.</strong> Manage cookies, in the footer, remembers your
-          answer in an essential first-party cookie for up to 180 days. Saving a choice does
-          not switch any measurement on.
+          answer in an essential first-party cookie for up to 180 days. Declining analytics
+          keeps optional measurement off and does not prevent you from using the website.
+        </li>
+        <li>
+          <strong>Optional measurement.</strong> After you accept, a random browser identifier
+          lasts up to 30 days. A visit ends after 30 minutes of inactivity and lasts at most
+          24 hours. We measure page and section views, scrolling, visible time and actions
+          such as opening the product link. Events can include browser, device and language
+          categories, a referring domain and campaign labels. They do not include what you
+          type, page text, your email address or complete browsing URLs.
         </li>
       </ul>
       <p>
-        If we ever turn on website measurement, it will run only after you agree, it will
-        not record what you type, the text of pages or your email address, and this page
-        will describe it, with a date, before it starts. You can withdraw at any time from
-        Manage cookies.
+        Supabase hosts our measurement service and database. Detailed measurements have a
+        90-day retention limit; statistics without browser or visit identifiers may be
+        retained for up to 13 months. Daily cleanup applies these limits, so removal follows
+        the next successful cleanup run. Consent records expire within 180 days and can
+        remain while retained measurements still refer to them.
+      </p>
+      <p>
+        You can review or withdraw your choice at any time through Manage cookies. Withdrawal
+        stops new optional observations; existing records follow the retention limits above.
+        A choice saved while measurement was unavailable may need to be confirmed again.
+        Website consent is separate from optional activity in a signed-in Codevalanche account.
       </p>
       <p>
         GitHub Pages hosts this website. Cloudflare is configured for DNS and, when
         enabled for website traffic, delivery and security. These services may process
         IP addresses and request details separately from optional measurement, even if
-        you decline it. Provider logs have separate retention settings. Cloudflare RUM
+        you decline it. Supabase also processes request metadata when you contact the
+        measurement service. Provider logs have separate retention settings. Cloudflare RUM
         and Google Analytics are disabled.
       </p>
 
@@ -87,7 +103,7 @@ export default function PrivacyPage() {
           give you the setting you asked for.
         </li>
         <li>
-          <strong>Website measurement, if it is ever switched on:</strong> only your consent
+          <strong>Optional website measurement:</strong> only your consent
           (Article 6(1)(a)), which you can withdraw at any time.
         </li>
       </ul>
@@ -120,6 +136,10 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Changes</h2>
+      <p>
+        22 October 2026: described consent-based website analytics, Supabase processing,
+        browser storage, retention and withdrawal.
+      </p>
       <p>
         18 October 2026: named GitHub Pages and Cloudflare for hosting, DNS and security;
         distinguished request metadata from optional measurement.
