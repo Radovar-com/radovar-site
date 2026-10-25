@@ -12,7 +12,7 @@ export default function NotFound() {
   return (
     <>
       <SiteHeader />
-      <main className="shell notFound" id="top" data-analytics-section="intro">
+      <main tabIndex={-1} className="shell notFound" id="top" data-analytics-section="intro">
         <h1>That page is not here.</h1>
         <p>
           The link may be out of date, or the address slightly off. The footer below has

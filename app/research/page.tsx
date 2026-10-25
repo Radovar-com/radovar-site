@@ -49,7 +49,7 @@ export default function ResearchPage() {
   return (
     <>
       <SiteHeader />
-      <main id="top" className="site-page research-page">
+      <main tabIndex={-1} id="top" className="site-page research-page">
         <section className="shell page-hero page-hero--split" data-analytics-section="intro" aria-labelledby="research-title">
           <div>
             <p className="kicker">Research</p>

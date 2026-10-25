@@ -10,6 +10,12 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const directory = path.join(root, 'public/media/codevalanche');
 const prefix = '/media/codevalanche/';
 const originals = [
+  'approval.webp',
+  'task-review-light.webp',
+  'task-review-dark.webp',
+  'task-brief.webp',
+  'ai-providers.webp',
+  'changes.webp',
   'approval-detail.webp',
   'approval-detail-dark.webp',
   'task-brief-detail.webp',
@@ -18,7 +24,7 @@ const originals = [
   'task-review-detail-light.webp',
   'task-review-detail-dark.webp',
 ];
-const widths = [640, 960];
+const widths = [640, 960, 1280];
 const webp = { quality: 85, effort: 6, smartSubsample: true };
 const manifest = {};
 const audit = { widths, webp, sources: [] };
@@ -36,14 +42,14 @@ async function writeIfChanged(file, bytes) {
 for (const filename of originals) {
   const original = await readFile(path.join(directory, filename));
   const { width, height, format } = await sharp(original).metadata();
-  if (format !== 'webp' || !width || !height || width <= widths.at(-1)) {
+  if (format !== 'webp' || !width || !height || width <= 960) {
     throw new Error(`Expected an original WebP crop wider than 960px: ${filename}`);
   }
   const src = prefix + filename;
   const candidates = [];
   const source = { src, width, height, bytes: original.length, sha256: digest(original), variants: [] };
 
-  for (const candidateWidth of widths) {
+  for (const candidateWidth of widths.filter(candidate => candidate < width)) {
     const candidateName = filename.replace(/\.webp$/, `-${candidateWidth}.webp`);
     // Omitting height preserves the complete crop and its natural aspect ratio.
     const { data, info } = await sharp(original)
@@ -77,4 +83,4 @@ if (report) {
 }
 const originalBytes = audit.sources.reduce((total, source) => total + source.bytes, 0);
 const mobileBytes = audit.sources.reduce((total, source) => total + source.variants[0].bytes, 0);
-console.log(`Generated ${originals.length * widths.length} responsive screenshot candidates; 640px crops save ${originalBytes - mobileBytes} bytes (${((1 - mobileBytes / originalBytes) * 100).toFixed(1)}%).`);
+console.log(`Generated ${audit.sources.reduce((total, source) => total + source.variants.length, 0)} responsive screenshot candidates; 640px crops save ${originalBytes - mobileBytes} bytes (${((1 - mobileBytes / originalBytes) * 100).toFixed(1)}%).`);

@@ -28,7 +28,7 @@ export default function CompanyPage() {
   return (
     <>
       <SiteHeader />
-      <main id="top" className="site-page company-page">
+      <main tabIndex={-1} id="top" className="site-page company-page">
         <section className="shell page-hero page-hero--art" data-analytics-section="intro" aria-labelledby="company-page-title">
           <div>
             <p className="kicker">About Radovar</p>

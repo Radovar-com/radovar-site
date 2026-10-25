@@ -1,13 +1,12 @@
 // The mobile dark-mode regressions reported by the owner, checked on local UI.
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const { chromium } = createRequire(path.resolve(root, '../owned-analytics-site-20261015/package.json'))('playwright');
+import { chromium } from 'playwright';
 const origin = process.env.RADOVAR_APPEARANCE_ORIGIN ?? 'http://127.0.0.1:4188';
 assert.ok(/^http:\/\/127\.0\.0\.1:\d+$/.test(origin), 'Local qualification only');
 const output = path.join(root, '.superpowers/sdd/2026-10-16-technical-audit/dark-mode');

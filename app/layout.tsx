@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -142,9 +141,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
-        <Link className="skip-link" href="#top">
+        <a className="skip-link" href="#top">
           Skip to content
-        </Link>
+        </a>
         {children}
         <AnalyticsProvider />
         <script

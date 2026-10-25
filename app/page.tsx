@@ -23,7 +23,7 @@ export default function HomePage() {
   return (
     <>
       <SiteHeader />
-      <main id="top" className="company-home site-page">
+      <main tabIndex={-1} id="top" className="company-home site-page">
         <section className="introduction" aria-labelledby="intro-title" data-analytics-section="intro">
           <Flight lane="hero" />
           <div className="shell introduction__content">

@@ -5,8 +5,23 @@
   "scripts": {
     "dev": "next dev",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "build": "node scripts/build-responsive-shots.mjs && node scripts/build-social-assets.mjs && next build && node scripts/postbuild-security.mjs && node scripts/build-llms-full.mjs",
-    "start": "next start"
+    "build": "node scripts/build-consent-module.mjs && node scripts/build-responsive-shots.mjs && node scripts/build-social-assets.mjs && next build && node scripts/postbuild-security.mjs && node scripts/build-llms-full.mjs",
+    "start": "next start",
+    "test": "node --test scripts/*.test.mjs",
+    "test:browser:install": "playwright install chromium",
+    "test:security": "node scripts/audit-security.mjs && node scripts/security-browser-test.mjs",
+    "test:consent": "node scripts/audit-consent.mjs",
+    "test:analytics": "node scripts/analytics-browser-test.mjs",
+    "test:a11y": "node scripts/audit-accessibility.mjs",
+    "test:seo": "node scripts/audit-seo.mjs",
+    "test:links": "node scripts/check-links.mjs",
+    "test:regressions": "node scripts/audit-regressions.mjs",
+    "test:lighthouse": "node scripts/audit-lighthouse.mjs",
+    "test:quality": "npm run test:security && npm run test:consent && npm run test:a11y && npm run test:seo && npm run test:links && npm run test:regressions && npm run test:responsive",
+    "pretest": "node scripts/prepare-contract-tests.mjs",
+    "pretest:analytics": "node scripts/prepare-contract-tests.mjs",
+    "predev": "node scripts/build-consent-module.mjs",
+    "test:responsive": "node scripts/audit-responsive.mjs"
   },
   "dependencies": {
     "next": "16.4.2",
@@ -14,9 +29,18 @@
     "react-dom": "19.3.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "esbuild": "0.28.2",
+    "lighthouse": "13.5.0",
+    "linkedom": "0.18.14",
+    "playwright": "1.64.1",
+    "sharp": "0.35.5",
     "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": "24.18.1"
   }
 }

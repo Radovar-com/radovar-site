@@ -1,4 +1,136 @@
 {
+  "/media/codevalanche/approval.webp": {
+    "width": 2000,
+    "height": 1250,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/approval-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/approval-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/approval-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/media/codevalanche/approval.webp",
+        "width": 2000
+      }
+    ]
+  },
+  "/media/codevalanche/task-review-light.webp": {
+    "width": 2000,
+    "height": 1250,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/task-review-light-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/task-review-light-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/task-review-light-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/media/codevalanche/task-review-light.webp",
+        "width": 2000
+      }
+    ]
+  },
+  "/media/codevalanche/task-review-dark.webp": {
+    "width": 2000,
+    "height": 1250,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/task-review-dark-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/task-review-dark-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/task-review-dark-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/media/codevalanche/task-review-dark.webp",
+        "width": 2000
+      }
+    ]
+  },
+  "/media/codevalanche/task-brief.webp": {
+    "width": 2000,
+    "height": 1250,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/task-brief-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/task-brief-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/task-brief-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/media/codevalanche/task-brief.webp",
+        "width": 2000
+      }
+    ]
+  },
+  "/media/codevalanche/ai-providers.webp": {
+    "width": 2000,
+    "height": 1250,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/ai-providers-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/ai-providers-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/ai-providers-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/media/codevalanche/ai-providers.webp",
+        "width": 2000
+      }
+    ]
+  },
+  "/media/codevalanche/changes.webp": {
+    "width": 2000,
+    "height": 1250,
+    "candidates": [
+      {
+        "src": "/media/codevalanche/changes-640.webp",
+        "width": 640
+      },
+      {
+        "src": "/media/codevalanche/changes-960.webp",
+        "width": 960
+      },
+      {
+        "src": "/media/codevalanche/changes-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/media/codevalanche/changes.webp",
+        "width": 2000
+      }
+    ]
+  },
   "/media/codevalanche/approval-detail.webp": {
     "width": 1400,
     "height": 1256,
@@ -10,6 +142,10 @@
       {
         "src": "/media/codevalanche/approval-detail-960.webp",
         "width": 960
+      },
+      {
+        "src": "/media/codevalanche/approval-detail-1280.webp",
+        "width": 1280
       },
       {
         "src": "/media/codevalanche/approval-detail.webp",
@@ -28,6 +164,10 @@
       {
         "src": "/media/codevalanche/approval-detail-dark-960.webp",
         "width": 960
+      },
+      {
+        "src": "/media/codevalanche/approval-detail-dark-1280.webp",
+        "width": 1280
       },
       {
         "src": "/media/codevalanche/approval-detail-dark.webp",

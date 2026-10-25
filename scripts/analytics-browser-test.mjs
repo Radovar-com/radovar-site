@@ -4,13 +4,12 @@ import {createServer} from 'node:http';
 import {readFile, mkdir} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath, pathToFileURL} from 'node:url';
-import {createRequire} from 'node:module';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const shared=process.env.OWNED_ANALYTICS_SITE_ROOT??path.resolve(root,'../owned-analytics-site-20261015');
-const {chromium}=createRequire(path.join(shared,'package.json'))('playwright');
+const shared=process.env.OWNED_ANALYTICS_SITE_ROOT??path.join(root,'.superpowers','test-contract');
+import { chromium } from 'playwright';
 const {validateWebsiteEvent,validateContractDto}=await import(pathToFileURL(path.join(shared,'supabase/functions/_shared/websiteAnalyticsContract.ts')));
 const prefix=process.env.BASE_PATH??'', events=new Map(),receipts=new Map(),requests=[],errors=[];
-const isSdkUrl=url=>url.pathname.endsWith('/analytics/owned-analytics.js');
+const isSdkUrl=url=>url.pathname.endsWith('/analytics/consent-manager.js');
 let failReceipt=false;
 const server=createServer(async(req,res)=>{try{
  const url=new URL(req.url,'http://fixture');res.setHeader('Content-Type','application/json');

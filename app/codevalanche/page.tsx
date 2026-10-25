@@ -49,7 +49,7 @@ export default function CodevalanchePage() {
   return (
     <>
       <SiteHeader />
-      <main id="top" className="site-page product-page">
+      <main tabIndex={-1} id="top" className="site-page product-page">
         <section className="shell page-hero" data-analytics-section="intro" aria-labelledby="product-page-title">
           <div className="page-hero--split">
             <div>

@@ -1,12 +1,10 @@
 // Local UI qualification only. Never enables analytics or contacts a live provider.
 import assert from 'node:assert/strict';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const shared = process.env.OWNED_ANALYTICS_SITE_ROOT ?? path.resolve(root, '../owned-analytics-site-20261015');
-const { chromium } = createRequire(path.join(shared, 'package.json'))('playwright');
+import { chromium } from 'playwright';
 const origin = process.env.RADOVAR_THEME_TEST_ORIGIN ?? 'http://127.0.0.1:4188';
 assert.ok(/^http:\/\/127\.0\.0\.1:\d+$/.test(origin), 'Only an explicit local server is allowed');
 const browser = await chromium.launch({ headless: true });
