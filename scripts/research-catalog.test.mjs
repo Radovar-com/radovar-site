@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const shared = process.env.OWNED_ANALYTICS_SITE_ROOT ?? path.resolve(root, '../owned-analytics-site-20261015');
+const shared = process.env.OWNED_ANALYTICS_SITE_ROOT ?? path.join(root, '.superpowers', 'test-contract');
 const { PAGE_SECTION_SCOPE } = await import(pathToFileURL(path.join(shared, 'supabase/functions/_shared/metricDefinitions.ts')));
 const { PAGE_REGISTRY } = await import(pathToFileURL(path.join(shared, 'supabase/functions/_shared/websiteAnalyticsContract.ts')));
 

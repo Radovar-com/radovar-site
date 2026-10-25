@@ -26,7 +26,7 @@ export default function PressPage() {
   return (
     <>
       <SiteHeader />
-      <main id="top" className="site-page press-page">
+      <main tabIndex={-1} id="top" className="site-page press-page">
         <section className="shell page-hero" data-analytics-section="intro" aria-labelledby="press-title">
           <p className="kicker">Updates</p>
           <h1 id="press-title">Radovar and Codevalanche: <em>the facts.</em></h1>

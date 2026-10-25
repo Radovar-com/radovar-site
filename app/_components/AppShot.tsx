@@ -41,10 +41,15 @@ export function AppShot({ src, alt, darkSrc, mobileSrc, mobileDarkSrc, mobileSiz
   const shot = (file: string, mobile: string | undefined, dark: boolean) => {
     const mobileFile = mobile || (responsiveShots[file] ? file : undefined);
     const crop = mobileFile ? responsiveShots[mobileFile] : undefined;
+    const desktop = responsiveShots[file];
+    const desktopSizes = stage ? "(max-width: 1440px) 82vw, 1180px"
+      : className?.split(/\s+/).includes("feature__visual")
+        ? "(max-width: 1100px) calc(100vw - clamp(44px, 9vw, 152px) - clamp(52px, 8vw, 128px) - 2px), (max-width: 1440px) 48vw, 680px"
+        : "(max-width: 760px) 88vw, (max-width: 1440px) 48vw, 680px";
     return (
       <picture key={file}>
         {mobileFile ? <source media="(max-width: 760px)" srcSet={crop ? crop.candidates.map(candidate => `${base}${candidate.src} ${candidate.width}w`).join(", ") : `${base}${mobileFile}`} sizes={crop ? mobileSizes : undefined} width={crop?.width ?? mobileSize?.[0]} height={crop?.height ?? mobileSize?.[1]} /> : null}
-        <img className={dark ? "app-shot__img app-shot__img--dark" : "app-shot__img"} src={`${base}${file}`} alt={alt} width={width} height={height} loading={priority && !dark ? "eager" : "lazy"} decoding="async" fetchPriority={priority && !dark ? "high" : undefined} />
+        <img className={dark ? "app-shot__img app-shot__img--dark" : "app-shot__img"} src={`${base}${file}`} srcSet={desktop?.candidates.map(candidate => `${base}${candidate.src} ${candidate.width}w`).join(", ")} sizes={desktop ? desktopSizes : undefined} alt={alt} width={width} height={height} loading={priority && !dark ? "eager" : "lazy"} decoding="async" fetchPriority={priority && !dark ? "high" : undefined} />
       </picture>
     );
   };

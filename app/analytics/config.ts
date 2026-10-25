@@ -33,6 +33,7 @@ export function analyticsPageId(pathname: string) {
 export type ConsentState = { websiteAnalytics: boolean; accountAnalytics: boolean; state: string; generation: number };
 export type ConsentManager = {
   getState(): ConsentState;
+  setConsent(choice: { websiteAnalytics: boolean }): Promise<void>;
   subscribe(listener: (state: ConsentState) => void): () => void;
   getCollectionContext(options: { touchActivity: boolean }): unknown;
   acceptAck(...args: unknown[]): boolean;

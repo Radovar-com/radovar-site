@@ -4,14 +4,12 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
 import { readdir, readFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.resolve(process.env.RADOVAR_SECURITY_OUT ?? path.join(root, 'out'));
-const shared = process.env.OWNED_ANALYTICS_SITE_ROOT ?? path.resolve(root, '../owned-analytics-site-20261015');
-const { chromium } = createRequire(path.join(shared, 'package.json'))('playwright');
+import { chromium } from 'playwright';
 const prefix = process.env.BASE_PATH ?? '';
 const routes = ['/', '/codevalanche/', '/company/', '/press/', '/docs/', '/security/', '/privacy/', '/terms/', '/changelog/', '/releases/', '/research/', '/research/wave-ai/'];
 const pageIds = { '/': 'home', '/codevalanche/': 'codevalanche', '/company/': 'company', '/press/': 'press', '/docs/': 'docs', '/security/': 'security', '/privacy/': 'privacy', '/terms/': 'terms', '/changelog/': 'changelog_archive', '/releases/': 'releases_archive', '/research/': 'research', '/research/wave-ai/': 'research_wave_ai' };
