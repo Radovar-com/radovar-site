@@ -33,8 +33,8 @@ export default function ChangelogPage() {
       <PageSchema {...page} />
       <div className="note">
         <p>
-          <strong>Current status.</strong> Codevalanche is in early access for Windows and public
-          downloads are in preparation. Visit{" "}
+          <strong>Current status.</strong> Codevalanche is available for Windows; the current version is
+          1.1.68, published on 13 November 2026. Visit{" "}
           <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a> for
           current product and download information.
         </p>

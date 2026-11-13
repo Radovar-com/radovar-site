@@ -13,7 +13,7 @@ import "./home.css";
 
 const latest: { id?: string; href: string; label: string; title: string; copy: string; spot: SpotName; tone: "sage" | "mist" | "sand" | "clay" }[] = [
   { href: "/research/wave-ai/", label: "Research · 16 October 2026", title: "Can coupled oscillators act as memory for AI?", copy: "A month-long experiment published in full, including the results that did not work.", spot: "compass", tone: "sage" },
-  { id: "press", href: "/press/", label: "Update · 16 October 2026", title: "A new radovar.com.", copy: "The company site now says who we are and what we make. Public downloads of Codevalanche are in preparation.", spot: "news", tone: "clay" },
+  { id: "press", href: "/press/codevalanche-1-1-68/", label: "Update · 13 November 2026", title: "Codevalanche 1.1.68.", copy: "From one conversation to a whole project: a Coordinator runs several agents in parallel while you stay in charge.", spot: "news", tone: "clay" },
   { id: "security", href: "/security/", label: "Security", title: "Your files, providers and permissions.", copy: "What stays on your PC, and what a hosted model can receive.", spot: "shield", tone: "mist" },
   { id: "changelog_archive", href: "/changelog/", label: "Release history · June–July 2026", title: "Twenty early-access builds for Windows.", copy: "Every early-access build, its date, and the one we pulled.", spot: "archive", tone: "sand" },
 ];
@@ -40,7 +40,7 @@ export default function HomePage() {
               <ol aria-label="Why Radovar exists">
                 <li><span className="intro-story__step">01 · The question</span><p className="intro-story__title">Who is in charge of the result?</p><p>Agents can already do real work in a codebase. When they do, someone still has to answer for what changed.</p></li>
                 <li><span className="intro-story__step">02 · Our answer</span><p className="intro-story__title">The person, every time.</p><p>Software where you choose the agent, follow every step it takes and keep only the changes you have checked.</p></li>
-                <li><span className="intro-story__step">03 · Our first product</span><p className="intro-story__title">Codevalanche.</p><p>A Windows desktop app for coding with AI agents. Early-access builds shipped in June and July 2026, and public downloads are in preparation.</p></li>
+                <li><span className="intro-story__step">03 · Our first product</span><p className="intro-story__title">Codevalanche.</p><p>A Windows desktop app for coding with AI agents. Early-access builds shipped in June and July 2026; version 1.0.1 was published on 20 October 2026, and the current version is 1.1.68.</p></li>
               </ol>
             </div>
           </div>
@@ -117,8 +117,8 @@ export default function HomePage() {
           <div className="closing home-closing flight-host">
             <Flight tone="light" />
             <div>
-              <h2>Codevalanche is in early access for Windows.</h2>
-              <p>Public downloads are in preparation. codevalanche.com shows what it does, which agents it supports and when you can get it.</p>
+              <h2>Codevalanche is available for Windows.</h2>
+              <p>Download it from codevalanche.com, which also shows what it does and which agents it supports.</p>
             </div>
             <div className="closing__actions">
               <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="resources" data-analytics-section-id="resources">Visit codevalanche.com</a>
