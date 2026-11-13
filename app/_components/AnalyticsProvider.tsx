@@ -51,11 +51,11 @@ function AnalyticsLeaf() {
         // Fence persisted grants too: enabled=false must never send to a relative endpoint.
         client = sdk.createAnalyticsClient({ siteId: "radovar", baseUrl, pageVersion: config.pageVersion, consentManager: baseUrl ? manager : { ...manager, getCollectionContext: () => null, acceptAck: () => false } });
       } catch (error) { manager.dispose(); throw error; }
-      let pageId = "", traversalPath = "", requested = -1;
+      let pageId = "", traversalPath = "", requested = -1, flushTimer = 0;
       const activeManager = client.consentManager;
       const api: AnalyticsRuntime = {
         consentManager: activeManager,
-        async setConsent(choice) { const operation = client.setConsent(choice); requested = choice.websiteAnalytics ? activeManager.getState().generation : -1; await operation; },
+        async setConsent(choice) { const operation = client.setConsent(choice); requested = choice.websiteAnalytics ? activeManager.getState().generation : -1; await operation; if (api.status() === "ready") void client.flush(); },
         flush: () => client.flush(),
         status: () => !baseUrl ? "not_configured" : activeManager.getCollectionContext({ touchActivity: false }) ? "ready" : activeManager.getState().websiteAnalytics || requested === activeManager.getState().generation ? "unavailable" : "disabled",
         get pageId() { return pageId; },
@@ -66,6 +66,9 @@ function AnalyticsLeaf() {
         const page = client.startPage({ pageId: next, navigationType: pageId ? traversalPath && analyticsPageId(traversalPath) === next ? "back_forward" : "route" : "initial" });
         pageId = next; traversalPath = "";
         for (const element of document.querySelectorAll<HTMLElement>("[data-analytics-section]")) page.observeSection(element, { sectionId: element.dataset.analyticsSection! });
+        // Most visits are short: send the page view soon instead of waiting for the 15-second timer or the page exit.
+        window.clearTimeout(flushTimer);
+        flushTimer = window.setTimeout(() => { if (api.status() === "ready") void client.flush(); }, 2000);
       };
       const popstate = () => { traversalPath = location.pathname; };
       const feature = (event: Event) => { const id: unknown = (event as CustomEvent).detail; if (typeof id === "string" && ["project", "agents", "review"].includes(id)) client.track("feature_selected", { feature_id: id, selection_id: id }); };
@@ -86,7 +89,7 @@ function AnalyticsLeaf() {
       // Capture explicit semantics before Next Link handles its ordinary client navigation.
       document.addEventListener("click", click, true);
       if (local) window.RadovarAnalytics = api; // Local harness handle; no identity or consent sharing across domains.
-      teardown = () => { navigate.current = null; window.removeEventListener("popstate", popstate, true); window.removeEventListener("radovar:feature", feature); document.removeEventListener("click", click, true); if (window.RadovarAnalytics === api) delete window.RadovarAnalytics; client.dispose(); manager.dispose(); };
+      teardown = () => { window.clearTimeout(flushTimer); navigate.current = null; window.removeEventListener("popstate", popstate, true); window.removeEventListener("radovar:feature", feature); document.removeEventListener("click", click, true); if (window.RadovarAnalytics === api) delete window.RadovarAnalytics; client.dispose(); manager.dispose(); };
       setRuntime(api);
     })().catch(() => { if (!cancelled) setFailed(true); });
     return () => { cancelled = true; teardown?.(); };

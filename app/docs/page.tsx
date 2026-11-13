@@ -73,8 +73,8 @@ export default function DocsPage() {
       </p>
       <div className="note">
         <p>
-          Codevalanche is in early access. Supported tools and workflows may
-          change between builds. For product information, visit{" "}
+          Supported tools and workflows may change between versions of
+          Codevalanche. For product information, visit{" "}
           <a href="https://codevalanche.com" data-analytics-action="product" data-analytics-section-id="resources" data-analytics-placement="resources">codevalanche.com</a>.
         </p>
       </div>
