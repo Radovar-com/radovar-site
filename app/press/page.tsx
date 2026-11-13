@@ -14,6 +14,7 @@ const page = {
 export const metadata = createPageMetadata(page);
 
 const news: { date: string; iso: string; kind: string; href: string; target?: string; title: string; copy: string }[] = [
+  { date: "13 November 2026", iso: "2026-11-13", kind: "Product", href: "/press/codevalanche-1-1-68/", title: "Codevalanche 1.1.68: from one conversation to a whole project.", copy: "Projects led by a Coordinator that runs several agents in parallel, local models in conversations, a natural voice, every AI account in one place and a lighter app. Available now for Windows." },
   { date: "16 October 2026", iso: "2026-10-16", kind: "Research", href: "/research/wave-ai/", title: "Can coupled oscillators act as memory for AI?", copy: "A month-long experiment, published in full: the setup, the controls, every result including the negative ones, and what we will not claim." },
   { date: "16 October 2026", iso: "2026-10-16", kind: "Company", href: "/company/", target: "company", title: "A new radovar.com.", copy: "The site now introduces Radovar as the company and Codevalanche as its first product. Codevalanche stays in early access for Windows. We are working on a new version, not yet published, and public downloads are in preparation." },
   { date: "2 July 2026", iso: "2026-07-02", kind: "Product", href: "/changelog/", target: "changelog_archive", title: "Codevalanche 0.1.31 published.", copy: "The most recent build in the June and July early-access archive, one of nine published that day." },
@@ -68,7 +69,7 @@ export default function PressPage() {
                 <div><dt>Company</dt><dd>Radovar, a software company building tools for working with AI agents.</dd></div>
                 <div><dt>Mission</dt><dd>Make work with AI agents something people can understand, check and trust.</dd></div>
                 <div><dt>Product</dt><dd>Codevalanche, a desktop app for coding with AI agents.</dd></div>
-                <div><dt>Status</dt><dd>Codevalanche is in early access for Windows. Early-access builds were published in June and July 2026. Public downloads are in preparation.</dd></div>
+                <div><dt>Status</dt><dd>Codevalanche is available for Windows from codevalanche.com. Version 1.0.1 was published on 20 October 2026; the current version, 1.1.68, on 13 November 2026.</dd></div>
               </dl>
               <dl>
                 <div><dt>What Codevalanche does</dt><dd>It works with projects on the user’s machine, connects supported coding agents and accounts such as Claude Code, Codex and local models, keeps each task’s conversation together and shows changed files and diffs before they are committed.</dd></div>
