@@ -40,7 +40,7 @@ export default function HomePage() {
               <ol aria-label="Why Radovar exists">
                 <li><span className="intro-story__step">01 · The question</span><p className="intro-story__title">Who is in charge of the result?</p><p>Agents can already do real work in a codebase. When they do, someone still has to answer for what changed.</p></li>
                 <li><span className="intro-story__step">02 · Our answer</span><p className="intro-story__title">The person, every time.</p><p>Software where you choose the agent, follow every step it takes and keep only the changes you have checked.</p></li>
-                <li><span className="intro-story__step">03 · Our first product</span><p className="intro-story__title">Codevalanche.</p><p>A Windows desktop app for coding with AI agents. Early-access builds shipped in June and July 2026; version 1.0.1 was published on 20 October 2026, and the current version is 1.1.68.</p></li>
+                <li><span className="intro-story__step">03 · Our first product</span><p className="intro-story__title">Codevalanche.</p><p>A Windows desktop app for coding with AI agents. Early-access builds shipped in June and July 2026; version 1.0.1 was published on 20 October 2026, and the current version is 1.1.69, published on 13 November 2026.</p></li>
               </ol>
             </div>
           </div>
