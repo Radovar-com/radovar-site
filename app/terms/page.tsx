@@ -7,7 +7,7 @@ const page = {
   title: "Terms",
   path: "/terms/",
   description:
-    "The terms that apply to this website and to Codevalanche while it is in early access.",
+    "The terms that apply to this website and to Codevalanche.",
 }
 
 export const metadata = createPageMetadata(page)
@@ -16,9 +16,9 @@ export default function TermsPage() {
   return (
     <DocPage
       kicker="Terms"
-      title="Website and early-access terms."
-      intro="These terms cover this website and the use of Codevalanche during early access. They explain acceptable use, the early-access status of the product and how to contact Radovar."
-      updated="15 October 2026"
+      title="Website and product terms."
+      intro="These terms cover this website and the use of Codevalanche. They explain acceptable use, how the product is provided and how to contact Radovar."
+      updated="14 November 2026"
     >
       <PageSchema {...page} />
       <h2>Who you are agreeing with</h2>
@@ -28,10 +28,10 @@ export default function TermsPage() {
         the person or organisation using this website or Codevalanche.
       </p>
 
-      <h2>Codevalanche is in early access</h2>
+      <h2>Codevalanche keeps changing</h2>
       <p>
-        Codevalanche is not a finished product. Builds are published as pre-releases, features
-        change, and behaviour that works today may be different next month. If you are
+        Codevalanche is updated often. Features change, and behaviour that works today may be
+        different next month. If you are
         deciding whether to depend on Codevalanche for something that matters, please plan
         around that.
       </p>
@@ -44,8 +44,7 @@ export default function TermsPage() {
       <div className="note">
         <p>
           Practical version: keep your work in version control, and read the diffs Codevalanche
-          shows you before you approve them. That advice would be sound even if this were a
-          mature product.
+          shows you before you approve them. That advice holds for any tool that changes code.
         </p>
       </div>
 

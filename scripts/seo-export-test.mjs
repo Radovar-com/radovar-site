@@ -15,7 +15,7 @@ const pages = [
   { route: '/docs/', title: 'Getting started with Codevalanche | Radovar', description: 'How to open a local project, connect a supported coding runtime, give an agent a task, and review the changes in Codevalanche.' },
   { route: '/security/', title: 'Security | Radovar', description: 'The boundaries between your local Codevalanche workspace, connected AI runtimes, and model providers.' },
   { route: '/privacy/', title: 'Privacy | Radovar', description: 'Who is responsible for your data at Radovar, what this website stores, how long we keep email, and what Codevalanche sends to the providers you choose.' },
-  { route: '/terms/', title: 'Terms | Radovar', description: 'The terms that apply to this website and to Codevalanche while it is in early access.' },
+  { route: '/terms/', title: 'Terms | Radovar', description: 'The terms that apply to this website and to Codevalanche.' },
   { route: '/press/', title: 'Updates | Radovar', description: 'Dated updates, company facts, logos and press contact for Radovar and Codevalanche.' },
   { route: '/research/', title: 'Research | Radovar', description: 'Experiments Radovar runs on AI systems, published in full with their methods, controls, results and limits, including the results that did not work.' },
   { route: '/research/wave-ai/', image: `${site}/research/wave-ai-social.png`, imageAlt: 'Can coupled oscillators act as memory for AI? Accuracy on the 64-step memory task: Wave 72.0%, GRU 76.5%, SSM 53.5%.', title: 'Wave AI: can coupled oscillators act as memory? | Radovar', description: 'Our month-long experiment testing networks of coupled oscillators as memory for AI models: the setup, the controls, every result including the negative ones, and what we will and will not claim.' },
