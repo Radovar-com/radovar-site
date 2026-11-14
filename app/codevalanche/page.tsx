@@ -34,7 +34,7 @@ const questions: { q: string; a: string; more?: ReactNode }[] = [
   { q: "Can I use an existing project?", a: "Yes. Open a local folder or repository and start with a focused task. Keep important work in version control and review changes before committing them." },
   { q: "Which agents can I connect?", a: "The agents and accounts supported by your installed build. Codevalanche is designed around tools such as Claude Code, Codex and supported local models." },
   { q: "Does my code leave my computer?", a: "Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.", more: <Link href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources">Read more about security</Link> },
-  { q: "Where can I download it?", a: "Codevalanche is available for Windows from codevalanche.com. Version 1.0.1 was published on 20 October 2026, and the current version, 1.1.68, on 13 November 2026.", more: <>Radovar keeps the <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">early-access release history</Link>.</> },
+  { q: "Where can I download it?", a: "Codevalanche is available for Windows from codevalanche.com. Version 1.0.1 was published on 20 October 2026, and the current version, 1.1.69, on 13 November 2026.", more: <>Radovar keeps the <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="resources">early-access release history</Link>.</> },
 ];
 
 const faqSchema = {
@@ -62,7 +62,7 @@ export default function CodevalanchePage() {
                 <a className="action-link action-link--primary" href="https://codevalanche.com" data-analytics-action="product" data-analytics-placement="intro" data-analytics-section-id="codevalanche">Visit codevalanche.com</a>
                 <Link className="action-link" href="/docs/" data-analytics-action="anchor" data-analytics-target="docs" data-analytics-placement="intro">Read the guide</Link>
               </div>
-              <p className="page-hero__meta">Available for Windows. Current version 1.1.68, published 13 November 2026.</p>
+              <p className="page-hero__meta">Available for Windows. Current version 1.1.69, published 13 November 2026.</p>
             </div>
           </div>
         </section>

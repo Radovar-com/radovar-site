@@ -69,7 +69,7 @@ export default function PressPage() {
                 <div><dt>Company</dt><dd>Radovar, a software company building tools for working with AI agents.</dd></div>
                 <div><dt>Mission</dt><dd>Make work with AI agents something people can understand, check and trust.</dd></div>
                 <div><dt>Product</dt><dd>Codevalanche, a desktop app for coding with AI agents.</dd></div>
-                <div><dt>Status</dt><dd>Codevalanche is available for Windows from codevalanche.com. Version 1.0.1 was published on 20 October 2026; the current version, 1.1.68, on 13 November 2026.</dd></div>
+                <div><dt>Status</dt><dd>Codevalanche is available for Windows from codevalanche.com. Version 1.0.1 was published on 20 October 2026; the current version, 1.1.69, on 13 November 2026.</dd></div>
               </dl>
               <dl>
                 <div><dt>What Codevalanche does</dt><dd>It works with projects on the user’s machine, connects supported coding agents and accounts such as Claude Code, Codex and local models, keeps each task’s conversation together and shows changed files and diffs before they are committed.</dd></div>
