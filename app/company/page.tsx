@@ -106,7 +106,7 @@ export default function CompanyPage() {
               <li><time dateTime="2026-06">June 2026</time><h3>Early access on Windows.</h3><p>Codevalanche is published as signed Windows installers, with an update feed that installed copies can check for new builds.</p></li>
               <li><time dateTime="2026-07">July 2026</time><h3>Twenty builds in just over two weeks.</h3><p>Between 17 June and 2 July we publish twenty early-access builds. One, version 0.1.24, is pulled after a problem is found, and the <Link href="/changelog/" data-analytics-action="anchor" data-analytics-target="changelog_archive" data-analytics-placement="inline">release history</Link> still lists it.</p></li>
               <li><time dateTime="2026-09">September 2026</time><h3>A first research experiment.</h3><p>From 2 September to 2 October we test whether coupled oscillators can act as memory for AI models, against standard neural networks, and <Link href="/research/wave-ai/" data-analytics-action="anchor" data-analytics-placement="inline">publish the full results</Link>, including what did not work.</p></li>
-              <li><time dateTime="2026-10-16">October 2026</time><h3>A company site, and public downloads in preparation.</h3><p>radovar.com relaunches as the home of the company. Codevalanche stays in early access for Windows while we work on a new version, not yet published, and prepare public downloads. It works with cloud agents such as Claude Code and Codex and with supported local models.</p></li>
+              <li><time dateTime="2026-10-20">October 2026</time><h3>Public downloads for Windows.</h3><p>radovar.com relaunches as the home of the company, and on 20 October we publish Codevalanche 1.0.1 for everyone on codevalanche.com. The current version is 1.1.69, published on 13 November 2026. It works with cloud agents such as Claude Code and Codex and with supported local models.</p></li>
             </ol>
           </div>
         </section>
@@ -120,12 +120,12 @@ export default function CompanyPage() {
               <p className="kicker">Trust</p>
               <h2 id="trust-title">How we handle your work.</h2>
             </div>
-            <p>Plain answers about files, providers, data and the terms of early access.</p>
+            <p>Plain answers about files, providers, data and our terms.</p>
           </div>
           <div className="cards">
             <Link className="card" href="/security/" data-analytics-action="anchor" data-analytics-target="security" data-analytics-placement="resources"><Spot name="shield" tone="mist" /><span className="card__label">Security</span><h3>Your files, providers and permissions.</h3><p>What stays on your PC and what a hosted model can receive.</p></Link>
             <Link className="card" href="/privacy/" data-analytics-action="anchor" data-analytics-target="privacy" data-analytics-placement="resources"><Spot name="compass" tone="sand" /><span className="card__label">Privacy</span><h3>How Radovar handles your information.</h3><p>Website preferences, email and information you share with us.</p></Link>
-            <Link className="card" href="/terms/" data-analytics-action="anchor" data-analytics-target="terms" data-analytics-placement="resources"><Spot name="book" tone="clay" /><span className="card__label">Terms</span><h3>Website and early-access terms.</h3><p>What we ask of you, and what early access means.</p></Link>
+            <Link className="card" href="/terms/" data-analytics-action="anchor" data-analytics-target="terms" data-analytics-placement="resources"><Spot name="book" tone="clay" /><span className="card__label">Terms</span><h3>Website and product terms.</h3><p>What we ask of you, and how Codevalanche is provided.</p></Link>
           </div>
         </section>
 

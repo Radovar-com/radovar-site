@@ -59,9 +59,9 @@ export default function SecurityPage() {
         affected version and enough detail to reproduce it. Please avoid
         including credentials or sensitive project data.
       </p>
-      <h2>Early access and security requirements</h2>
+      <h2>Security requirements</h2>
       <p>
-        Codevalanche is in early access. Radovar does not claim third-party
+        Radovar does not claim third-party
         security certification. For a deployment with specific security
         requirements, contact{" "}
         <a href="mailto:info@radovar.com" data-analytics-action="contact" data-analytics-contact="info" data-analytics-placement="inline">info@radovar.com</a> to discuss the
