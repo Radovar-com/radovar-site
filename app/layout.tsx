@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./landscape.css";
 import { AnalyticsProvider } from "./_components/AnalyticsProvider";
+import { PageCounter } from "./_components/PageCounter";
 import { HOME_TITLE, SITE_URL as SITE, SITE_DESCRIPTION as description, SOCIAL_IMAGE } from "./_lib/site-metadata";
 
 /* Only the weights the page actually renders. Display uses 300 (h1/h2) and
@@ -147,6 +148,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </Link>
         {children}
         <AnalyticsProvider />
+        <PageCounter />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
