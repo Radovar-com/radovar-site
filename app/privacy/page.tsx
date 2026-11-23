@@ -20,7 +20,7 @@ export default function PrivacyPage() {
       kicker="Privacy"
       title="How Radovar handles your information."
       intro="Who is responsible for your data, what this website stores, how long we keep your email, and what Codevalanche sends to the providers you choose."
-      updated="22 October 2026"
+      updated="23 November 2026"
     >
       <PageSchema {...page} />
       <h2>Who is responsible</h2>
@@ -54,6 +54,17 @@ export default function PrivacyPage() {
           such as opening the product link, and page performance where available. Events can include browser, device and language
           categories, a referring domain and campaign labels. They do not include what you
           type, page text, your email address or complete browsing URLs.
+        </li>
+        <li>
+          <strong>Anonymous page counts.</strong> Separately, and whatever you choose under
+          Manage cookies, we count how many times each page is opened. For each day we keep
+          only a number per page and per kind of source: opened directly, from another page
+          of this site, from a search engine, a social network, GitHub, an AI assistant or
+          another website. Nothing is stored in your browser, and the address you came from,
+          your IP address and your browser details are not kept. Supabase sees your IP
+          address while it handles the request, as with any server. If your browser sends
+          Global Privacy Control or Do Not Track, you are not counted. Legal basis:
+          legitimate interest (knowing whether people find the website).
         </li>
       </ul>
       <p>
@@ -136,6 +147,9 @@ export default function PrivacyPage() {
       </p>
 
       <h2>Changes</h2>
+      <p>
+        23 November 2026: added anonymous daily page counts that need no cookie and no choice.
+      </p>
       <p>
         22 October 2026: described consent-based website analytics, Supabase processing,
         browser storage, retention and withdrawal.
