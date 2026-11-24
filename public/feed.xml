@@ -33,7 +33,7 @@
       <link>https://radovar.com/changelog/</link>
       <guid isPermaLink="false">radovar-update-2026-06-17-0.1.11</guid>
       <pubDate>Wed, 17 Jun 2026 12:00:00 GMT</pubDate>
-      <description>Signed Windows installers with an update feed. Version 0.1.11 is the earliest build in the archive.</description>
+      <description>Windows installers with an update feed. Version 0.1.11 is the earliest build in the archive.</description>
     </item>
   </channel>
 </rss>

@@ -63,7 +63,7 @@ export default function ChangelogPage() {
 
       <h2>About these Windows builds</h2>
       <p>
-        The builds were published as signed Windows installers with an update feed
+        The builds were published as Windows installers with an update feed
         alongside them. Installed copies could check that feed for updates.
       </p>
       <p>
