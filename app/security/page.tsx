@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createPageMetadata } from "../_lib/site-metadata";
 import { PageSchema } from "../_components/PageSchema";
 import { DocPage } from "../_components/DocPage";
@@ -17,6 +18,25 @@ export default function SecurityPage() {
       intro="Codevalanche opens projects on your computer. What an AI agent can read, change, or send over the network also depends on the runtime and provider you connect."
     >
       <PageSchema {...page} />
+      <h2 id="data">How we handle data</h2>
+      <ul>
+        <li>Radovar makes Codevalanche. A person at Radovar reads every message about data or security.</li>
+        <li>By default, Codevalanche sends Radovar nothing about you. Usage statistics and error reports stay off until you turn them on.</li>
+        <li>Your prompts, files and code go from your computer to the AI provider you choose. They do not pass through Radovar’s servers.</li>
+        <li>The app contains no third-party analytics or tracking code.</li>
+        <li>
+          Every address the app contacts, with when and why, is listed on{" "}
+          <a href="https://codevalanche.com/docs/privacy/network/" data-analytics-action="product" data-analytics-placement="inline">What Codevalanche connects to</a>.
+        </li>
+        <li>
+          Steps anyone can repeat to check this are on{" "}
+          <a href="https://codevalanche.com/docs/privacy/check/" data-analytics-action="product" data-analytics-placement="inline">Check it yourself</a>.
+        </li>
+        <li>
+          Policies: <Link href="/privacy/">Radovar privacy</Link> and the{" "}
+          <a href="https://codevalanche.com/privacy.html" data-analytics-action="product" data-analytics-placement="inline">Codevalanche privacy policy</a>.
+        </li>
+      </ul>
       <h2>Where your project lives</h2>
       <p>
         Codevalanche is a desktop application that works with projects on your

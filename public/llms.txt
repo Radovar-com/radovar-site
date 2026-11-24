@@ -7,9 +7,18 @@
 - Codevalanche is a desktop app for Windows for coding with AI agents.
 - It works with projects on the user's own computer, connects supported cloud agents such as Claude Code and Codex with the user's own accounts, and supports local models on the user's hardware.
 - Changed files, diffs and checks are shown next to the conversation that produced them, before the user keeps a change.
-- Status: available for Windows from https://codevalanche.com/. Version 1.0.1 was published on 20 October 2026; the current version is 1.1.69, published on 13 November 2026. Before that, twenty early-access builds were published between 17 June and 2 July 2026.
+- Status: available for Windows from https://codevalanche.com/. Version 1.0.1 was published on 20 October 2026; the current version is 1.1.74, published on 23 November 2026. Before that, twenty early-access builds were published between 17 June and 2 July 2026.
 - "Local-first" describes the project workspace. When a hosted model is used, the prompt and relevant file context go to that provider.
 - Product website: https://codevalanche.com/
+
+## How Radovar and Codevalanche handle data
+
+- By default, Codevalanche sends Radovar nothing about the user. Usage statistics and error reports are off until the user turns them on (Settings › Send feedback › Help improve the app).
+- Prompts, files and code go from the user's computer to the AI provider the user chooses. They do not pass through Radovar's servers.
+- The app contains no third-party analytics or tracking code.
+- Every address the app contacts, with when, why and what is sent: https://codevalanche.com/docs/privacy/network/
+- Steps anyone can repeat to check these statements: https://codevalanche.com/docs/privacy/check/
+- Security reports: security@radovar.com, policy at https://codevalanche.com/security/#report
 
 ## Key pages
 
